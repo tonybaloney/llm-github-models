@@ -1,7 +1,6 @@
 import llm
 from llm.models import Conversation, Prompt, Response
-from llm.default_plugins.openai_models import combine_chunks, _attachment
-from llm.utils import remove_dict_none_values
+from llm.default_plugins.openai_models import _attachment
 from typing import Optional, Iterator, List, Dict, Any
 
 from azure.ai.inference import ChatCompletionsClient
@@ -139,11 +138,11 @@ class GitHubModels(_Shared, llm.Model):
                     content = None
                 if content is not None:
                     yield content
-            response.response_json = remove_dict_none_values(combine_chunks(chunks))
+            response.response_json = None # TODO
         else:
             completion = client.complete(
                 messages=messages,
                 stream=False,
             )
-            response.response_json = remove_dict_none_values(completion.model_dump())
+            response.response_json = None # TODO
             yield completion.choices[0].message.content
