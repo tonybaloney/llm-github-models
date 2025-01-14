@@ -100,7 +100,7 @@ class _Shared:
 
 
 class GitHubModels(_Shared, llm.Model):
-    needs_key = True
+    needs_key = "github"
     key_env_var = "GITHUB_MODELS_KEY"
 
     def __init__(self, model_id: str, can_stream: bool):
