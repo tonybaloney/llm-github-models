@@ -1,0 +1,26 @@
+[project]
+name = "llm-github-models"
+version = "0.1"
+description = "LLM plugin to access GitHub Models API"
+readme = "README.md"
+authors = [{name = "Anthony Shaw"}]
+license = {text = "Apache-2.0"}
+classifiers = [
+    "License :: OSI Approved :: Apache Software License"
+]
+dependencies = [
+    "llm>=0.19",
+    "azure-ai-inference>=1.0.0b6",
+]
+
+[project.urls]
+Homepage = "https://github.com/tonybaloney/llm-github-models"
+Changelog = "https://github.com/tonybaloney/llm-github-models/releases"
+Issues = "https://github.com/tonybaloney/llm-github-models/issues"
+CI = "https://github.com/tonybaloney/llm-github-models/actions"
+
+[project.entry-points.llm]
+github = "llm_github_models"
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-recording"]
