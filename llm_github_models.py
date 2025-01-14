@@ -12,47 +12,47 @@ INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
 def register_models(register):
     # Register both sync and async versions of each model
     # TODO: Dynamically fetch this list
-    for model_id in [
-        'github/gpt-4o',
-        'github/gpt-4o-mini',
-        'github/o1',
-        'github/o1-mini',
-        'github/o1-preview',
-        'github/phi-3-5-moe-instruct',
-        'github/phi-3-5-mini-instruct',
-        'github/phi-3-5-vision-instruct',
-        'github/phi-3-medium-128k-instruct',
-        'github/phi-3-medium-4k-instruct',
-        'github/phi-3-mini-128k-instruct',
-        'github/phi-3-mini-4k-instruct',
-        'github/phi-3-small-128k-instruct',
-        'github/phi-3-small-8k-instruct',
-        'github/ai21-jamba-1-5-large',
-        'github/ai21-jamba-1-5-mini',
-        'github/codestral-2501',
-        'github/cohere-command-r',
-        'github/cohere-command-r-08-2024',
-        'github/cohere-command-r-plus',
-        'github/cohere-command-r-plus-08-2024',
-        'github/cohere-embed-v3-english',
-        'github/cohere-embed-v3-multilingual',
-        'github/llama-3-2-11b-vision-instruct',
-        'github/llama-3-2-90b-vision-instruct',
-        'github/llama-3-3-70b-instruct',
-        'github/meta-llama-3-1-405b-instruct',
-        'github/meta-llama-3-1-70b-instruct',
-        'github/meta-llama-3-1-8b-instruct',
-        'github/meta-llama-3-70b-instruct',
-        'github/meta-llama-3-8b-instruct',
-        'github/ministral-3b',
-        'github/mistral-large-2411',
-        'github/mistral-nemo',
-        'github/mistral-large',
-        'github/mistral-large-2407',
-        'github/mistral-small',
-        'github/jais-30b-chat',
+    for model_id, can_stream in [
+        ('github/gpt-4o', True),        
+        ('github/gpt-4o-mini', True),
+        ('github/o1', False),
+        ('github/o1-mini', False),
+        ('github/o1-preview', False),
+        ('github/phi-3-5-moe-instruct', True),
+        ('github/phi-3-5-mini-instruct', True),
+        ('github/phi-3-5-vision-instruct', True),
+        ('github/phi-3-medium-128k-instruct', True),
+        ('github/phi-3-medium-4k-instruct', True),
+        ('github/phi-3-mini-128k-instruct', True),
+        ('github/phi-3-mini-4k-instruct', True),
+        ('github/phi-3-small-128k-instruct', True),
+        ('github/phi-3-small-8k-instruct', True),
+        ('github/ai21-jamba-1-5-large', True),
+        ('github/ai21-jamba-1-5-mini', True),
+        ('github/codestral-2501', True),
+        ('github/cohere-command-r', True),
+        ('github/cohere-command-r-08-2024', True),
+        ('github/cohere-command-r-plus', True),
+        ('github/cohere-command-r-plus-08-2024', True),
+        ('github/cohere-embed-v3-english', True),
+        ('github/cohere-embed-v3-multilingual', True),
+        ('github/llama-3-2-11b-vision-instruct', True),
+        ('github/llama-3-2-90b-vision-instruct', True),
+        ('github/llama-3-3-70b-instruct', True),
+        ('github/meta-llama-3-1-405b-instruct', True),
+        ('github/meta-llama-3-1-70b-instruct', True),
+        ('github/meta-llama-3-1-8b-instruct', True),
+        ('github/meta-llama-3-70b-instruct', True),
+        ('github/meta-llama-3-8b-instruct', True),
+        ('github/ministral-3b', True),
+        ('github/mistral-large-2411', True),
+        ('github/mistral-nemo', True),
+        ('github/mistral-large', True),
+        ('github/mistral-large-2407', True),
+        ('github/mistral-small', True),
+        ('github/jais-30b-chat', True),
     ]:
-        register(GitHubModels(model_id))
+        register(GitHubModels(model_id, can_stream=can_stream))
 
 
 class _Shared:
@@ -102,12 +102,11 @@ class _Shared:
 class GitHubModels(_Shared, llm.Model):
     needs_key = True
     key_env_var = "GITHUB_MODELS_KEY"
-    can_stream = True
 
-
-    def __init__(self, model_id: str):
+    def __init__(self, model_id: str, can_stream: bool):
         self.model_id = model_id
         self.model_name = model_id.split("/")[-1]
+        self.can_stream = can_stream
 
     def execute(
         self,
