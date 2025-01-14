@@ -1,12 +1,18 @@
 # GitHub Models Plugin for LLM
 
-This is a plugin for [llm](llm.datasette.io) that uses [GitHub Models](https://github.blog/news-insights/product-news/introducing-github-models/) via the Azure AI Inference SDK.
+This is a plugin for [llm](https://llm.datasette.io) that uses [GitHub Models](https://github.blog/news-insights/product-news/introducing-github-models/) via the Azure AI Inference SDK.
 
 To set the API key, use the `llm keys set` command or use the `GITHUB_MODELS_KEY` environment variable.
 
 To get an API key, create a PAT inside GitHub.
 
 All model names are affixed with `github/` to distinguish the OpenAI ones from the builtin models.
+
+## Installation
+
+```default
+$ llm install llm-github-models
+```
 
 ## Example
 
