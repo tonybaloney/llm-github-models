@@ -31,3 +31,18 @@ Sure, here are some interesting facts about cheese:
 
 2. Cheese is an ancient food: The earliest evidence of cheese-making dates back to around 6000 BC, found in ancient Polish sites.
 ```
+
+### Image attachments
+
+Multi-modal vision models can accept image attachments using the [LLM attachments](https://llm.datasette.io/en/stable/usage.html#attachments) options:
+
+```bash
+llm -m github/Llama-3.2-11B-Vision-Instruct "Describe this image" -a https://static.simonwillison.net/static/2024/pelicans.jpg
+```
+
+Produces
+```bash
+This image depicts a dense gathering of pelicans, with the largest birds situated in the center, showcasing their light brown plumage and long, pointed beaks. The pelicans are standing on a rocky shoreline, with a serene body of water behind them, characterized by its pale blue hue and gentle ripples. In the background, a dark, rocky cliff rises, adding depth to the scene.
+
+The overall atmosphere of the image exudes tranquility, with the pelicans seemingly engaging in a social gathering or feeding activity. The photograph's clarity and focus on the pelicans' behavior evoke a sense of observation and appreciation for the natural world.
+```
