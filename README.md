@@ -1,4 +1,7 @@
 # GitHub Models Plugin for LLM
+[![PyPI](https://img.shields.io/pypi/v/llm-github-models.svg)](https://pypi.org/project/llm-github-models/)
+[![Changelog](https://img.shields.io/github/v/release/tonybaloney/llm-github-models?include_prereleases&label=changelog)](https://github.com/tonybaloney/llm-github-models/releases)
+
 
 This is a plugin for [llm](https://llm.datasette.io) that uses [GitHub Models](https://github.blog/news-insights/product-news/introducing-github-models/) via the Azure AI Inference SDK.
 
@@ -12,7 +15,9 @@ $ llm install llm-github-models
 
 To set the API key, use the `llm keys set github` command or use the `GITHUB_MODELS_KEY` environment variable.
 
-To get an API key, create a PAT inside GitHub.
+To get an API key, create a personal access token (PAT) inside [GitHub Settings](https://github.com/settings/tokens).
+
+Learn about [rate limits here](https://docs.github.com/github-models/prototyping-with-ai-models#rate-limits)
 
 All model names are affixed with `github/` to distinguish the OpenAI ones from the builtin models.
 
