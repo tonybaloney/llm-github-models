@@ -36,8 +36,8 @@ def register_models(register):
         ('github/cohere-command-r-plus-08-2024', True),
         ('github/cohere-embed-v3-english', True),
         ('github/cohere-embed-v3-multilingual', True),
-        ('github/llama-3-2-11b-vision-instruct', True),
-        ('github/llama-3-2-90b-vision-instruct', True),
+        ('github/Llama-3.2-11B-Vision-Instruct', True),
+        ('github/Llama-3.2-90B-Vision-Instruct', True),
         ('github/llama-3-3-70b-instruct', True),
         ('github/meta-llama-3-1-405b-instruct', True),
         ('github/meta-llama-3-1-70b-instruct', True),
@@ -56,6 +56,12 @@ def register_models(register):
 
 
 class _Shared:
+    attachment_types = {
+        "image/png",
+        "image/jpeg",
+        "image/webp",
+        "image/gif",
+    }
     def build_messages(self, prompt: Prompt, conversation: Optional[Conversation]) -> List[Dict[str, Any]]:
         messages = []
         current_system = None
