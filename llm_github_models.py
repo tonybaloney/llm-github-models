@@ -109,8 +109,8 @@ class GitHubModels(_Shared, llm.Model):
     key_env_var = "GITHUB_MODELS_KEY"
 
     def __init__(self, model_id: str, can_stream: bool, input_modalities=None, output_modalities=None):
-        self.model_id = model_id
-        self.model_name = model_id.split("/")[-1]
+        self.model_id = f"github/{model_id}"
+        self.model_name = model_id
         self.can_stream = can_stream
         self.input_modalities = input_modalities
         self.output_modalities = output_modalities
