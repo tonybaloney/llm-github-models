@@ -147,8 +147,8 @@ class GitHubModels(_Shared, llm.Model):
         self.attachment_types = set()
         if "image" in input_modalities:
             self.attachment_types.update(IMAGE_ATTACHMENTS)
-        if "audio" in input_modalities:
-            self.attachment_types.update(AUDIO_ATTACHMENTS)
+        # if "audio" in input_modalities:
+        #    self.attachment_types.update(AUDIO_ATTACHMENTS)
 
         self.input_modalities = input_modalities
         self.output_modalities = output_modalities
