@@ -8,61 +8,86 @@ from azure.core.credentials import AzureKeyCredential
 
 INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
 
+CHAT_MODELS = [
+    ("AI21-Jamba-1.5-Large", False, ["text"], ["text"]),
+    ("AI21-Jamba-1.5-Mini", False, ["text"], ["text"]),
+    ("Codestral-2501", False, ["text"], ["text"]),
+    ("Cohere-command-r", False, ["text"], ["text"]),
+    ("Cohere-command-r-08-2024", False, ["text"], ["text"]),
+    ("Cohere-command-r-plus", False, ["text"], ["text"]),
+    ("Cohere-command-r-plus-08-2024", False, ["text"], ["text"]),
+    ("Llama-3.2-11B-Vision-Instruct", False, ["text", "image", "audio"], ["text"]),
+    ("Llama-3.2-90B-Vision-Instruct", False, ["text", "image", "audio"], ["text"]),
+    ("Llama-3.3-70B-Instruct", False, ["text"], ["text"]),
+    ("Meta-Llama-3-70B-Instruct", False, ["text"], ["text"]),
+    ("Meta-Llama-3-8B-Instruct", False, ["text"], ["text"]),
+    ("Meta-Llama-3.1-405B-Instruct", False, ["text"], ["text"]),
+    ("Meta-Llama-3.1-70B-Instruct", False, ["text"], ["text"]),
+    ("Meta-Llama-3.1-8B-Instruct", False, ["text"], ["text"]),
+    ("Ministral-3B", False, ["text"], ["text"]),
+    ("Mistral-Large-2411", False, ["text"], ["text"]),
+    ("Mistral-Nemo", False, ["text"], ["text"]),
+    ("Mistral-large", False, ["text"], ["text"]),
+    ("Mistral-large-2407", False, ["text"], ["text"]),
+    ("Mistral-small", False, ["text"], ["text"]),
+    ("Phi-3-medium-128k-instruct", False, ["text"], ["text"]),
+    ("Phi-3-medium-4k-instruct", False, ["text"], ["text"]),
+    ("Phi-3-mini-128k-instruct", False, ["text"], ["text"]),
+    ("Phi-3-mini-4k-instruct", False, ["text"], ["text"]),
+    ("Phi-3-small-128k-instruct", False, ["text"], ["text"]),
+    ("Phi-3-small-8k-instruct", False, ["text"], ["text"]),
+    ("Phi-3.5-MoE-instruct", False, ["text"], ["text"]),
+    ("Phi-3.5-mini-instruct", False, ["text"], ["text"]),
+    ("Phi-3.5-vision-instruct", False, ["text", "image"], []),
+    ("Phi-4", False, ["text"], ["text"]),
+    ("gpt-4o", False, ["text", "image", "audio"], ["text"]),
+    ("gpt-4o-mini", False, ["text", "image", "audio"], ["text"]),
+    ("jais-30b-chat", False, ["text"], ["text"]),
+    ("o1", True, ["text", "image"], ["text"]),
+    ("o1-mini", True, ["text"], ["text"]),
+    ("o1-preview", True, ["text"], ["text"]),
+]
+
+EMBEDDING_MODELS = [
+    "Cohere-embed-v3-english",
+    "Cohere-embed-v3-multilingual",
+    "text-embedding-3-large",
+    "text-embedding-3-small",
+]
+
+
 @llm.hookimpl
 def register_models(register):
     # Register both sync and async versions of each model
     # TODO: Dynamically fetch this list
-    for model_id, can_stream in [
-        ('github/gpt-4o', True),        
-        ('github/gpt-4o-mini', True),
-        ('github/o1', False),
-        ('github/o1-mini', False),
-        ('github/o1-preview', False),
-        ('github/phi-3-5-moe-instruct', True),
-        ('github/phi-3-5-mini-instruct', True),
-        ('github/phi-3-5-vision-instruct', True),
-        ('github/phi-3-medium-128k-instruct', True),
-        ('github/phi-3-medium-4k-instruct', True),
-        ('github/phi-3-mini-128k-instruct', True),
-        ('github/phi-3-mini-4k-instruct', True),
-        ('github/phi-3-small-128k-instruct', True),
-        ('github/phi-3-small-8k-instruct', True),
-        ('github/ai21-jamba-1-5-large', True),
-        ('github/ai21-jamba-1-5-mini', True),
-        ('github/codestral-2501', True),
-        ('github/cohere-command-r', True),
-        ('github/cohere-command-r-08-2024', True),
-        ('github/cohere-command-r-plus', True),
-        ('github/cohere-command-r-plus-08-2024', True),
-        ('github/cohere-embed-v3-english', True),
-        ('github/cohere-embed-v3-multilingual', True),
-        ('github/Llama-3.2-11B-Vision-Instruct', True),
-        ('github/Llama-3.2-90B-Vision-Instruct', True),
-        ('github/llama-3-3-70b-instruct', True),
-        ('github/meta-llama-3-1-405b-instruct', True),
-        ('github/meta-llama-3-1-70b-instruct', True),
-        ('github/meta-llama-3-1-8b-instruct', True),
-        ('github/meta-llama-3-70b-instruct', True),
-        ('github/meta-llama-3-8b-instruct', True),
-        ('github/ministral-3b', True),
-        ('github/mistral-large-2411', True),
-        ('github/mistral-nemo', True),
-        ('github/mistral-large', True),
-        ('github/mistral-large-2407', True),
-        ('github/mistral-small', True),
-        ('github/jais-30b-chat', True),
-    ]:
-        register(GitHubModels(model_id, can_stream=can_stream))
+    for model_id, can_stream, input_modalities, output_modalities in CHAT_MODELS:
+        register(
+            GitHubModels(
+                model_id,
+                can_stream=can_stream,
+                input_modalities=input_modalities,
+                output_modalities=output_modalities,
+            )
+        )
+
+
+IMAGE_ATTACHMENTS = {
+    "image/png",
+    "image/jpeg",
+    "image/webp",
+    "image/gif",
+}
+
+AUDIO_ATTACHMENTS = {
+    "audio/wav",
+    "audio/mpeg",
+}
 
 
 class _Shared:
-    attachment_types = {
-        "image/png",
-        "image/jpeg",
-        "image/webp",
-        "image/gif",
-    }
-    def build_messages(self, prompt: Prompt, conversation: Optional[Conversation]) -> List[Dict[str, Any]]:
+    def build_messages(
+        self, prompt: Prompt, conversation: Optional[Conversation]
+    ) -> List[Dict[str, Any]]:
         messages = []
         current_system = None
         if conversation is not None:
@@ -109,10 +134,24 @@ class GitHubModels(_Shared, llm.Model):
     needs_key = "github"
     key_env_var = "GITHUB_MODELS_KEY"
 
-    def __init__(self, model_id: str, can_stream: bool):
-        self.model_id = model_id
-        self.model_name = model_id.split("/")[-1]
+    def __init__(
+        self,
+        model_id: str,
+        can_stream: bool,
+        input_modalities=None,
+        output_modalities=None,
+    ):
+        self.model_id = f"github/{model_id}"
+        self.model_name = model_id
         self.can_stream = can_stream
+        self.attachment_types = set()
+        if "image" in input_modalities:
+            self.attachment_types.update(IMAGE_ATTACHMENTS)
+        # if "audio" in input_modalities:
+        #    self.attachment_types.update(AUDIO_ATTACHMENTS)
+
+        self.input_modalities = input_modalities
+        self.output_modalities = output_modalities
 
     def execute(
         self,
@@ -143,11 +182,11 @@ class GitHubModels(_Shared, llm.Model):
                     content = None
                 if content is not None:
                     yield content
-            response.response_json = None # TODO
+            response.response_json = None  # TODO
         else:
             completion = client.complete(
                 messages=messages,
                 stream=False,
             )
-            response.response_json = None # TODO
+            response.response_json = None  # TODO
             yield completion.choices[0].message.content
