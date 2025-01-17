@@ -61,6 +61,12 @@ def register_models(register):
 
 
 class _Shared:
+    attachment_types = {
+        "image/png",
+        "image/jpeg",
+        "image/webp",
+        "image/gif",
+    }
     def build_messages(self, prompt: Prompt, conversation: Optional[Conversation]) -> List[Dict[str, Any]]:
         messages = []
         current_system = None
