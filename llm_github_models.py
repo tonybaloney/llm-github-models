@@ -16,6 +16,7 @@ CHAT_MODELS = [
     ("Cohere-command-r-08-2024", False, ["text"], ["text"]),
     ("Cohere-command-r-plus", False, ["text"], ["text"]),
     ("Cohere-command-r-plus-08-2024", False, ["text"], ["text"]),
+    ("DeepSeek-R1", False, ["text"], ["text"]),
     ("Llama-3.2-11B-Vision-Instruct", False, ["text", "image", "audio"], ["text"]),
     ("Llama-3.2-90B-Vision-Instruct", False, ["text", "image", "audio"], ["text"]),
     ("Llama-3.3-70B-Instruct", False, ["text"], ["text"]),
