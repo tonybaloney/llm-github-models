@@ -1,6 +1,6 @@
 [project]
 name = "llm-github-models"
-version = "0.6"
+version = "0.7"
 description = "LLM plugin to access GitHub Models API"
 readme = "README.md"
 authors = [{name = "Anthony Shaw"}]
@@ -10,7 +10,7 @@ classifiers = [
 ]
 dependencies = [
     "llm>=0.19",
-    "azure-ai-inference>=1.0.0b6",
+    "azure-ai-inference>=1.0.0b7",
 ]
 
 [project.urls]
