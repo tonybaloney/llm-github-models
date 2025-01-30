@@ -46,9 +46,11 @@ This image depicts a dense gathering of pelicans, with the largest birds situate
 
 The overall atmosphere of the image exudes tranquility, with the pelicans seemingly engaging in a social gathering or feeding activity. The photograph's clarity and focus on the pelicans' behavior evoke a sense of observation and appreciation for the natural world.
 ```
+
+
 ## Supported Models
 ### OpenAI GPT-4o
-![Model Image](/images/modules/marketplace/models/families/openai.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/openai.svg)
 Usage: `llm -m github/gpt-4o`
 
 **Publisher:**  OpenAI 
@@ -85,7 +87,7 @@ The introduction of gpt-4o opens numerous possibilities for businesses in variou
  
 
 ### OpenAI GPT-4o mini
-![Model Image](/images/modules/marketplace/models/families/openai.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/openai.svg)
 Usage: `llm -m github/gpt-4o-mini`
 
 **Publisher:**  OpenAI 
@@ -101,7 +103,7 @@ GPT-4o mini surpasses GPT-3.5 Turbo and other small models on academic benchmark
 - [OpenAI announcement](https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/) 
 
 ### OpenAI o1
-![Model Image](/images/modules/marketplace/models/families/openai.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/openai.svg)
 Usage: `llm -m github/o1`
 
 **Publisher:**  OpenAI 
@@ -134,7 +136,7 @@ The o1 series models are specifically designed to tackle reasoning and problem-s
 o1 model does not include all the features available in other models.  
 
 ### OpenAI o1-mini
-![Model Image](/images/modules/marketplace/models/families/openai.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/openai.svg)
 Usage: `llm -m github/o1-mini`
 
 **Publisher:**  OpenAI 
@@ -173,7 +175,7 @@ o1-mini model is currently in preview and do not include some features available
  
 
 ### OpenAI o1-preview
-![Model Image](/images/modules/marketplace/models/families/openai.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/openai.svg)
 Usage: `llm -m github/o1-preview`
 
 **Publisher:**  OpenAI 
@@ -210,7 +212,7 @@ o1-preview model is currently in preview and do not include some features availa
  
 
 ### OpenAI Text Embedding 3 (large)
-![Model Image](/images/modules/marketplace/models/families/openai.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/openai.svg)
 Usage: `llm -m github/text-embedding-3-large`
 
 **Publisher:**  OpenAI 
@@ -218,7 +220,7 @@ Usage: `llm -m github/text-embedding-3-large`
 **Description:**  Text-embedding-3 series models are the latest and most capable embedding model. The text-embedding-3 models offer better average multi-language retrieval performance with the MIRACL benchmark while still maintaining performance for English tasks with the MTEB benchmark. 
 
 ### OpenAI Text Embedding 3 (small)
-![Model Image](/images/modules/marketplace/models/families/openai.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/openai.svg)
 Usage: `llm -m github/text-embedding-3-small`
 
 **Publisher:**  OpenAI 
@@ -226,7 +228,7 @@ Usage: `llm -m github/text-embedding-3-small`
 **Description:**  Text-embedding-3 series models are the latest and most capable embedding model. The text-embedding-3 models offer better average multi-language retrieval performance with the MIRACL benchmark while still maintaining performance for English tasks with the MTEB benchmark. 
 
 ### Phi-3.5-MoE instruct (128k)
-![Model Image](/images/modules/marketplace/models/families/microsoft.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/microsoft.svg)
 Usage: `llm -m github/Phi-3-5-MoE-instruct`
 
 **Publisher:**  Microsoft 
@@ -247,7 +249,7 @@ This is a static model trained on an offline dataset with 4.9T tokens and a cuto
  
 
 ### Phi-3.5-mini instruct (128k)
-![Model Image](/images/modules/marketplace/models/families/microsoft.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/microsoft.svg)
 Usage: `llm -m github/Phi-3-5-mini-instruct`
 
 **Publisher:**  Microsoft 
@@ -267,7 +269,7 @@ Phi-3.5-mini has 3.8B parameters and is a dense decoder-only Transformer model u
 Phi-3.5-mini is a static model trained on an offline dataset with 3.4T tokens and a cutoff date October 2023 for publicly available data. Future versions of the tuned models may be released as we improve models. 
 
 ### Phi-3.5-vision instruct (128k)
-![Model Image](/images/modules/marketplace/models/families/microsoft.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/microsoft.svg)
 Usage: `llm -m github/Phi-3-5-vision-instruct`
 
 **Publisher:**  Microsoft 
@@ -297,7 +299,7 @@ Usage: `llm -m github/Phi-3-5-vision-instruct`
  
 
 ### Phi-3-medium instruct (128k)
-![Model Image](/images/modules/marketplace/models/families/microsoft.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/microsoft.svg)
 Usage: `llm -m github/Phi-3-medium-128k-instruct`
 
 **Publisher:**  Microsoft 
@@ -330,7 +332,7 @@ Our training data includes a wide variety of sources, totaling 4.8 trillion toke
 We are focusing on the quality of data that could potentially improve the reasoning ability for the model, and we filter the publicly available documents to contain the correct level of knowledge. As an example, the result of a game in premier league in a particular day might be good training data for frontier models, but we need to remove such information to leave more model capacity for reasoning for the small size models. More details about data can be found in the [Phi-3 Technical Report](https://aka.ms/phi3-tech-report). 
 
 ### Phi-3-medium instruct (4k)
-![Model Image](/images/modules/marketplace/models/families/microsoft.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/microsoft.svg)
 Usage: `llm -m github/Phi-3-medium-4k-instruct`
 
 **Publisher:**  Microsoft 
@@ -363,7 +365,7 @@ Our training data includes a wide variety of sources, totaling 4.8 trillion toke
 We are focusing on the quality of data that could potentially improve the reasoning ability for the model, and we filter the publicly available documents to contain the correct level of knowledge. As an example, the result of a game in premier league in a particular day might be good training data for frontier models, but we need to remove such information to leave more model capacity for reasoning for the small size models. More details about data can be found in the [Phi-3 Technical Report](https://aka.ms/phi3-tech-report). 
 
 ### Phi-3-mini instruct (128k)
-![Model Image](/images/modules/marketplace/models/families/microsoft.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/microsoft.svg)
 Usage: `llm -m github/Phi-3-mini-128k-instruct`
 
 **Publisher:**  Microsoft 
@@ -396,7 +398,7 @@ Our training data includes a wide variety of sources, totaling 4.9 trillion toke
 We are focusing on the quality of data that could potentially improve the reasoning ability for the model, and we filter the publicly available documents to contain the correct level of knowledge. As an example, the result of a game in premier league in a particular day might be good training data for frontier models, but we need to remove such information to leave more model capacity for reasoning for the small size models. More details about data can be found in the [Phi-3 Technical Report](https://aka.ms/phi3-tech-report). 
 
 ### Phi-3-mini instruct (4k)
-![Model Image](/images/modules/marketplace/models/families/microsoft.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/microsoft.svg)
 Usage: `llm -m github/Phi-3-mini-4k-instruct`
 
 **Publisher:**  Microsoft 
@@ -429,7 +431,7 @@ Our training data includes a wide variety of sources, totaling 4.9 trillion toke
 We are focusing on the quality of data that could potentially improve the reasoning ability for the model, and we filter the publicly available documents to contain the correct level of knowledge. As an example, the result of a game in premier league in a particular day might be good training data for frontier models, but we need to remove such information to leave more model capacity for reasoning for the small size models. More details about data can be found in the [Phi-3 Technical Report](https://aka.ms/phi3-tech-report). 
 
 ### Phi-3-small instruct (128k)
-![Model Image](/images/modules/marketplace/models/families/microsoft.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/microsoft.svg)
 Usage: `llm -m github/Phi-3-small-128k-instruct`
 
 **Publisher:**  Microsoft 
@@ -458,7 +460,7 @@ Our training data includes a wide variety of sources, totaling 4.8 trillion toke
 We are focusing on the quality of data that could potentially improve the reasoning ability for the model, and we filter the publicly available documents to contain the correct level of knowledge. As an example, the result of a game in premier league in a particular day might be good training data for frontier models, but we need to remove such information to leave more model capacity for reasoning for the small size models. More details about data can be found in the [Phi-3 Technical Report](https://aka.ms/phi3-tech-report). 
 
 ### Phi-3-small instruct (8k)
-![Model Image](/images/modules/marketplace/models/families/microsoft.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/microsoft.svg)
 Usage: `llm -m github/Phi-3-small-8k-instruct`
 
 **Publisher:**  Microsoft 
@@ -490,7 +492,7 @@ Our training data includes a wide variety of sources, totaling 4.8 trillion toke
 We are focusing on the quality of data that could potentially improve the reasoning ability for the model, and we filter the publicly available documents to contain the correct level of knowledge. As an example, the result of a game in premier league in a particular day might be good training data for frontier models, but we need to remove such information to leave more model capacity for reasoning for the small size models. More details about data can be found in the [Phi-3 Technical Report](https://aka.ms/phi3-tech-report). 
 
 ### Phi-4
-![Model Image](/images/modules/marketplace/models/families/microsoft.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/microsoft.svg)
 Usage: `llm -m github/Phi-4`
 
 **Publisher:**  Microsoft 
@@ -521,7 +523,7 @@ Multilingual data constitutes about 8% of our overall data. We are focusing on t
  
 
 ### AI21 Jamba 1.5 Large
-![Model Image](/images/modules/marketplace/models/families/ai21 labs.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/ai21 labs.svg)
 Usage: `llm -m github/AI21-Jamba-1-5-Large`
 
 **Publisher:**  AI21 Labs 
@@ -558,7 +560,7 @@ Jamba 1.5 Large was trained in Q3 2024 with data covering through early March 20
 | **Jamba 1.5 Large**  | 398B (94B active)  | 256K                | 
 
 ### AI21 Jamba 1.5 Mini
-![Model Image](/images/modules/marketplace/models/families/ai21 labs.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/ai21 labs.svg)
 Usage: `llm -m github/AI21-Jamba-1-5-Mini`
 
 **Publisher:**  AI21 Labs 
@@ -589,7 +591,7 @@ Jamba 1.5 Mini was trained in Q3 2024 with data covering through early March 202
 | **Jamba 1.5 Large**  | 398B (94B active)  | 256K                | 
 
 ### Codestral 25.01
-![Model Image](/images/modules/marketplace/models/families/mistral ai.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/mistral ai.svg)
 Usage: `llm -m github/Codestral-2501`
 
 **Publisher:**  Mistral AI 
@@ -610,7 +612,7 @@ Improve developers productivity and reduce errors: it can complete coding functi
 - _Code generation with fill-in-the-middle (FIM) completion_: users can define the starting point of the code using a prompt, and the ending point of the code using an optional suffix and an optional stop. The Codestral model will then generate the code that fits in between, making it ideal for tasks that require a specific piece of code to be generated.  
 
 ### Cohere Command R
-![Model Image](/images/modules/marketplace/models/families/cohere.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/cohere.svg)
 Usage: `llm -m github/Cohere-command-r`
 
 **Publisher:**  Cohere 
@@ -652,7 +654,7 @@ The model is trained with a number of other answering modes, which can be select
 Command R has been optimized to interact with your code, by requesting code snippets, code explanations, or code rewrites. It might not perform well out-of-the-box for pure code completion. For better performance, we also recommend using a low temperature (and even greedy decoding) for code-generation related instructions. 
 
 ### Cohere Command R 08-2024
-![Model Image](/images/modules/marketplace/models/families/cohere.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/cohere.svg)
 Usage: `llm -m github/Cohere-command-r-08-2024`
 
 **Publisher:**  Cohere 
@@ -690,7 +692,7 @@ Command R 08-2024 has been optimized to interact with your code, by requesting c
 Structured Outputs ensures outputs from Cohere’s Command R 08-2024 model adheres to a user-defined response format. It supports JSON response format, including user-defined JSON schemas. This enables developers to reliably and consistently generate model outputs for programmatic usage and reliable function calls. Some examples include extracting data, formulating queries, and displaying model outputs in the UI. 
 
 ### Cohere Command R+
-![Model Image](/images/modules/marketplace/models/families/cohere.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/cohere.svg)
 Usage: `llm -m github/Cohere-command-r-plus`
 
 **Publisher:**  Cohere 
@@ -732,7 +734,7 @@ The model is trained with a number of other answering modes, which can be select
 Command R+ has been optimized to interact with your code, by requesting code snippets, code explanations, or code rewrites. It might not perform well out-of-the-box for pure code completion. For better performance, we also recommend using a low temperature (and even greedy decoding) for code-generation related instructions. 
 
 ### Cohere Command R+ 08-2024
-![Model Image](/images/modules/marketplace/models/families/cohere.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/cohere.svg)
 Usage: `llm -m github/Cohere-command-r-plus-08-2024`
 
 **Publisher:**  Cohere 
@@ -770,7 +772,7 @@ Command R+ 08-2024 has been optimized to interact with your code, by requesting 
 Structured Outputs ensures outputs from Cohere’s Command R+ 08-2024 model adheres to a user-defined response format. It supports JSON response format, including user-defined JSON schemas. This enables developers to reliably and consistently generate model outputs for programmatic usage and reliable function calls. Some examples include extracting data, formulating queries, and displaying model outputs in the UI. 
 
 ### Cohere Embed v3 English
-![Model Image](/images/modules/marketplace/models/families/cohere.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/cohere.svg)
 Usage: `llm -m github/Cohere-embed-v3-english`
 
 **Publisher:**  Cohere 
@@ -778,7 +780,7 @@ Usage: `llm -m github/Cohere-embed-v3-english`
 **Description:**  Cohere Embed English is the market’s leading multimodal (text, image) representation model used for semantic search, retrieval-augmented generation (RAG), classification, and clustering. Embed English has top performance on the HuggingFace MTEB benchmark and performs well on a variety of industries such as Finance, Legal, and General-Purpose Corpora.The model was trained on nearly 1B English training pairs. 
 
 ### Cohere Embed v3 Multilingual
-![Model Image](/images/modules/marketplace/models/families/cohere.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/cohere.svg)
 Usage: `llm -m github/Cohere-embed-v3-multilingual`
 
 **Publisher:**  Cohere 
@@ -786,7 +788,7 @@ Usage: `llm -m github/Cohere-embed-v3-multilingual`
 **Description:**  Cohere Embed Multilingual is the market’s leading multimodal (text, image) representation model used for semantic search, retrieval-augmented generation (RAG), classification, and clustering. Embed Multilingual supports 100+ languages and can be used to search within a language (e.g., search with a French query on French documents) and across languages (e.g., search with an English query on Chinese documents). This model was trained on nearly 1B English training pairs and nearly 0.5B Non-English training pairs from 100+ languages. 
 
 ### DeepSeek-R1
-![Model Image](/images/modules/marketplace/models/families/deepseek.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/deepseek.svg)
 Usage: `llm -m github/DeepSeek-R1`
 
 **Publisher:**  DeepSeek 
@@ -811,7 +813,7 @@ The model's reasoning output (contained within the `<think>` tags) may contain m
  
 
 ### Llama-3.2-11B-Vision-Instruct
-![Model Image](/images/modules/marketplace/models/families/meta.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/meta.svg)
 Usage: `llm -m github/Llama-3-2-11B-Vision-Instruct`
 
 **Publisher:**  Meta 
@@ -841,7 +843,7 @@ Developers may fine-tune Llama 3.2 models for languages beyond these supported l
  
 
 ### Llama-3.2-90B-Vision-Instruct
-![Model Image](/images/modules/marketplace/models/families/meta.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/meta.svg)
 Usage: `llm -m github/Llama-3-2-90B-Vision-Instruct`
 
 **Publisher:**  Meta 
@@ -873,7 +875,7 @@ Developers may fine-tune Llama 3.2 models for languages beyond these supported l
  
 
 ### Llama-3.3-70B-Instruct
-![Model Image](/images/modules/marketplace/models/families/meta.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/meta.svg)
 Usage: `llm -m github/Llama-3-3-70B-Instruct`
 
 **Publisher:**  Meta 
@@ -892,7 +894,7 @@ Usage: `llm -m github/Llama-3-3-70B-Instruct`
  
 
 ### Meta-Llama-3.1-405B-Instruct
-![Model Image](/images/modules/marketplace/models/families/meta.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/meta.svg)
 Usage: `llm -m github/Meta-Llama-3-1-405B-Instruct`
 
 **Publisher:**  Meta 
@@ -912,7 +914,7 @@ Llama 3.1 is an auto-regressive language model that uses an optimized transforme
 **Data Freshness:** The pretraining data has a cutoff of December 2023. 
 
 ### Meta-Llama-3.1-70B-Instruct
-![Model Image](/images/modules/marketplace/models/families/meta.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/meta.svg)
 Usage: `llm -m github/Meta-Llama-3-1-70B-Instruct`
 
 **Publisher:**  Meta 
@@ -932,7 +934,7 @@ Llama 3.1 is an auto-regressive language model that uses an optimized transforme
 **Data Freshness:** The pretraining data has a cutoff of December 2023. 
 
 ### Meta-Llama-3.1-8B-Instruct
-![Model Image](/images/modules/marketplace/models/families/meta.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/meta.svg)
 Usage: `llm -m github/Meta-Llama-3-1-8B-Instruct`
 
 **Publisher:**  Meta 
@@ -952,7 +954,7 @@ Llama 3.1 is an auto-regressive language model that uses an optimized transforme
 **Data Freshness:** The pretraining data has a cutoff of December 2023. 
 
 ### Meta-Llama-3-70B-Instruct
-![Model Image](/images/modules/marketplace/models/families/meta.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/meta.svg)
 Usage: `llm -m github/Meta-Llama-3-70B-Instruct`
 
 **Publisher:**  Meta 
@@ -970,7 +972,7 @@ Llama 3 is an auto-regressive language model that uses an optimized transformer 
 **Data Freshness** The pretraining data has a cutoff of March 2023 for the 8B and December 2023 for the 70B models respectively.  
 
 ### Meta-Llama-3-8B-Instruct
-![Model Image](/images/modules/marketplace/models/families/meta.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/meta.svg)
 Usage: `llm -m github/Meta-Llama-3-8B-Instruct`
 
 **Publisher:**  Meta 
@@ -988,7 +990,7 @@ Llama 3 is an auto-regressive language model that uses an optimized transformer 
 **Data Freshness** The pretraining data has a cutoff of March 2023 for the 8B and December 2023 for the 70B models respectively.  
 
 ### Ministral 3B
-![Model Image](/images/modules/marketplace/models/families/mistral ai.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/mistral ai.svg)
 Usage: `llm -m github/Ministral-3B`
 
 **Publisher:**  Mistral AI 
@@ -1009,7 +1011,7 @@ _Source: [Un Ministral, des Ministraux - Introducing the world’s best edge mod
  
 
 ### Mistral Large 24.11
-![Model Image](/images/modules/marketplace/models/families/mistral ai.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/mistral ai.svg)
 Usage: `llm -m github/Mistral-Large-2411`
 
 **Publisher:**  Mistral AI 
@@ -1037,7 +1039,7 @@ Usage: `llm -m github/Mistral-Large-2411`
 *Output:* Models generate text only. 
 
 ### Mistral Nemo
-![Model Image](/images/modules/marketplace/models/families/mistral ai.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/mistral ai.svg)
 Usage: `llm -m github/Mistral-Nemo`
 
 **Publisher:**  Mistral AI 
@@ -1053,7 +1055,7 @@ Usage: `llm -m github/Mistral-Nemo`
 **Advanced Reasoning.** Mistral Nemo demonstrates state-of-the-art mathematical and reasoning capabilities within its size category. 
 
 ### Mistral Large
-![Model Image](/images/modules/marketplace/models/families/mistral ai.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/mistral ai.svg)
 Usage: `llm -m github/Mistral-large`
 
 **Publisher:**  Mistral AI 
@@ -1072,7 +1074,7 @@ Additionally, Mistral Large is:
 For full details of this model, please read [release blog post](https://aka.ms/mistral-blog). 
 
 ### Mistral Large (2407)
-![Model Image](/images/modules/marketplace/models/families/mistral ai.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/mistral ai.svg)
 Usage: `llm -m github/Mistral-large-2407`
 
 **Publisher:**  Mistral AI 
@@ -1088,7 +1090,7 @@ Usage: `llm -m github/Mistral-large-2407`
 **Advanced Reasoning.** State-of-the-art mathematical and reasoning capabilities 
 
 ### Mistral Small
-![Model Image](/images/modules/marketplace/models/families/mistral ai.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/mistral ai.svg)
 Usage: `llm -m github/Mistral-small`
 
 **Publisher:**  Mistral AI 
@@ -1108,7 +1110,7 @@ Mistral Small is:
 For full details of this model, please read [release blog post](https://aka.ms/mistral-blog). 
 
 ### JAIS 30b Chat
-![Model Image](/images/modules/marketplace/models/families/core42.svg)
+![Model Image](https://github.com//images/modules/marketplace/models/families/core42.svg)
 Usage: `llm -m github/jais-30b-chat`
 
 **Publisher:**  Core42 

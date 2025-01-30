@@ -34,7 +34,7 @@ print("## Supported Models")
 
 for model in models:
     print(f"### {model['friendly_name']}")
-    print(f"![Model Image]({model['logo_url']})")
+    print(f"![Model Image](https://github.com/{model['logo_url']})")
     print(f"Usage: `llm -m github/{model['name']}`\n")
     print("**Publisher:** ", model['publisher'], "\n")
     print("**Description:** ", model['description'].replace("\n## ", "\n#### "), "\n")
