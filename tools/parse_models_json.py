@@ -8,12 +8,17 @@ from pprint import pprint
 chat_models = []
 embedding_models = []
 
+def supports_streaming(name):
+    if name in ['o1', 'o1-mini', 'o1-preview', 'o3-mini']:
+        return False
+    return True
+
 
 with open("models.json", "r") as f:
     models = json.load(f)
     for model in models:
         if model['task'] == 'chat-completion':
-            chat_models.append((model['original_name'], "o1" in model['name'], model['supported_input_modalities'], model['supported_output_modalities']))
+            chat_models.append((model['original_name'], supports_streaming(model['name']), model['supported_input_modalities'], model['supported_output_modalities']))
         elif model['task'] == 'embeddings':
             embedding_models.append(model['original_name'])
         else:

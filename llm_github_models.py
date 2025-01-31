@@ -9,45 +9,47 @@ from azure.core.credentials import AzureKeyCredential
 INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
 
 CHAT_MODELS = [
-    ("AI21-Jamba-1.5-Large", False, ["text"], ["text"]),
-    ("AI21-Jamba-1.5-Mini", False, ["text"], ["text"]),
-    ("Codestral-2501", False, ["text"], ["text"]),
-    ("Cohere-command-r", False, ["text"], ["text"]),
-    ("Cohere-command-r-08-2024", False, ["text"], ["text"]),
-    ("Cohere-command-r-plus", False, ["text"], ["text"]),
-    ("Cohere-command-r-plus-08-2024", False, ["text"], ["text"]),
+    ("AI21-Jamba-1.5-Large", True, ["text"], ["text"]),
+    ("AI21-Jamba-1.5-Mini", True, ["text"], ["text"]),
+    ("Codestral-2501", True, ["text"], ["text"]),
+    ("Cohere-command-r", True, ["text"], ["text"]),
+    ("Cohere-command-r-08-2024", True, ["text"], ["text"]),
+    ("Cohere-command-r-plus", True, ["text"], ["text"]),
+    ("Cohere-command-r-plus-08-2024", True, ["text"], ["text"]),
     ("DeepSeek-R1", True, ["text"], ["text"]),
-    ("Llama-3.2-11B-Vision-Instruct", False, ["text", "image", "audio"], ["text"]),
-    ("Llama-3.2-90B-Vision-Instruct", False, ["text", "image", "audio"], ["text"]),
-    ("Llama-3.3-70B-Instruct", False, ["text"], ["text"]),
-    ("Meta-Llama-3-70B-Instruct", False, ["text"], ["text"]),
-    ("Meta-Llama-3-8B-Instruct", False, ["text"], ["text"]),
-    ("Meta-Llama-3.1-405B-Instruct", False, ["text"], ["text"]),
-    ("Meta-Llama-3.1-70B-Instruct", False, ["text"], ["text"]),
-    ("Meta-Llama-3.1-8B-Instruct", False, ["text"], ["text"]),
-    ("Ministral-3B", False, ["text"], ["text"]),
-    ("Mistral-Large-2411", False, ["text"], ["text"]),
-    ("Mistral-Nemo", False, ["text"], ["text"]),
-    ("Mistral-large", False, ["text"], ["text"]),
-    ("Mistral-large-2407", False, ["text"], ["text"]),
-    ("Mistral-small", False, ["text"], ["text"]),
-    ("Phi-3-medium-128k-instruct", False, ["text"], ["text"]),
-    ("Phi-3-medium-4k-instruct", False, ["text"], ["text"]),
-    ("Phi-3-mini-128k-instruct", False, ["text"], ["text"]),
-    ("Phi-3-mini-4k-instruct", False, ["text"], ["text"]),
-    ("Phi-3-small-128k-instruct", False, ["text"], ["text"]),
-    ("Phi-3-small-8k-instruct", False, ["text"], ["text"]),
-    ("Phi-3.5-MoE-instruct", False, ["text"], ["text"]),
-    ("Phi-3.5-mini-instruct", False, ["text"], ["text"]),
-    ("Phi-3.5-vision-instruct", False, ["text", "image"], []),
-    ("Phi-4", False, ["text"], ["text"]),
-    ("gpt-4o", False, ["text", "image", "audio"], ["text"]),
-    ("gpt-4o-mini", False, ["text", "image", "audio"], ["text"]),
-    ("jais-30b-chat", False, ["text"], ["text"]),
-    ("o1", True, ["text", "image"], ["text"]),
-    ("o1-mini", True, ["text"], ["text"]),
-    ("o1-preview", True, ["text"], ["text"]),
+    ("Llama-3.2-11B-Vision-Instruct", True, ["text", "image", "audio"], ["text"]),
+    ("Llama-3.2-90B-Vision-Instruct", True, ["text", "image", "audio"], ["text"]),
+    ("Llama-3.3-70B-Instruct", True, ["text"], ["text"]),
+    ("Meta-Llama-3-70B-Instruct", True, ["text"], ["text"]),
+    ("Meta-Llama-3-8B-Instruct", True, ["text"], ["text"]),
+    ("Meta-Llama-3.1-405B-Instruct", True, ["text"], ["text"]),
+    ("Meta-Llama-3.1-70B-Instruct", True, ["text"], ["text"]),
+    ("Meta-Llama-3.1-8B-Instruct", True, ["text"], ["text"]),
+    ("Ministral-3B", True, ["text"], ["text"]),
+    ("Mistral-Large-2411", True, ["text"], ["text"]),
+    ("Mistral-Nemo", True, ["text"], ["text"]),
+    ("Mistral-large", True, ["text"], ["text"]),
+    ("Mistral-large-2407", True, ["text"], ["text"]),
+    ("Mistral-small", True, ["text"], ["text"]),
+    ("Phi-3-medium-128k-instruct", True, ["text"], ["text"]),
+    ("Phi-3-medium-4k-instruct", True, ["text"], ["text"]),
+    ("Phi-3-mini-128k-instruct", True, ["text"], ["text"]),
+    ("Phi-3-mini-4k-instruct", True, ["text"], ["text"]),
+    ("Phi-3-small-128k-instruct", True, ["text"], ["text"]),
+    ("Phi-3-small-8k-instruct", True, ["text"], ["text"]),
+    ("Phi-3.5-MoE-instruct", True, ["text"], ["text"]),
+    ("Phi-3.5-mini-instruct", True, ["text"], ["text"]),
+    ("Phi-3.5-vision-instruct", True, ["text", "image"], []),
+    ("Phi-4", True, ["text"], ["text"]),
+    ("gpt-4o", True, ["text", "image", "audio"], ["text"]),
+    ("gpt-4o-mini", True, ["text", "image", "audio"], ["text"]),
+    ("jais-30b-chat", True, ["text"], ["text"]),
+    ("o1", False, ["text", "image"], ["text"]),
+    ("o1-mini", False, ["text"], ["text"]),
+    ("o1-preview", False, ["text"], ["text"]),
+    ("o3-mini", False, ["text"], ["text"]),
 ]
+
 
 EMBEDDING_MODELS = [
     "Cohere-embed-v3-english",
@@ -163,10 +165,15 @@ class GitHubModels(_Shared, llm.Model):
     ) -> Iterator[str]:
         key = self.get_key()
 
+        extra = {}
+        if self.model_name == "o3-mini":
+            extra["api_version"] = "2024-12-01-preview"
+
         client = ChatCompletionsClient(
             endpoint=INFERENCE_ENDPOINT,
             credential=AzureKeyCredential(key),
             model=self.model_name,
+            **extra,
         )
         messages = self.build_messages(prompt, conversation)
         if stream:
