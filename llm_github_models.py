@@ -47,7 +47,7 @@ CHAT_MODELS = [
     ("o1", False, ["text", "image"], ["text"]),
     ("o1-mini", False, ["text"], ["text"]),
     ("o1-preview", False, ["text"], ["text"]),
-    ("o3-mini", True, ["text"], ["text"]),
+    ("o3-mini", False, ["text"], ["text"]),
 ]
 
 
@@ -165,10 +165,15 @@ class GitHubModels(_Shared, llm.Model):
     ) -> Iterator[str]:
         key = self.get_key()
 
+        extra = {}
+        if self.model_name == "o3-mini":
+            extra["api_version"] = "2024-12-01-preview"
+
         client = ChatCompletionsClient(
             endpoint=INFERENCE_ENDPOINT,
             credential=AzureKeyCredential(key),
             model=self.model_name,
+            **extra,
         )
         messages = self.build_messages(prompt, conversation)
         if stream:

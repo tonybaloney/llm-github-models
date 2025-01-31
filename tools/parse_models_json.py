@@ -9,7 +9,7 @@ chat_models = []
 embedding_models = []
 
 def supports_streaming(name):
-    if name in ['o1', 'o1-mini', 'o1-preview']:
+    if name in ['o1', 'o1-mini', 'o1-preview', 'o3-mini']:
         return False
     return True
 
