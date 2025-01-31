@@ -47,7 +47,6 @@ This image depicts a dense gathering of pelicans, with the largest birds situate
 The overall atmosphere of the image exudes tranquility, with the pelicans seemingly engaging in a social gathering or feeding activity. The photograph's clarity and focus on the pelicans' behavior evoke a sense of observation and appreciation for the natural world.
 ```
 
-
 ## Supported Models
 ### OpenAI GPT-4o
 ![Model Image](https://github.com//images/modules/marketplace/models/families/openai.svg)
@@ -210,6 +209,42 @@ o1-preview model is currently in preview and do not include some features availa
 - [OpenAI o1-preview model announcement](https://openai.com/index/introducing-openai-o1-preview/)
 - [Azure OpenAI blog announcement](https://aka.ms/new-models)
  
+
+### OpenAI o3-mini
+![Model Image](https://github.com//images/modules/marketplace/models/families/openai.svg)
+Usage: `llm -m github/o3-mini`
+
+**Publisher:**  OpenAI 
+
+**Description:**  #### o1 and o3 Series Models: Enhanced Reasoning and Problem Solving on Azure
+
+The o1 and o3 series models are specifically designed to tackle reasoning and problem-solving tasks with increased focus and capability. These models spend more time processing and understanding the user's request, making them exceptionally strong in areas like science, coding, math and similar fields. For example, o1 can be used by healthcare researchers to annotate cell sequencing data, by physicists to generate complicated mathematical formulas needed for quantum optics, and by developers in all fields to build and execute multi-step workflows.
+
+#### Key Capabilities of these models
+
+- o1 added advanced image analysis capabilities with the new version. Enhance your prompts and context with images for additional insights.
+- o3-mini follows o1 mini but adds the features supported by o1 like function calling and tools.
+- Complex Code Generation: Capable of generating algorithms and handling advanced coding tasks to support developers.
+- Advanced Problem Solving: Ideal for comprehensive brainstorming sessions and addressing multifaceted challenges.
+- Complex Document Comparison: Perfect for analyzing contracts, case files, or legal documents to identify subtle differences.
+- Instruction Following and Workflow Management: Particularly effective for managing workflows requiring shorter contexts.
+
+#### Features and properties supported in o3-mini model
+
+- Supports both System message and the new Developer message to improve upgrade experience.
+- Reasoning effort as in `high`, `medium`, and `low`. It controls whether the model thinks "less" or "more" in terms of applying cognitive reasoning.
+- Structured outputs and functions/tools.
+- Context window: 200K, Max Completion Tokens: 100K
+
+#### Model Variants
+
+- `o3-mini`: Now includes the o1 features with significant cost-efficiencies for scenarios requiring high performance.
+- `o1`: The most capable model in the o1 series, offering enhanced reasoning abilities. Now generally available.
+- `o1-mini`: A faster and more cost-efficient option in the o1 series, ideal for coding tasks requiring speed and lower resource consumption.
+
+#### Limitations
+
+o1 model does not include all the features available in other models.  
 
 ### OpenAI Text Embedding 3 (large)
 ![Model Image](https://github.com//images/modules/marketplace/models/families/openai.svg)
@@ -536,12 +571,12 @@ Usage: `llm -m github/AI21-Jamba-1-5-Large`
 
 Jamba 1.5 Large is a state-of-the-art, hybrid SSM-Transformer instruction following foundation model
 
-#### Model Variations	 
+#### Model Variations    
 
 94B total parameters and 398B active parameters
 
 #### Model Input
-	
+
 Models input text only.
 
 #### Model Output
@@ -571,13 +606,13 @@ Usage: `llm -m github/AI21-Jamba-1-5-Mini`
 
 #### Model Architecture
 Jamba 1.5 Mini is a state-of-the-art, hybrid SSM-Transformer instruction following foundation model                                                                                                                             
-#### Model Variations	
+#### Model Variations
 52B total parameters and 12B active parameters
 
-#### Model Input	
+#### Model Input
 Model inputs text only.
 
-#### Model Output	
+#### Model Output
 Model generates text only.
 
 #### Model Dates
@@ -1024,19 +1059,19 @@ Usage: `llm -m github/Mistral-Large-2411`
 - **BETTER PERFORMANCE ON LONG CONTEXT**
 - **IMPROVED FUNCTION CALLING**
 
-**Multi-lingual by design.** Dozens of languages supported, including English, French, German, Spanish, Italian, Chinese, Japanese, Korean, Portuguese, Dutch and Polish
+**Multi-lingual by design.** Dozens of languages supported, including English, French, German, Spanish, Italian, Chinese, Japanese, Korean, Portuguese, Dutch and Polish
 
 **Proficient in coding.** Trained on 80+ coding languages such as Python, Java, C, C++, JavaScript, and Bash. Also trained on more specific languages such as Swift and Fortran
 
 **Agent-centric.** Best-in-class agentic capabilities with native function calling and JSON outputting 
 
-**Advanced Reasoning.** State-of-the-art mathematical and reasoning capabilities
+**Advanced Reasoning.** State-of-the-art mathematical and reasoning capabilities
 
-*Context length:* 128K tokens
+*Context length:* 128K tokens
 
-*Input:* Models input text only.
+*Input:* Models input text only.
 
-*Output:* Models generate text only. 
+*Output:* Models generate text only. 
 
 ### Mistral Nemo
 ![Model Image](https://github.com//images/modules/marketplace/models/families/mistral ai.svg)
@@ -1081,13 +1116,13 @@ Usage: `llm -m github/Mistral-large-2407`
 
 **Description:**  Mistral Large (2407) is an advanced Large Language Model (LLM) with state-of-the-art reasoning, knowledge and coding capabilities.
 
-**Multi-lingual by design.** Dozens of languages supported, including English, French, German, Spanish, Italian, Chinese, Japanese, Korean, Portuguese, Dutch and Polish
+**Multi-lingual by design.** Dozens of languages supported, including English, French, German, Spanish, Italian, Chinese, Japanese, Korean, Portuguese, Dutch and Polish
 
 **Proficient in coding.** Trained on 80+ coding languages such as Python, Java, C, C++, JavaScript, and Bash. Also trained on more specific languages such as Swift and Fortran
 
 **Agent-centric.** Best-in-class agentic capabilities with native function calling and JSON outputting 
 
-**Advanced Reasoning.** State-of-the-art mathematical and reasoning capabilities 
+**Advanced Reasoning.** State-of-the-art mathematical and reasoning capabilities 
 
 ### Mistral Small
 ![Model Image](https://github.com//images/modules/marketplace/models/families/mistral ai.svg)
@@ -1099,11 +1134,11 @@ Usage: `llm -m github/Mistral-small`
 
 Mistral Small is:
 
-- **A small model optimized for low latency.** Very efficient for high volume and low latency workloads. Mistral Small is Mistral's smallest proprietary model, it outperforms Mixtral 8x7B and has lower latency. 
-- **Specialized in RAG.** Crucial information is not lost in the middle of long context windows (up to 32K tokens).
-- **Strong in coding.** Code generation, review and comments. Supports all mainstream coding languages.
-- **Multi-lingual by design.** Best-in-class performance in French, German, Spanish, and Italian - in addition to English. Dozens of other languages are supported.
-- **Responsible AI.** Efficient guardrails baked in the model, with additional safety layer with safe_mode option
+- **A small model optimized for low latency.** Very efficient for high volume and low latency workloads. Mistral Small is Mistral's smallest proprietary model, it outperforms Mixtral 8x7B and has lower latency. 
+- **Specialized in RAG.** Crucial information is not lost in the middle of long context windows (up to 32K tokens).
+- **Strong in coding.** Code generation, review and comments. Supports all mainstream coding languages.
+- **Multi-lingual by design.** Best-in-class performance in French, German, Spanish, and Italian - in addition to English. Dozens of other languages are supported.
+- **Responsible AI.** Efficient guardrails baked in the model, with additional safety layer with safe_mode option
 
 #### Resources
 
@@ -1126,4 +1161,3 @@ The model is based on transformer-based decoder-only (GPT-3) architecture and us
 The pretraining data for Jais-30b is a total of 1.63 T tokens consisting of English, Arabic, and code. Jais-30b-chat model is finetuned with both Arabic and English prompt-response pairs. We extended our finetuning datasets used for jais-13b-chat which included a wide range of instructional data across various domains. We cover a wide range of common tasks including question answering, code generation, and reasoning over textual content. To enhance performance in Arabic, we developed an in-house Arabic dataset as well as translating some open-source English instructions into Arabic.
 
 The pretraining data has a cutoff of December 2022, with some tuning data being more recent, up to October 2023. 
-
