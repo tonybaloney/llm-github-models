@@ -47,6 +47,7 @@ CHAT_MODELS = [
     ("o1", True, ["text", "image"], ["text"]),
     ("o1-mini", True, ["text"], ["text"]),
     ("o1-preview", True, ["text"], ["text"]),
+    ("o3-mini", False, ["text"], ["text"]),
 ]
 
 EMBEDDING_MODELS = [
