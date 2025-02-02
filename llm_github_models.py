@@ -1,59 +1,20 @@
 import llm
 from llm.models import Conversation, Prompt, Response
 from llm.default_plugins.openai_models import _attachment
-from typing import Optional, Iterator, List, Dict, Any
-
+from typing import Optional, Iterator, List, Dict, Any, Tuple
+from pathlib import Path
+import json
+import time
 from azure.ai.inference import ChatCompletionsClient
 from azure.core.credentials import AzureKeyCredential
+from pydantic import BaseModel
+import requests
 
 INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
 
-CHAT_MODELS = [
-    ("AI21-Jamba-1.5-Large", True, ["text"], ["text"]),
-    ("AI21-Jamba-1.5-Mini", True, ["text"], ["text"]),
-    ("Codestral-2501", True, ["text"], ["text"]),
-    ("Cohere-command-r", True, ["text"], ["text"]),
-    ("Cohere-command-r-08-2024", True, ["text"], ["text"]),
-    ("Cohere-command-r-plus", True, ["text"], ["text"]),
-    ("Cohere-command-r-plus-08-2024", True, ["text"], ["text"]),
-    ("DeepSeek-R1", True, ["text"], ["text"]),
-    ("Llama-3.2-11B-Vision-Instruct", True, ["text", "image", "audio"], ["text"]),
-    ("Llama-3.2-90B-Vision-Instruct", True, ["text", "image", "audio"], ["text"]),
-    ("Llama-3.3-70B-Instruct", True, ["text"], ["text"]),
-    ("Meta-Llama-3-70B-Instruct", True, ["text"], ["text"]),
-    ("Meta-Llama-3-8B-Instruct", True, ["text"], ["text"]),
-    ("Meta-Llama-3.1-405B-Instruct", True, ["text"], ["text"]),
-    ("Meta-Llama-3.1-70B-Instruct", True, ["text"], ["text"]),
-    ("Meta-Llama-3.1-8B-Instruct", True, ["text"], ["text"]),
-    ("Ministral-3B", True, ["text"], ["text"]),
-    ("Mistral-Large-2411", True, ["text"], ["text"]),
-    ("Mistral-Nemo", True, ["text"], ["text"]),
-    ("Mistral-large", True, ["text"], ["text"]),
-    ("Mistral-large-2407", True, ["text"], ["text"]),
-    ("Mistral-small", True, ["text"], ["text"]),
-    ("Phi-3-medium-128k-instruct", True, ["text"], ["text"]),
-    ("Phi-3-medium-4k-instruct", True, ["text"], ["text"]),
-    ("Phi-3-mini-128k-instruct", True, ["text"], ["text"]),
-    ("Phi-3-mini-4k-instruct", True, ["text"], ["text"]),
-    ("Phi-3-small-128k-instruct", True, ["text"], ["text"]),
-    ("Phi-3-small-8k-instruct", True, ["text"], ["text"]),
-    ("Phi-3.5-MoE-instruct", True, ["text"], ["text"]),
-    ("Phi-3.5-mini-instruct", True, ["text"], ["text"]),
-    ("Phi-3.5-vision-instruct", True, ["text", "image"], []),
-    ("Phi-4", True, ["text"], ["text"]),
-    ("gpt-4o", True, ["text", "image", "audio"], ["text"]),
-    ("gpt-4o-mini", True, ["text", "image", "audio"], ["text"]),
-    ("jais-30b-chat", True, ["text"], ["text"]),
-    ("o1", False, ["text", "image"], ["text"]),
-    ("o1-mini", False, ["text"], ["text"]),
-    ("o1-preview", False, ["text"], ["text"]),
-    ("o3-mini", False, ["text"], ["text"]),
-]
-
-
 EMBEDDING_MODELS = [
     "Cohere-embed-v3-english",
-    "Cohere-embed-v3-multilingual",
+    "Cohere-embed-v3-multilingual", 
     "text-embedding-3-large",
     "text-embedding-3-small",
 ]
@@ -61,9 +22,10 @@ EMBEDDING_MODELS = [
 
 @llm.hookimpl
 def register_models(register):
-    # Register both sync and async versions of each model
-    # TODO: Dynamically fetch this list
-    for model_id, can_stream, input_modalities, output_modalities in CHAT_MODELS:
+    """Register both sync and async versions of each model"""
+    # Dynamically fetch the list of models
+    models = fetch_models()    
+    for model_id, can_stream, input_modalities, output_modalities in models:
         register(
             GitHubModels(
                 model_id,
@@ -86,6 +48,109 @@ AUDIO_ATTACHMENTS = {
     "audio/mpeg",
 }
 
+class GitHubModelsConfig(BaseModel):
+    GITHUB_MARKETPLACE_BASE_URL: str = "https://github.com/marketplace"
+
+def get_cached_models(path: Path, cache_timeout: int = 3600) -> Optional[List[Tuple[str, bool, List[str], List[str]]]]:
+    """
+    Get cached models if they exist and aren't expired.
+    
+    Args:
+        path: Path to cache file
+        cache_timeout: Cache timeout in seconds (default: 1 hour)
+        
+    Returns:
+        List of model tuples if valid cache exists, None otherwise
+    """
+    if path.is_file():
+        mod_time = path.stat().st_mtime
+        if time.time() - mod_time < cache_timeout:
+            try:
+                with open(path, "r") as file:
+                    return json.load(file)
+            except Exception:
+                return None
+    return None
+
+def save_models_cache(models: List[Tuple[str, bool, List[str], List[str]]], path: Path):
+    """
+    Save models to cache file.
+    
+    Args:
+        models: List of model tuples to cache
+        path: Path to cache file
+    """
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w") as file:
+        json.dump(models, file)
+
+def fetch_models() -> List[Tuple[str, bool, List[str], List[str]]]:
+    """Fetch available chat models from GitHub Marketplace with caching"""
+    config = GitHubModelsConfig()
+    cache_path = llm.user_dir() / "github_models.json"
+    
+    # Check cache first
+    cached_models = get_cached_models(cache_path)
+    if cached_models:
+        return cached_models
+    
+    # Fallback models in case API fetch fails
+    fallback_models = [
+        ("Meta-Llama-3-70B-Instruct", True, ["text"], ["text"]),
+        ("o3-mini", False, ["text"], ["text"])
+    ]
+    
+    try:
+        headers = {"Accept": "application/json"}
+        models = []
+        page = 1
+        
+        while True:
+            response = requests.get(
+                f"{config.GITHUB_MARKETPLACE_BASE_URL}?page={page}&type=models&task=chat-completion&query=sort%3Aname-asc",
+                headers=headers,
+                timeout=10
+            )
+            if not response.ok:
+                return fallback_models
+                
+            data = response.json()
+            
+            for model in data.get("results", []):
+                model_id = model.get("original_name", model["name"])
+                
+                # Determine capabilities based on model metadata
+                input_modalities = ["text"]
+                if model.get("vision_enabled"):
+                    input_modalities.append("image")
+                if model.get("audio_enabled"):
+                    input_modalities.append("audio")
+                    
+                output_modalities = ["text"]
+                
+                # Special handling for o1 models which don't support streaming
+                can_stream = not model_id.startswith("o1")
+                
+                models.append((
+                    model_id,
+                    can_stream,
+                    input_modalities,
+                    output_modalities
+                ))
+
+            if page >= data.get("totalPages", 1):
+                break
+            page += 1
+
+        # Cache the results before returning
+        if models:
+            save_models_cache(models, cache_path)
+            return models
+        return fallback_models
+
+    except Exception as e:
+        print(f"Error fetching models, using fallback list: {e}")
+        return fallback_models
 
 class _Shared:
     def build_messages(
