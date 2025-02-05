@@ -26,3 +26,6 @@ jobs:
     - name: Run tests
       run: |
         pytest
+      with:
+        env:
+          GITHUB_MODELS_KEY: ${{ secrets._GITHUB_MODELS_KEY }}
