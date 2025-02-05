@@ -27,4 +27,4 @@ jobs:
       run: |
         pytest
       env:
-        GITHUB_MODELS_KEY: ${{ secrets._GITHUB_MODELS_KEY }}
+        GITHUB_MODELS_KEY: ghpat-1234567890abcdef
