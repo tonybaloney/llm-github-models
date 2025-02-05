@@ -1,6 +1,9 @@
 name: Python package
 
-on: [push, pull_request]
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test:
@@ -27,4 +30,4 @@ jobs:
       run: |
         pytest
       env:
-        GITHUB_MODELS_KEY: ghpat-1234567890abcdef
+        GITHUB_MODELS_KEY: ${{ secrets._GITHUB_MODELS_KEY }}
