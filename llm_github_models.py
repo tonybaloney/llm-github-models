@@ -158,7 +158,7 @@ def build_messages(
                 messages.append(UserMessage(prev_response.prompt.prompt))
             messages.append(AssistantMessage(prev_response.text_or_raise()))
     if prompt.system and prompt.system != current_system:
-        messages.append(SystemMessage(prev_response.prompt.system))
+        messages.append(SystemMessage(prompt.system))
     if not prompt.attachments:
         messages.append(UserMessage(content=prompt.prompt))
     else:
