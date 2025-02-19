@@ -1,6 +1,6 @@
 [project]
 name = "llm-github-models"
-version = "0.9"
+version = "0.10"
 description = "LLM plugin to access GitHub Models API"
 readme = "README.md"
 authors = [{name = "Anthony Shaw"}]
