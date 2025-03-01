@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "name": "GPT-4o with audio",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "llm",
+      "args": ["what is happening in this audio?", "-m", "github/gpt-4o", "-a", "tests/files/kick.wav"],
+    }
+  ]
+}
