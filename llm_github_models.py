@@ -23,8 +23,8 @@ from azure.ai.inference.models import (
 from pydantic import BaseModel
 import requests
 
-# Using the updated endpoint URL
-INFERENCE_ENDPOINT = "https://models.github.ai/inference"
+# Using the documented endpoint URL
+INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
 
 EMBEDDING_MODELS = [
     "Cohere-embed-v3-english",
