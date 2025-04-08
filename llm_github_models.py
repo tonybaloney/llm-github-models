@@ -17,6 +17,7 @@ from azure.ai.inference.models import (
     ImageUrl,
     SystemMessage,
     UserMessage,
+    JsonSchemaFormat,
 )
 
 INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
@@ -86,11 +87,12 @@ EMBEDDING_MODELS = [
 def register_models(register):
     # Register both sync and async versions of each model
     # TODO: Dynamically fetch this list
-    for model_id, can_stream, input_modalities, output_modalities in CHAT_MODELS:
+    for model_id, can_stream, supports_schema, input_modalities, output_modalities in CHAT_MODELS:
         register(
             GitHubModels(
                 model_id,
                 can_stream=can_stream,
+                supports_schema=supports_schema,
                 input_modalities=input_modalities,
                 output_modalities=output_modalities,
             )
@@ -189,12 +191,14 @@ class GitHubModels(llm.Model):
         self,
         model_id: str,
         can_stream: bool,
+        supports_schema: bool,
         input_modalities: Optional[List[str]] = None,
         output_modalities: Optional[List[str]] = None,
     ):
         self.model_id = f"github/{model_id}"
         self.model_name = model_id
         self.can_stream = can_stream
+        self.supports_schema = supports_schema
         self.attachment_types = set()
         if input_modalities and "image" in input_modalities:
             self.attachment_types.update(IMAGE_ATTACHMENTS)
@@ -203,6 +207,7 @@ class GitHubModels(llm.Model):
 
         self.input_modalities = input_modalities
         self.output_modalities = output_modalities
+
 
     def execute(
         self,
@@ -214,8 +219,7 @@ class GitHubModels(llm.Model):
         key = self.get_key()
 
         extra = {}
-        if self.model_name == "o3-mini":
-            extra["api_version"] = "2024-12-01-preview"
+        extra["api_version"] = "2025-03-01-preview" # Use latest version
 
         client = ChatCompletionsClient(
             endpoint=INFERENCE_ENDPOINT,
@@ -223,11 +227,21 @@ class GitHubModels(llm.Model):
             model=self.model_name,
             **extra,
         )
+
+        if prompt.schema:
+            response_format = JsonSchemaFormat(
+                name="output",
+                schema=prompt.schema
+            )
+        else:
+            response_format = "text"
+
         messages = build_messages(prompt, conversation)
         if stream:
             completion = client.complete(
                 messages=messages,
                 stream=True,
+                response_format=response_format,
             )
             chunks = []
             for chunk in completion:
@@ -243,6 +257,7 @@ class GitHubModels(llm.Model):
             completion = client.complete(
                 messages=messages,
                 stream=False,
+                response_format=response_format,
             )
             response.response_json = None  # TODO
             yield completion.choices[0].message.content
