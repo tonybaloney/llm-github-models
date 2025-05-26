@@ -1,8 +1,7 @@
 from typing import Iterator, List, Optional
 
-from azure.ai.inference import ChatCompletionsClient, EmbeddingsClient
-from azure.core.credentials import AzureKeyCredential
 import llm
+from azure.ai.inference import ChatCompletionsClient, EmbeddingsClient
 from azure.ai.inference.models import (
     AssistantMessage,
     AudioContentFormat,
@@ -17,6 +16,7 @@ from azure.ai.inference.models import (
     TextContentItem,
     UserMessage,
 )
+from azure.core.credentials import AzureKeyCredential
 from llm.models import Attachment, Conversation, Prompt, Response
 
 INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
@@ -123,21 +123,17 @@ def attachment_as_content_item(attachment: Attachment) -> ContentItem:
     if attachment is None or attachment.resolve_type() is None:
         raise ValueError("Attachment cannot be None or empty")
 
-    attachment_type: str = attachment.resolve_type() # type: ignore
+    attachment_type: str = attachment.resolve_type()  # type: ignore
 
     if attachment_type.startswith("audio/"):
         audio_format = (
-            AudioContentFormat.WAV
-            if attachment_type == "audio/wav"
-            else AudioContentFormat.MP3
+            AudioContentFormat.WAV if attachment_type == "audio/wav" else AudioContentFormat.MP3
         )
         if attachment.path is None:
             raise ValueError("Audio attachment must have a path for audio content")
 
         return AudioContentItem(
-            input_audio=InputAudio.load(
-                audio_file=attachment.path, audio_format=audio_format
-            )
+            input_audio=InputAudio.load(audio_file=attachment.path, audio_format=audio_format)
         )
     if attachment_type.startswith("image/"):
         if attachment.url:
@@ -166,24 +162,19 @@ def build_messages(
     current_system = None
     if conversation is not None:
         for prev_response in conversation.responses:
-            if (
-                prev_response.prompt.system
-                and prev_response.prompt.system != current_system
-            ):
+            if prev_response.prompt.system and prev_response.prompt.system != current_system:
                 messages.append(SystemMessage(prev_response.prompt.system))
                 current_system = prev_response.prompt.system
             if prev_response.attachments:
                 attachment_message: list[ContentItem] = []
                 if prev_response.prompt.prompt:
-                    attachment_message.append(
-                        TextContentItem(text=prev_response.prompt.prompt)
-                    )
+                    attachment_message.append(TextContentItem(text=prev_response.prompt.prompt))
                 for attachment in prev_response.attachments:
                     attachment_message.append(attachment_as_content_item(attachment))
                 messages.append(UserMessage(attachment_message))
             else:
                 messages.append(UserMessage(prev_response.prompt.prompt))
-            messages.append(AssistantMessage(prev_response.text_or_raise())) # type: ignore
+            messages.append(AssistantMessage(prev_response.text_or_raise()))  # type: ignore
     if prompt.system and prompt.system != current_system:
         messages.append(SystemMessage(prompt.system))
     if not prompt.attachments:
@@ -229,7 +220,7 @@ class GitHubModels(llm.Model):
         conversation: Optional[Conversation],
     ) -> Iterator[str]:
         # unset keys are handled by llm.Model.get_key()
-        key: str = self.get_key() # type: ignore
+        key: str = self.get_key()  # type: ignore
 
         extra = {}
         if self.model_name == "o3-mini":

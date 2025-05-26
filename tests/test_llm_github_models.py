@@ -20,9 +20,7 @@ MODELS = ["github/gpt-4o", "github/gpt-4o-mini"]
 @pytest.mark.parametrize("model", MODELS)
 def test_build_messages_no_conversation(model: str):
     # Test build_messages with conversation=None and a basic prompt without system.
-    dummy_prompt = Prompt(
-        prompt="Hello from prompt", system=None, attachments=[], model=model
-    )
+    dummy_prompt = Prompt(prompt="Hello from prompt", system=None, attachments=[], model=model)
     messages = build_messages(dummy_prompt, None)
     # Should add one UserMessage from prompt since conversation is None.
     assert isinstance(messages, list)
@@ -38,15 +36,11 @@ def test_build_messages_no_conversation(model: str):
 @pytest.mark.parametrize("model", MODELS)
 def test_build_messages_with_conversation_no_prompt_system(model: str):
     # Create a dummy conversation with one response.
-    dummy_prompt = Prompt(
-        prompt="Hello from prompt", system=None, attachments=[], model=model
-    )
+    dummy_prompt = Prompt(prompt="Hello from prompt", system=None, attachments=[], model=model)
     _model = get_model(model)
     # The response has a system message and a user message.
     dummy_response = Response(
-        prompt=Prompt(
-            prompt="Hello from last time", system=None, attachments=[], model=model
-        ),
+        prompt=Prompt(prompt="Hello from last time", system=None, attachments=[], model=model),
         model=_model,
         stream=False,
     )
@@ -118,9 +112,7 @@ def test_build_messages_with_image_path_attachment():
 def test_build_messages_with_image_url_attachments():
     # Create a dummy attachment object for an image.
     model: str = "gpt-4o"
-    attachment = Attachment(
-        path=None, url="http://dummy.image/url.png", type="image/png"
-    )
+    attachment = Attachment(path=None, url="http://dummy.image/url.png", type="image/png")
     dummy_attachment = attachment
     # Create a prompt with an attachment and prompt text.
     dummy_prompt = Prompt(
@@ -150,9 +142,7 @@ def test_build_messages_with_image_url_attachments():
 def test_build_messages_with_audio_path_attachment():
     # Create a dummy attachment object for an image.
     model: str = "gpt-4o"
-    attachment = Attachment(
-        path=pathlib.Path("tests/files/kick.wav"), url=None, type="audio/wav"
-    )
+    attachment = Attachment(path=pathlib.Path("tests/files/kick.wav"), url=None, type="audio/wav")
     dummy_attachment = attachment
     # Create a prompt with an attachment and prompt text.
     dummy_prompt = Prompt(

@@ -1,7 +1,9 @@
-from llm_github_models import GitHubEmbeddingModel, EMBEDDING_MODELS
-import pytest
 from unittest.mock import patch
+
+import pytest
 from azure.ai.inference.models import EmbeddingItem, EmbeddingsResult
+
+from llm_github_models import EMBEDDING_MODELS, GitHubEmbeddingModel
 
 EMBEDDING_MODEL_IDS = [f"github/{model}" for model in EMBEDDING_MODELS]
 
