@@ -12,65 +12,85 @@ from azure.ai.inference.models import (
     ImageDetailLevel,
     ImageUrl,
     InputAudio,
+    JsonSchemaFormat,
     SystemMessage,
     TextContentItem,
     UserMessage,
 )
 from azure.core.credentials import AzureKeyCredential
 from llm.models import Attachment, Conversation, EmbeddingModel, Prompt, Response
+from pydantic import BaseModel
 
 INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
 
 CHAT_MODELS = [
-    ("AI21-Jamba-1.5-Large", True, ["text"], ["text"]),
-    ("AI21-Jamba-1.5-Mini", True, ["text"], ["text"]),
-    ("Codestral-2501", True, ["text"], ["text"]),
-    ("Cohere-command-r", True, ["text"], ["text"]),
-    ("Cohere-command-r-08-2024", True, ["text"], ["text"]),
-    ("Cohere-command-r-plus", True, ["text"], ["text"]),
-    ("Cohere-command-r-plus-08-2024", True, ["text"], ["text"]),
-    ("DeepSeek-R1", True, ["text"], ["text"]),
-    ("DeepSeek-V3", True, ["text"], ["text"]),
-    ("DeepSeek-V3-0324", True, ["text"], ["text"]),
-    ("Llama-3.2-11B-Vision-Instruct", True, ["text", "image", "audio"], ["text"]),
-    ("Llama-3.2-90B-Vision-Instruct", True, ["text", "image", "audio"], ["text"]),
-    ("Llama-3.3-70B-Instruct", True, ["text"], ["text"]),
-    ("Llama-4-Maverick-17B-128E-Instruct-FP8", True, ["text", "image"], ["text"]),
-    ("Llama-4-Scout-17B-16E-Instruct", True, ["text", "image"], ["text"]),
-    ("Meta-Llama-3-70B-Instruct", True, ["text"], ["text"]),
-    ("Meta-Llama-3-8B-Instruct", True, ["text"], ["text"]),
-    ("Meta-Llama-3.1-405B-Instruct", True, ["text"], ["text"]),
-    ("Meta-Llama-3.1-70B-Instruct", True, ["text"], ["text"]),
-    ("Meta-Llama-3.1-8B-Instruct", True, ["text"], ["text"]),
-    ("Ministral-3B", True, ["text"], ["text"]),
-    ("Mistral-Large-2411", True, ["text"], ["text"]),
-    ("Mistral-Nemo", True, ["text"], ["text"]),
-    ("Mistral-large", True, ["text"], ["text"]),
-    ("Mistral-large-2407", True, ["text"], ["text"]),
-    ("Mistral-small", True, ["text"], ["text"]),
-    ("Phi-3-medium-128k-instruct", True, ["text"], ["text"]),
-    ("Phi-3-medium-4k-instruct", True, ["text"], ["text"]),
-    ("Phi-3-mini-128k-instruct", True, ["text"], ["text"]),
-    ("Phi-3-mini-4k-instruct", True, ["text"], ["text"]),
-    ("Phi-3-small-128k-instruct", True, ["text"], ["text"]),
-    ("Phi-3-small-8k-instruct", True, ["text"], ["text"]),
-    ("Phi-3.5-MoE-instruct", True, ["text"], ["text"]),
-    ("Phi-3.5-mini-instruct", True, ["text"], ["text"]),
-    ("Phi-3.5-vision-instruct", True, ["text", "image"], None),
-    ("Phi-4", True, ["text"], ["text"]),
-    ("Phi-4-mini-instruct", True, ["text"], ["text"]),
-    ("Phi-4-multimodal-instruct", True, ["audio", "image", "text"], ["text"]),
-    ("gpt-4.1", True, ["text", "image", "audio"], ["text"]),
-    ("gpt-4.1-mini", True, ["text", "image"], ["text"]),
-    ("gpt-4.1-nano", True, ["text", "image"], ["text"]),
-    ("gpt-4o", True, ["text", "image", "audio"], ["text"]),
-    ("gpt-4o-mini", True, ["text", "image", "audio"], ["text"]),
-    ("jais-30b-chat", True, ["text"], ["text"]),
-    ("mistral-small-2503", True, ["text", "image"], ["text"]),
-    ("o1", False, ["text", "image"], ["text"]),
-    ("o1-mini", False, ["text"], ["text"]),
-    ("o1-preview", False, ["text"], ["text"]),
-    ("o3-mini", False, ["text"], ["text"]),
+    ("AI21-Jamba-1.5-Large", True, False, ["text"], ["text"]),
+    ("AI21-Jamba-1.5-Mini", True, False, ["text"], ["text"]),
+    ("Codestral-2501", True, False, ["text"], ["text"]),
+    ("Cohere-command-r", True, False, ["text"], ["text"]),
+    ("Cohere-command-r-08-2024", True, False, ["text"], ["text"]),
+    ("Cohere-command-r-plus", True, False, ["text"], ["text"]),
+    ("Cohere-command-r-plus-08-2024", True, False, ["text"], ["text"]),
+    ("DeepSeek-R1", True, False, ["text"], ["text"]),
+    ("DeepSeek-V3", True, False, ["text"], ["text"]),
+    ("DeepSeek-V3-0324", True, False, ["text"], ["text"]),
+    (
+        "Llama-3.2-11B-Vision-Instruct",
+        True,
+        False,
+        ["text", "image", "audio"],
+        ["text"],
+    ),
+    (
+        "Llama-3.2-90B-Vision-Instruct",
+        True,
+        False,
+        ["text", "image", "audio"],
+        ["text"],
+    ),
+    ("Llama-3.3-70B-Instruct", True, False, ["text"], ["text"]),
+    (
+        "Llama-4-Maverick-17B-128E-Instruct-FP8",
+        True,
+        False,
+        ["text", "image"],
+        ["text"],
+    ),
+    ("Llama-4-Scout-17B-16E-Instruct", True, False, ["text", "image"], ["text"]),
+    ("Meta-Llama-3-70B-Instruct", True, False, ["text"], ["text"]),
+    ("Meta-Llama-3-8B-Instruct", True, False, ["text"], ["text"]),
+    ("Meta-Llama-3.1-405B-Instruct", True, False, ["text"], ["text"]),
+    ("Meta-Llama-3.1-70B-Instruct", True, False, ["text"], ["text"]),
+    ("Meta-Llama-3.1-8B-Instruct", True, False, ["text"], ["text"]),
+    ("Ministral-3B", True, False, ["text"], ["text"]),
+    ("Mistral-Large-2411", True, False, ["text"], ["text"]),
+    ("Mistral-Nemo", True, False, ["text"], ["text"]),
+    ("Mistral-large", True, False, ["text"], ["text"]),
+    ("Mistral-large-2407", True, False, ["text"], ["text"]),
+    ("Mistral-small", True, False, ["text"], ["text"]),
+    ("Phi-3-medium-128k-instruct", True, False, ["text"], ["text"]),
+    ("Phi-3-medium-4k-instruct", True, False, ["text"], ["text"]),
+    ("Phi-3-mini-128k-instruct", True, False, ["text"], ["text"]),
+    ("Phi-3-mini-4k-instruct", True, False, ["text"], ["text"]),
+    ("Phi-3-small-128k-instruct", True, False, ["text"], ["text"]),
+    ("Phi-3-small-8k-instruct", True, False, ["text"], ["text"]),
+    ("Phi-3.5-MoE-instruct", True, False, ["text"], ["text"]),
+    ("Phi-3.5-mini-instruct", True, False, ["text"], ["text"]),
+    ("Phi-3.5-vision-instruct", True, False, ["text", "image"], None),
+    ("Phi-4", True, False, ["text"], ["text"]),
+    ("Phi-4-mini-instruct", True, False, ["text"], ["text"]),
+    ("Phi-4-multimodal-instruct", True, False, ["audio", "image", "text"], ["text"]),
+    ("gpt-4.1", True, True, ["text", "image", "audio"], ["text"]),
+    ("gpt-4.1-mini", True, True, ["text", "image"], ["text"]),
+    ("gpt-4.1-nano", True, True, ["text", "image"], ["text"]),
+    ("gpt-4o", True, True, ["text", "image", "audio"], ["text"]),
+    ("gpt-4o-mini", True, True, ["text", "image", "audio"], ["text"]),
+    ("jais-30b-chat", True, False, ["text"], ["text"]),
+    ("mistral-small-2503", True, False, ["text", "image"], ["text"]),
+    ("o1", False, True, ["text", "image"], ["text"]),
+    ("o1-mini", False, False, ["text"], ["text"]),
+    ("o1-preview", False, False, ["text"], ["text"]),
+    ("o3-mini", False, True, ["text"], ["text"]),
 ]
 
 
@@ -86,11 +106,12 @@ EMBEDDING_MODELS = [
 def register_models(register):
     # Register both sync and async versions of each model
     # TODO: Dynamically fetch this list
-    for model_id, can_stream, input_modalities, output_modalities in CHAT_MODELS:
+    for model_id, can_stream, supports_schema, input_modalities, output_modalities in CHAT_MODELS:
         register(
             GitHubModels(
                 model_id,
                 can_stream=can_stream,
+                supports_schema=supports_schema,
                 input_modalities=input_modalities,
                 output_modalities=output_modalities,
             )
@@ -197,12 +218,14 @@ class GitHubModels(llm.Model):
         self,
         model_id: str,
         can_stream: bool,
+        supports_schema: bool,
         input_modalities: Optional[List[str]] = None,
         output_modalities: Optional[List[str]] = None,
     ):
         self.model_id = f"github/{model_id}"
         self.model_name = model_id
         self.can_stream = can_stream
+        self.supports_schema = supports_schema
         self.attachment_types = set()
         if input_modalities and "image" in input_modalities:
             self.attachment_types.update(IMAGE_ATTACHMENTS)
@@ -223,8 +246,7 @@ class GitHubModels(llm.Model):
         key: str = self.get_key()  # type: ignore
 
         extra = {}
-        if self.model_name == "o3-mini":
-            extra["api_version"] = "2024-12-01-preview"
+        extra["api_version"] = "2025-03-01-preview"  # Use latest version
 
         client = ChatCompletionsClient(
             endpoint=INFERENCE_ENDPOINT,
@@ -232,11 +254,26 @@ class GitHubModels(llm.Model):
             model=self.model_name,
             **extra,
         )
+
+        if prompt.schema:
+            if not isinstance(prompt.schema, dict) and issubclass(prompt.schema, BaseModel):
+                response_format = JsonSchemaFormat(
+                    name="output", schema=prompt.schema.model_json_schema()
+                )
+            else:
+                response_format = JsonSchemaFormat(
+                    name="output",
+                    schema=prompt.schema,  # type: ignore[variable]
+                )
+        else:
+            response_format = "text"
+
         messages = build_messages(prompt, conversation)
         if stream:
             completion = client.complete(
                 messages=messages,
                 stream=True,
+                response_format=response_format,
             )
             chunks = []
             for chunk in completion:
@@ -252,6 +289,7 @@ class GitHubModels(llm.Model):
             completion = client.complete(
                 messages=messages,
                 stream=False,
+                response_format=response_format,
             )
             response.response_json = None  # TODO
             yield completion.choices[0].message.content

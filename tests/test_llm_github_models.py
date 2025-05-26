@@ -1,3 +1,4 @@
+import json
 import pathlib
 
 import pytest
@@ -11,6 +12,7 @@ from azure.ai.inference.models import (
 )
 from llm import get_model
 from llm.models import Attachment, Conversation, Prompt, Response
+from pydantic import BaseModel
 
 from llm_github_models import build_messages
 
@@ -169,3 +171,33 @@ def test_build_messages_with_audio_path_attachment():
     assert audio_item.input_audio.data.startswith("UklGRuwiAAB")
     assert audio_item.input_audio.format == "wav"
     assert audio_item.input_audio.data.endswith("AAAAA=")
+
+
+class DogSchema(BaseModel):
+    """
+    A schema for a dog with a name and age.
+    """
+    name: str
+    age: int
+    one_sentence_bio: str
+
+
+def test_schema_with_unsupported_model():
+    """
+    Test that requesting a schema for an unsupported model raises an error.
+    """
+    model = get_model("github/Mistral-Nemo")
+
+    with pytest.raises(ValueError):
+        model.prompt("Invent a good dog", schema=DogSchema)
+
+
+def test_schema_with_supported_model():
+    """
+    Test that requesting a schema for a supported model works.
+    """
+    model = get_model("github/gpt-4.1-mini")
+
+    response = model.prompt("Invent a good dog named Buddy", schema=DogSchema)
+    dog = json.loads(response.text())
+    assert dog['name'] == "Buddy"

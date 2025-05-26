@@ -1,0 +1,19 @@
+{
+        "name": "Python 3.13",
+        "image": "mcr.microsoft.com/devcontainers/python:3.13-bullseye",
+        "customizations": {
+                "vscode": {
+                        "settings": {
+                                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                                "python.linting.enabled": true
+                        },
+                        "extensions": [
+                                "ms-python.python",
+                                "ms-python.vscode-pylance",
+                                "ms-python.vscode-python-envs"
+                        ]
+                }
+        },
+        "postCreateCommand": ".devcontainer/postCreateCommand.sh",
+        "postStartCommand": ".devcontainer/postStartCommand.sh"
+}
