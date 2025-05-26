@@ -15,7 +15,8 @@ def supports_streaming(name):
     return True
 
 def supports_schemas(name):
-    if name in ["gpt-4o", "gpt-4o-mini", "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano", "o1", "o3-mini"]:
+    if name in ["gpt-4o", "gpt-4o-mini", "gpt-4.1", 
+                "gpt-4.1-mini", "gpt-4.1-nano", "o1", "o3-mini"]:
         return True
     return False
 

@@ -19,6 +19,7 @@ from azure.ai.inference.models import (
 )
 from azure.core.credentials import AzureKeyCredential
 from llm.models import Attachment, Conversation, Prompt, Response
+from pydantic import BaseModel
 
 INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
 
@@ -256,10 +257,16 @@ class GitHubModels(llm.Model):
         )
 
         if prompt.schema:
-            response_format = JsonSchemaFormat(
-                name="output",
-                schema=prompt.schema
-            )
+            if not isinstance(prompt.schema, dict) and issubclass(prompt.schema, BaseModel):
+                response_format = JsonSchemaFormat(
+                    name="output",
+                    schema=prompt.schema.model_json_schema()
+                )
+            else:
+                response_format = JsonSchemaFormat(
+                    name="output",
+                    schema=prompt.schema # type: ignore[variable]
+                )
         else:
             response_format = "text"
 
