@@ -21,6 +21,7 @@ from azure.ai.inference.models import (
 from azure.core.credentials import AzureKeyCredential
 from llm.models import (
     AsyncConversation,
+    AsyncModel,
     AsyncResponse,
     Attachment,
     Conversation,
@@ -192,7 +193,7 @@ def attachment_as_content_item(attachment: Attachment) -> ContentItem:
 
 
 def build_messages(
-    prompt: Prompt, conversation: Optional[Conversation]
+    prompt: Prompt, conversation: Optional[Union[Conversation, AsyncConversation]] = None
 ) -> List[ChatRequestMessage]:
     messages: List[ChatRequestMessage] = []
     current_system = None
@@ -315,7 +316,7 @@ class GitHubModels(_Shared, llm.Model):
                 yield completion.choices[0].message.content
 
 
-class GitHubAsyncModels(_Shared, llm.AsyncModel):
+class GitHubAsyncModels(_Shared, AsyncModel):
     async def execute(
         self,
         prompt: Prompt,
@@ -327,7 +328,7 @@ class GitHubAsyncModels(_Shared, llm.AsyncModel):
 
         async with AsyncChatCompletionsClient(
             endpoint=INFERENCE_ENDPOINT,
-            credential=AzureKeyCredential(key),
+            credential=AzureKeyCredential(key),  # type: ignore[variable]
             model=self.model_name,
             **self.client_kwargs,
         ) as client:
