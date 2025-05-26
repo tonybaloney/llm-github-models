@@ -1,4 +1,4 @@
-from typing import Iterator, List, Optional
+from typing import Iterable, Iterator, List, Optional, Union
 
 import llm
 from azure.ai.inference import ChatCompletionsClient, EmbeddingsClient
@@ -17,7 +17,7 @@ from azure.ai.inference.models import (
     UserMessage,
 )
 from azure.core.credentials import AzureKeyCredential
-from llm.models import Attachment, Conversation, Prompt, Response
+from llm.models import Attachment, Conversation, EmbeddingModel, Prompt, Response
 
 INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
 
@@ -257,7 +257,7 @@ class GitHubModels(llm.Model):
             yield completion.choices[0].message.content
 
 
-class GitHubEmbeddingModel(llm.EmbeddingModel):
+class GitHubEmbeddingModel(EmbeddingModel):
     needs_key = "github"
     key_env_var = "GITHUB_MODELS_KEY"
     batch_size = 100
@@ -270,18 +270,20 @@ class GitHubEmbeddingModel(llm.EmbeddingModel):
         self.model_name = model_id
         self.dimensions = dimensions
 
-    def embed_batch(self, texts: List[str]) -> Iterator[List[float]]:
-        if not texts:
-            return []
+    def embed_batch(self, items: Iterable[Union[str, bytes]]) -> Iterator[List[float]]:
+        if not items:
+            return iter([])
 
         key = self.get_key()
         client = EmbeddingsClient(
             endpoint=INFERENCE_ENDPOINT,
-            credential=AzureKeyCredential(key),
+            credential=AzureKeyCredential(key),  # type: ignore
         )
 
+        # TODO: Handle iterable of bytes
+
         kwargs = {
-            "input": texts,
+            "input": items,
             "model": self.model_name,
         }
         if self.dimensions:
