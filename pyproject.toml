@@ -23,4 +23,10 @@ CI = "https://github.com/tonybaloney/llm-github-models/actions"
 github = "llm_github_models"
 
 [project.optional-dependencies]
-test = ["pytest", "pytest-recording"]
+test = ["pytest", "pytest-recording", "ruff", "pyright"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

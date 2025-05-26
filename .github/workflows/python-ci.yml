@@ -8,7 +8,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
+    permissions:
+      models: read
     strategy:
       matrix:
         python-version: [3.9, "3.10", 3.11, 3.12, 3.12]
@@ -21,13 +22,16 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip ruff
+        python -m pip install --upgrade pip
         pip install ".[test]"
     - name: Run ruff format
       run: |
         ruff check
+    - name: Run pyright
+      run: |
+        pyright llm_github_models.py
     - name: Run tests
       run: |
         pytest
       env:
-        GITHUB_MODELS_KEY: ${{ secrets._GITHUB_MODELS_KEY }}
+        GITHUB_MODELS_KEY: ${{ secrets.GITHUB_TOKEN }}
