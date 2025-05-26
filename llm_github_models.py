@@ -1,24 +1,24 @@
-import llm
-from llm.models import Attachment, Conversation, Prompt, Response
-from typing import Optional, Iterator, List
+from typing import Iterator, List, Optional
 
+import llm
 from azure.ai.inference import ChatCompletionsClient
-from azure.core.credentials import AzureKeyCredential
 from azure.ai.inference.models import (
-    ChatRequestMessage,
     AssistantMessage,
-    AudioContentItem,
-    TextContentItem,
-    ImageContentItem,
-    ContentItem,
-    InputAudio,
     AudioContentFormat,
+    AudioContentItem,
+    ChatRequestMessage,
+    ContentItem,
+    ImageContentItem,
     ImageDetailLevel,
     ImageUrl,
+    InputAudio,
     SystemMessage,
+    TextContentItem,
     UserMessage,
     JsonSchemaFormat,
 )
+from azure.core.credentials import AzureKeyCredential
+from llm.models import Attachment, Conversation, Prompt, Response
 
 INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
 
@@ -131,18 +131,26 @@ AUDIO_ATTACHMENTS = {
 
 
 def attachment_as_content_item(attachment: Attachment) -> ContentItem:
-    if attachment.resolve_type().startswith("audio/"):
+    if attachment is None or attachment.resolve_type() is None:
+        raise ValueError("Attachment cannot be None or empty")
+
+    attachment_type: str = attachment.resolve_type() # type: ignore
+
+    if attachment_type.startswith("audio/"):
         audio_format = (
             AudioContentFormat.WAV
-            if attachment.resolve_type() == "audio/wav"
+            if attachment_type == "audio/wav"
             else AudioContentFormat.MP3
         )
+        if attachment.path is None:
+            raise ValueError("Audio attachment must have a path for audio content")
+
         return AudioContentItem(
             input_audio=InputAudio.load(
                 audio_file=attachment.path, audio_format=audio_format
             )
         )
-    if attachment.resolve_type().startswith("image/"):
+    if attachment_type.startswith("image/"):
         if attachment.url:
             return ImageContentItem(
                 image_url=ImageUrl(
@@ -154,12 +162,12 @@ def attachment_as_content_item(attachment: Attachment) -> ContentItem:
             return ImageContentItem(
                 image_url=ImageUrl.load(
                     image_file=attachment.path,
-                    image_format=attachment.resolve_type().split("/")[1],
+                    image_format=attachment_type.split("/")[1],
                     detail=ImageDetailLevel.AUTO,
                 ),
             )
 
-    raise ValueError(f"Unsupported attachment type: {attachment.resolve_type()}")
+    raise ValueError(f"Unsupported attachment type: {attachment_type}")
 
 
 def build_messages(
@@ -186,7 +194,7 @@ def build_messages(
                 messages.append(UserMessage(attachment_message))
             else:
                 messages.append(UserMessage(prev_response.prompt.prompt))
-            messages.append(AssistantMessage(prev_response.text_or_raise()))
+            messages.append(AssistantMessage(prev_response.text_or_raise())) # type: ignore
     if prompt.system and prompt.system != current_system:
         messages.append(SystemMessage(prompt.system))
     if not prompt.attachments:
@@ -234,7 +242,8 @@ class GitHubModels(llm.Model):
         response: Response,
         conversation: Optional[Conversation],
     ) -> Iterator[str]:
-        key = self.get_key()
+        # unset keys are handled by llm.Model.get_key()
+        key: str = self.get_key() # type: ignore
 
         extra = {}
         extra["api_version"] = "2025-03-01-preview" # Use latest version
