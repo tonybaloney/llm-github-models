@@ -118,7 +118,7 @@ def test_embed_empty_list(MockEmbeddingsClient):
     model = GitHubEmbeddingModel("text-embedding-3-small")
     with patch.object(model, "get_key", return_value="key"):
         result = model.embed_batch([])
-    assert result == []
+    assert list(result) == []
 
     MockEmbeddingsClient.assert_not_called()
 
