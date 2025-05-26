@@ -212,3 +212,44 @@ async def test_async_model_prompt():
     model = get_async_model("github/gpt-4.1-mini")
     response = await model.prompt("What is the capital of France?")
     assert "Paris" in await response.text()
+
+
+def test_sync_returns_usage():
+    """
+    Test that the sync model returns usage information for streaming and non-streaming.
+    """
+    model = get_model("github/gpt-4.1-mini")
+    response = model.prompt("What is the capital of France?")
+    usage = response.usage()
+
+    assert usage is not None
+    assert usage.input > 0
+    assert usage.output > 0
+
+    response = model.prompt("What is the capital of France?", stream=True)
+    usage = response.usage()
+
+    assert usage is not None
+    assert usage.input > 0
+    assert usage.output > 0
+
+
+@pytest.mark.asyncio
+async def test_async_returns_usage():
+    """
+    Test that the async model returns usage information for streaming and non-streaming.
+    """
+    model = get_async_model("github/gpt-4.1-mini")
+    response = await model.prompt("What is the capital of France?")
+    usage = await response.usage()
+
+    assert usage is not None
+    assert usage.input > 0
+    assert usage.output > 0
+
+    response = await model.prompt("What is the capital of France?", stream=True)
+    usage = await response.usage()
+
+    assert usage is not None
+    assert usage.input > 0
+    assert usage.output > 0

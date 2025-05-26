@@ -17,6 +17,7 @@ from azure.ai.inference.models import (
     SystemMessage,
     TextContentItem,
     UserMessage,
+    CompletionsUsage,
 )
 from azure.core.credentials import AzureKeyCredential
 from llm.models import (
@@ -218,6 +219,29 @@ def build_messages(
     return messages
 
 
+def set_usage(usage: CompletionsUsage, response: Response) -> None:
+    if not usage:
+        return
+
+    # Recursively remove keys with value 0 and empty dictionaries
+    def remove_empty_and_zero(obj):
+        if isinstance(obj, dict):
+            cleaned = {k: remove_empty_and_zero(v) for k, v in obj.items() if v != 0 and v != {}}
+            return {k: v for k, v in cleaned.items() if v is not None and v != {}}
+        return obj
+
+    details = usage.as_dict()
+    details.pop("prompt_tokens")
+    details.pop("completion_tokens")
+    details.pop("total_tokens")
+
+    response.set_usage(
+        input=usage.prompt_tokens,
+        output=usage.completion_tokens,
+        details=remove_empty_and_zero(details),
+    )
+
+
 class _Shared:
     needs_key = "github"
     key_env_var = "GITHUB_MODELS_KEY"
@@ -244,7 +268,8 @@ class _Shared:
         self.output_modalities = output_modalities
 
         self.client_kwargs = {}
-        self.client_kwargs["api_version"] = "2025-03-01-preview"  # Use latest version
+        # Use latest version
+        self.client_kwargs["api_version"] = "2025-03-01-preview"
 
     # Using the same display string for both the sync and async models
     # makes them not show up twice in `llm models`
@@ -287,6 +312,7 @@ class GitHubModels(_Shared, llm.Model):
                     messages=messages,
                     stream=True,
                     response_format=response_format,
+                    model_extras={"stream_options": {"include_usage": True}},
                 )
                 chunks = []
                 for chunk in completion:
@@ -297,6 +323,9 @@ class GitHubModels(_Shared, llm.Model):
                         content = None
                     if content is not None:
                         yield content
+
+                if chunk.usage:
+                    set_usage(chunk.usage, response)
                 response.response_json = None  # TODO
             else:
                 completion = client.complete(
@@ -306,6 +335,8 @@ class GitHubModels(_Shared, llm.Model):
                 )
                 response.response_json = None  # TODO
                 yield completion.choices[0].message.content
+                if completion.usage:
+                    set_usage(completion.usage, response)
 
 
 class GitHubAsyncModels(_Shared, AsyncModel):
@@ -343,6 +374,7 @@ class GitHubAsyncModels(_Shared, AsyncModel):
                     messages=messages,
                     stream=True,
                     response_format=response_format,
+                    model_extras={"stream_options": {"include_usage": True}},
                 )
                 async for chunk in completion:
                     try:
@@ -352,6 +384,8 @@ class GitHubAsyncModels(_Shared, AsyncModel):
                     if content is not None:
                         yield content
                 response.response_json = None  # TODO
+                if chunk.usage:
+                    set_usage(chunk.usage, response)
             else:
                 completion = await client.complete(
                     messages=messages,
@@ -360,6 +394,8 @@ class GitHubAsyncModels(_Shared, AsyncModel):
                 )
                 response.response_json = None  # TODO
                 yield completion.choices[0].message.content
+                if completion.usage:
+                    set_usage(completion.usage, response)
 
 
 class GitHubEmbeddingModel(EmbeddingModel):
