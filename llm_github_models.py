@@ -1,5 +1,12 @@
 import llm
-from llm.models import AsyncConversation, AsyncResponse, Attachment, Conversation, Prompt, Response
+from llm.models import (
+    AsyncConversation,
+    AsyncResponse,
+    Attachment,
+    Conversation,
+    Prompt,
+    Response,
+)
 from typing import AsyncGenerator, Optional, Iterator, List
 
 from azure.ai.inference import ChatCompletionsClient
@@ -33,10 +40,8 @@ CHAT_MODELS = [
     ("DeepSeek-R1", True, ["text"], ["text"]),
     ("DeepSeek-V3", True, ["text"], ["text"]),
     ("DeepSeek-V3-0324", True, ["text"], ["text"]),
-    ("Llama-3.2-11B-Vision-Instruct", True,
-     ["text", "image", "audio"], ["text"]),
-    ("Llama-3.2-90B-Vision-Instruct", True,
-     ["text", "image", "audio"], ["text"]),
+    ("Llama-3.2-11B-Vision-Instruct", True, ["text", "image", "audio"], ["text"]),
+    ("Llama-3.2-90B-Vision-Instruct", True, ["text", "image", "audio"], ["text"]),
     ("Llama-3.3-70B-Instruct", True, ["text"], ["text"]),
     ("Meta-Llama-3-70B-Instruct", True, ["text"], ["text"]),
     ("Meta-Llama-3-8B-Instruct", True, ["text"], ["text"]),
@@ -96,7 +101,7 @@ def register_models(register):
                 can_stream=can_stream,
                 input_modalities=input_modalities,
                 output_modalities=output_modalities,
-            )
+            ),
         )
 
 
@@ -142,8 +147,7 @@ def attachment_as_content_item(attachment: Attachment) -> ContentItem:
                 ),
             )
 
-    raise ValueError(
-        f"Unsupported attachment type: {attachment.resolve_type()}")
+    raise ValueError(f"Unsupported attachment type: {attachment.resolve_type()}")
 
 
 def build_messages(
@@ -166,8 +170,7 @@ def build_messages(
                         TextContentItem(text=prev_response.prompt.prompt)
                     )
                 for attachment in prev_response.attachments:
-                    attachment_message.append(
-                        attachment_as_content_item(attachment))
+                    attachment_message.append(attachment_as_content_item(attachment))
                 messages.append(UserMessage(attachment_message))
             else:
                 messages.append(UserMessage(prev_response.prompt.prompt))

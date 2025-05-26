@@ -50,5 +50,7 @@ with open("models.fragment.md", "w", encoding="utf-8") as f:
         f.write(f"### {model['friendly_name']}\n\n")
         f.write(f"![Model Image](https://github.com/{model['logo_url']})\n\n")
         f.write(f"Usage: `llm -m github/{model['name']}`\n\n")
-        f.write(f"**Publisher:** {model["publisher"]} \n\n")
-        f.write(f"**Description:** {model["description"].replace("\n## ", "\n#### ")} \n\n")
+        f.write(f"**Publisher:** {model['publisher']} \n\n")
+        f.write(
+            f"**Description:** {model['description'].replace('\n## ', '\n#### ')} \n\n"
+        )
