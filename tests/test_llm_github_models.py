@@ -177,6 +177,7 @@ class DogSchema(BaseModel):
     """
     A schema for a dog with a name and age.
     """
+
     name: str
     age: int
     one_sentence_bio: str
@@ -200,4 +201,4 @@ def test_schema_with_supported_model():
 
     response = model.prompt("Invent a good dog named Buddy", schema=DogSchema)
     dog = json.loads(response.text())
-    assert dog['name'] == "Buddy"
+    assert dog["name"] == "Buddy"
