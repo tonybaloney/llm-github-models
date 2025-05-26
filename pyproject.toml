@@ -1,6 +1,6 @@
 [project]
 name = "llm-github-models"
-version = "0.12"
+version = "0.13"
 description = "LLM plugin to access GitHub Models API"
 readme = "README.md"
 authors = [{name = "Anthony Shaw"}]
@@ -9,8 +9,8 @@ classifiers = [
     "License :: OSI Approved :: Apache Software License"
 ]
 dependencies = [
-    "llm>=0.19",
     "aiohttp>=3.11.18",
+    "llm>=0.23",
     "azure-ai-inference>=1.0.0b8",
 ]
 
@@ -24,4 +24,10 @@ CI = "https://github.com/tonybaloney/llm-github-models/actions"
 github = "llm_github_models"
 
 [project.optional-dependencies]
-test = ["pytest", "pytest-recording"]
+test = ["pytest", "pytest-recording", "ruff", "pyright"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

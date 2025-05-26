@@ -1,17 +1,20 @@
-from llm_github_models import build_messages
-from llm.models import Prompt, Conversation, Attachment, Response
-from llm import get_model
+import json
+import pathlib
 
+import pytest
 from azure.ai.inference.models import (
-    UserMessage,
+    AudioContentItem,
     ImageContentItem,
     ImageUrl,
-    AudioContentItem,
     InputAudio,
     SystemMessage,
+    UserMessage,
 )
-import pytest
-import pathlib
+from llm import get_model
+from llm.models import Attachment, Conversation, Prompt, Response
+from pydantic import BaseModel
+
+from llm_github_models import build_messages
 
 MODELS = ["github/gpt-4o", "github/gpt-4o-mini"]
 
@@ -19,9 +22,7 @@ MODELS = ["github/gpt-4o", "github/gpt-4o-mini"]
 @pytest.mark.parametrize("model", MODELS)
 def test_build_messages_no_conversation(model: str):
     # Test build_messages with conversation=None and a basic prompt without system.
-    dummy_prompt = Prompt(
-        prompt="Hello from prompt", system=None, attachments=[], model=model
-    )
+    dummy_prompt = Prompt(prompt="Hello from prompt", system=None, attachments=[], model=model)
     messages = build_messages(dummy_prompt, None)
     # Should add one UserMessage from prompt since conversation is None.
     assert isinstance(messages, list)
@@ -37,15 +38,11 @@ def test_build_messages_no_conversation(model: str):
 @pytest.mark.parametrize("model", MODELS)
 def test_build_messages_with_conversation_no_prompt_system(model: str):
     # Create a dummy conversation with one response.
-    dummy_prompt = Prompt(
-        prompt="Hello from prompt", system=None, attachments=[], model=model
-    )
+    dummy_prompt = Prompt(prompt="Hello from prompt", system=None, attachments=[], model=model)
     _model = get_model(model)
     # The response has a system message and a user message.
     dummy_response = Response(
-        prompt=Prompt(
-            prompt="Hello from last time", system=None, attachments=[], model=model
-        ),
+        prompt=Prompt(prompt="Hello from last time", system=None, attachments=[], model=model),
         model=_model,
         stream=False,
     )
@@ -117,9 +114,7 @@ def test_build_messages_with_image_path_attachment():
 def test_build_messages_with_image_url_attachments():
     # Create a dummy attachment object for an image.
     model: str = "gpt-4o"
-    attachment = Attachment(
-        path=None, url="http://dummy.image/url.png", type="image/png"
-    )
+    attachment = Attachment(path=None, url="http://dummy.image/url.png", type="image/png")
     dummy_attachment = attachment
     # Create a prompt with an attachment and prompt text.
     dummy_prompt = Prompt(
@@ -149,9 +144,7 @@ def test_build_messages_with_image_url_attachments():
 def test_build_messages_with_audio_path_attachment():
     # Create a dummy attachment object for an image.
     model: str = "gpt-4o"
-    attachment = Attachment(
-        path=pathlib.Path("tests/files/kick.wav"), url=None, type="audio/wav"
-    )
+    attachment = Attachment(path=pathlib.Path("tests/files/kick.wav"), url=None, type="audio/wav")
     dummy_attachment = attachment
     # Create a prompt with an attachment and prompt text.
     dummy_prompt = Prompt(
@@ -178,3 +171,34 @@ def test_build_messages_with_audio_path_attachment():
     assert audio_item.input_audio.data.startswith("UklGRuwiAAB")
     assert audio_item.input_audio.format == "wav"
     assert audio_item.input_audio.data.endswith("AAAAA=")
+
+
+class DogSchema(BaseModel):
+    """
+    A schema for a dog with a name and age.
+    """
+
+    name: str
+    age: int
+    one_sentence_bio: str
+
+
+def test_schema_with_unsupported_model():
+    """
+    Test that requesting a schema for an unsupported model raises an error.
+    """
+    model = get_model("github/Mistral-Nemo")
+
+    with pytest.raises(ValueError):
+        model.prompt("Invent a good dog", schema=DogSchema)
+
+
+def test_schema_with_supported_model():
+    """
+    Test that requesting a schema for a supported model works.
+    """
+    model = get_model("github/gpt-4.1-mini")
+
+    response = model.prompt("Invent a good dog named Buddy", schema=DogSchema)
+    dog = json.loads(response.text())
+    assert dog["name"] == "Buddy"
