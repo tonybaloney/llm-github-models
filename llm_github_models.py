@@ -12,10 +12,10 @@ from azure.ai.inference.models import (
     ImageDetailLevel,
     ImageUrl,
     InputAudio,
+    JsonSchemaFormat,
     SystemMessage,
     TextContentItem,
     UserMessage,
-    JsonSchemaFormat,
 )
 from azure.core.credentials import AzureKeyCredential
 from llm.models import Attachment, Conversation, Prompt, Response
