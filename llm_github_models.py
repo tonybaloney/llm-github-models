@@ -128,6 +128,7 @@ def register_models(register):
             GitHubAsyncModels(
                 model_id,
                 can_stream=can_stream,
+                supports_schema=supports_schema,
                 input_modalities=input_modalities,
                 output_modalities=output_modalities,
             ),
