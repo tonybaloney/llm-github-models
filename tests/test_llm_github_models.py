@@ -16,7 +16,7 @@ from pydantic import BaseModel
 
 from llm_github_models import build_messages
 
-MODELS = ["github/gpt-4o", "github/gpt-4o-mini"]
+MODELS = ["github/gpt-4.1-mini", "github/gpt-4o-mini"]
 
 
 @pytest.mark.parametrize("model", MODELS)
