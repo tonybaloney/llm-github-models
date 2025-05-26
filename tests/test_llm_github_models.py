@@ -192,7 +192,7 @@ class DogSchema(BaseModel):
     one_sentence_bio: str
 
 
-def test_schema_with_unsuported_model():
+def test_schema_with_unsupported_model():
     """
     Test that requesting a schema for an unsupported model raises an error.
     """
