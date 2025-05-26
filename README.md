@@ -24,12 +24,12 @@ All model names are affixed with `github/` to distinguish the OpenAI ones from t
 ## Example
 
 ```default
-$ llm prompt 'top facts about cheese' -m github/mistral-large                                                                                                                
-Sure, here are some interesting facts about cheese:
+$ llm prompt 'top facts about cheese' -m github/gpt-4.1-mini
+Sure! Here are some top facts about cheese:
 
-1. There are over 2000 types of cheese: The variety of cheese is vast, with different flavors, textures, and aromas. This is due to factors like the type of milk used, the aging process, and the specific bacteria and mold cultures involved.
+1. **Ancient Origins**: Cheese is one of the oldest man-made foods, with evidence of cheese-making dating back over 7,000 years.
 
-2. Cheese is an ancient food: The earliest evidence of cheese-making dates back to around 6000 BC, found in ancient Polish sites.
+2. **Variety**: There are over 1,800 distinct types of cheese worldwide, varying by texture, flavor, milk source, and production methods.
 ```
 
 ### Image attachments
