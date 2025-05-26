@@ -14,9 +14,17 @@ def supports_streaming(name):
         return False
     return True
 
+
 def supports_schemas(name):
-    if name in ["gpt-4o", "gpt-4o-mini", "gpt-4.1",
-                "gpt-4.1-mini", "gpt-4.1-nano", "o1", "o3-mini"]:
+    if name in [
+        "gpt-4o",
+        "gpt-4o-mini",
+        "gpt-4.1",
+        "gpt-4.1-mini",
+        "gpt-4.1-nano",
+        "o1",
+        "o3-mini",
+    ]:
         return True
     return False
 
@@ -56,5 +64,5 @@ with open("models.fragment.md", "w", encoding="utf-8") as f:
     for model in models:
         f.write(f"### {model['displayName']}\n\n")
         f.write(f"Usage: `llm -m github/{model['name']}`\n\n")
-        f.write(f"**Publisher:** {model["publisher"]} \n\n")
-        f.write(f"**Description:** {model["summary"].replace("\n## ", "\n#### ")} \n\n")
+        f.write(f"**Publisher:** {model['publisher']} \n\n")
+        f.write(f"**Description:** {model['description'].replace('\n## ', '\n#### ')} \n\n")

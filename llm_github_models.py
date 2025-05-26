@@ -1,7 +1,7 @@
-from typing import Iterator, List, Optional
+from typing import Iterable, Iterator, List, Optional, Union
 
 import llm
-from azure.ai.inference import ChatCompletionsClient
+from azure.ai.inference import ChatCompletionsClient, EmbeddingsClient
 from azure.ai.inference.models import (
     AssistantMessage,
     AudioContentFormat,
@@ -18,7 +18,7 @@ from azure.ai.inference.models import (
     UserMessage,
 )
 from azure.core.credentials import AzureKeyCredential
-from llm.models import Attachment, Conversation, Prompt, Response
+from llm.models import Attachment, Conversation, EmbeddingModel, Prompt, Response
 from pydantic import BaseModel
 
 INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
@@ -95,10 +95,10 @@ CHAT_MODELS = [
 
 
 EMBEDDING_MODELS = [
-    "Cohere-embed-v3-english",
-    "Cohere-embed-v3-multilingual",
-    "text-embedding-3-large",
-    "text-embedding-3-small",
+    ("Cohere-embed-v3-english", []),
+    ("Cohere-embed-v3-multilingual", []),
+    ("text-embedding-3-large", [1024, 256]),
+    ("text-embedding-3-small", [512]),
 ]
 
 
@@ -118,6 +118,15 @@ def register_models(register):
         )
 
 
+@llm.hookimpl
+def register_embedding_models(register):
+    # Register embedding models
+    for model_id, supported_dimensions in EMBEDDING_MODELS:
+        register(GitHubEmbeddingModel(model_id))
+        for dimensions in supported_dimensions:
+            register(GitHubEmbeddingModel(model_id, dimensions=dimensions))
+
+
 IMAGE_ATTACHMENTS = {
     "image/png",
     "image/jpeg",
@@ -135,21 +144,17 @@ def attachment_as_content_item(attachment: Attachment) -> ContentItem:
     if attachment is None or attachment.resolve_type() is None:
         raise ValueError("Attachment cannot be None or empty")
 
-    attachment_type: str = attachment.resolve_type() # type: ignore
+    attachment_type: str = attachment.resolve_type()  # type: ignore
 
     if attachment_type.startswith("audio/"):
         audio_format = (
-            AudioContentFormat.WAV
-            if attachment_type == "audio/wav"
-            else AudioContentFormat.MP3
+            AudioContentFormat.WAV if attachment_type == "audio/wav" else AudioContentFormat.MP3
         )
         if attachment.path is None:
             raise ValueError("Audio attachment must have a path for audio content")
 
         return AudioContentItem(
-            input_audio=InputAudio.load(
-                audio_file=attachment.path, audio_format=audio_format
-            )
+            input_audio=InputAudio.load(audio_file=attachment.path, audio_format=audio_format)
         )
     if attachment_type.startswith("image/"):
         if attachment.url:
@@ -178,24 +183,19 @@ def build_messages(
     current_system = None
     if conversation is not None:
         for prev_response in conversation.responses:
-            if (
-                prev_response.prompt.system
-                and prev_response.prompt.system != current_system
-            ):
+            if prev_response.prompt.system and prev_response.prompt.system != current_system:
                 messages.append(SystemMessage(prev_response.prompt.system))
                 current_system = prev_response.prompt.system
             if prev_response.attachments:
                 attachment_message: list[ContentItem] = []
                 if prev_response.prompt.prompt:
-                    attachment_message.append(
-                        TextContentItem(text=prev_response.prompt.prompt)
-                    )
+                    attachment_message.append(TextContentItem(text=prev_response.prompt.prompt))
                 for attachment in prev_response.attachments:
                     attachment_message.append(attachment_as_content_item(attachment))
                 messages.append(UserMessage(attachment_message))
             else:
                 messages.append(UserMessage(prev_response.prompt.prompt))
-            messages.append(AssistantMessage(prev_response.text_or_raise())) # type: ignore
+            messages.append(AssistantMessage(prev_response.text_or_raise()))  # type: ignore
     if prompt.system and prompt.system != current_system:
         messages.append(SystemMessage(prompt.system))
     if not prompt.attachments:
@@ -235,7 +235,6 @@ class GitHubModels(llm.Model):
         self.input_modalities = input_modalities
         self.output_modalities = output_modalities
 
-
     def execute(
         self,
         prompt: Prompt,
@@ -244,10 +243,10 @@ class GitHubModels(llm.Model):
         conversation: Optional[Conversation],
     ) -> Iterator[str]:
         # unset keys are handled by llm.Model.get_key()
-        key: str = self.get_key() # type: ignore
+        key: str = self.get_key()  # type: ignore
 
         extra = {}
-        extra["api_version"] = "2025-03-01-preview" # Use latest version
+        extra["api_version"] = "2025-03-01-preview"  # Use latest version
 
         client = ChatCompletionsClient(
             endpoint=INFERENCE_ENDPOINT,
@@ -259,13 +258,12 @@ class GitHubModels(llm.Model):
         if prompt.schema:
             if not isinstance(prompt.schema, dict) and issubclass(prompt.schema, BaseModel):
                 response_format = JsonSchemaFormat(
-                    name="output",
-                    schema=prompt.schema.model_json_schema()
+                    name="output", schema=prompt.schema.model_json_schema()
                 )
             else:
                 response_format = JsonSchemaFormat(
                     name="output",
-                    schema=prompt.schema # type: ignore[variable]
+                    schema=prompt.schema,  # type: ignore[variable]
                 )
         else:
             response_format = "text"
@@ -295,3 +293,39 @@ class GitHubModels(llm.Model):
             )
             response.response_json = None  # TODO
             yield completion.choices[0].message.content
+
+
+class GitHubEmbeddingModel(EmbeddingModel):
+    needs_key = "github"
+    key_env_var = "GITHUB_MODELS_KEY"
+    batch_size = 100
+
+    def __init__(self, model_id: str, dimensions: Optional[int] = None):
+        self.model_id = f"github/{model_id}"
+        if dimensions is not None:
+            self.model_id += f"-{dimensions}"
+
+        self.model_name = model_id
+        self.dimensions = dimensions
+
+    def embed_batch(self, items: Iterable[Union[str, bytes]]) -> Iterator[List[float]]:
+        if not items:
+            return iter([])
+
+        key = self.get_key()
+        client = EmbeddingsClient(
+            endpoint=INFERENCE_ENDPOINT,
+            credential=AzureKeyCredential(key),  # type: ignore
+        )
+
+        # TODO: Handle iterable of bytes
+
+        kwargs = {
+            "input": items,
+            "model": self.model_name,
+        }
+        if self.dimensions:
+            kwargs["dimensions"] = self.dimensions
+
+        response = client.embed(**kwargs)
+        return ([float(x) for x in item.embedding] for item in response.data)

@@ -3,28 +3,13 @@ import json
 import requests
 
 url = "https://api.catalog.azureml.ms/asset-gallery/v1.0/models"
-headers = {
-    "Content-Type": "application/json"
-}
+headers = {"Content-Type": "application/json"}
 filters = {
     "filters": [
-        {
-            "field": "freePlayground",
-            "operator": "eq",
-            "values": ["true"]
-        },
-        {
-            "field": "labels",
-            "operator": "eq",
-            "values": ["latest"]
-        }
+        {"field": "freePlayground", "operator": "eq", "values": ["true"]},
+        {"field": "labels", "operator": "eq", "values": ["latest"]},
     ],
-    "order": [
-        {
-            "field": "name",
-            "direction": "asc"
-        }
-    ]
+    "order": [{"field": "name", "direction": "asc"}],
 }
 
 all_models = []
