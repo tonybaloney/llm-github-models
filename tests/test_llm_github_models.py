@@ -1,17 +1,18 @@
-from llm_github_models import build_messages
-from llm.models import Prompt, Conversation, Attachment, Response
-from llm import get_model
+import pathlib
 
+import pytest
 from azure.ai.inference.models import (
-    UserMessage,
+    AudioContentItem,
     ImageContentItem,
     ImageUrl,
-    AudioContentItem,
     InputAudio,
     SystemMessage,
+    UserMessage,
 )
-import pytest
-import pathlib
+from llm import get_model
+from llm.models import Attachment, Conversation, Prompt, Response
+
+from llm_github_models import build_messages
 
 MODELS = ["github/gpt-4o", "github/gpt-4o-mini"]
 
