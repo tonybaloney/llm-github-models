@@ -10,7 +10,7 @@ from azure.ai.inference.models import (
     SystemMessage,
     UserMessage,
 )
-from llm import get_model
+from llm import get_async_model, get_model
 from llm.models import Attachment, Conversation, Prompt, Response
 from pydantic import BaseModel
 
@@ -202,3 +202,13 @@ def test_schema_with_supported_model():
     response = model.prompt("Invent a good dog named Buddy", schema=DogSchema)
     dog = json.loads(response.text())
     assert dog["name"] == "Buddy"
+
+
+@pytest.mark.asyncio
+async def test_async_model_prompt():
+    """
+    Test that the async model prompt works correctly.
+    """
+    model = get_async_model("github/gpt-4.1-mini")
+    response = await model.prompt("What is the capital of France?")
+    assert "Paris" in await response.text()
