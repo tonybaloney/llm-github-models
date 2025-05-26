@@ -14,6 +14,12 @@ def supports_streaming(name):
         return False
     return True
 
+def supports_schemas(name):
+    if name in ["gpt-4o", "gpt-4o-mini", "gpt-4.1",
+                "gpt-4.1-mini", "gpt-4.1-nano", "o1", "o3-mini"]:
+        return True
+    return False
+
 
 with open("models.json", "r", encoding="utf-8") as f:
     models = json.load(f)
@@ -23,6 +29,7 @@ with open("models.json", "r", encoding="utf-8") as f:
                 (
                     model["name"],
                     supports_streaming(model["name"]),
+                    supports_schemas(model["name"]),
                     model["modelLimits"]["supportedInputModalities"],
                     model["modelLimits"]["supportedOutputModalities"],
                 )
