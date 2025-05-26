@@ -1,7 +1,6 @@
 import json
 import pathlib
 
-from pydantic import BaseModel
 import pytest
 from azure.ai.inference.models import (
     AudioContentItem,
@@ -13,6 +12,7 @@ from azure.ai.inference.models import (
 )
 from llm import get_model
 from llm.models import Attachment, Conversation, Prompt, Response
+from pydantic import BaseModel
 
 from llm_github_models import build_messages
 
