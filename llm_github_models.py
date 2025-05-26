@@ -1,21 +1,8 @@
-import llm
-from llm.models import (
-    AsyncConversation,
-    AsyncResponse,
-    Attachment,
-    Conversation,
-    Prompt,
-    Response,
-)
-from typing import AsyncGenerator, Optional, Iterator, List
-
-from azure.ai.inference import ChatCompletionsClient
-from azure.ai.inference.aio import ChatCompletionsClient as AsyncChatCompletionsClient
-from azure.core.credentials import AzureKeyCredential
-from typing import Iterable, Iterator, List, Optional, Union
+from typing import AsyncGenerator, Iterable, Iterator, List, Optional, Union
 
 import llm
 from azure.ai.inference import ChatCompletionsClient, EmbeddingsClient
+from azure.ai.inference.aio import ChatCompletionsClient as AsyncChatCompletionsClient
 from azure.ai.inference.models import (
     AssistantMessage,
     AudioContentFormat,
@@ -32,7 +19,15 @@ from azure.ai.inference.models import (
     UserMessage,
 )
 from azure.core.credentials import AzureKeyCredential
-from llm.models import Attachment, Conversation, EmbeddingModel, Prompt, Response
+from llm.models import (
+    AsyncConversation,
+    AsyncResponse,
+    Attachment,
+    Conversation,
+    EmbeddingModel,
+    Prompt,
+    Response,
+)
 from pydantic import BaseModel
 
 INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
@@ -258,7 +253,8 @@ class _Shared:
         self.client_kwargs = {}
         self.client_kwargs["api_version"] = "2025-03-01-preview"  # Use latest version
 
-    # Using the same display string for both the sync and async models makes them not show up twice in `llm models`
+    # Using the same display string for both the sync and async models
+    # makes them not show up twice in `llm models`
     def __str__(self) -> str:
         return f"GitHub Models: {self.model_id}"
 
