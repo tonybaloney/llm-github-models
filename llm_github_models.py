@@ -1,7 +1,8 @@
-from typing import Iterable, Iterator, List, Optional, Union
+from typing import AsyncGenerator, Iterable, Iterator, List, Optional, Union
 
 import llm
 from azure.ai.inference import ChatCompletionsClient, EmbeddingsClient
+from azure.ai.inference.aio import ChatCompletionsClient as AsyncChatCompletionsClient
 from azure.ai.inference.models import (
     AssistantMessage,
     AudioContentFormat,
@@ -18,7 +19,16 @@ from azure.ai.inference.models import (
     UserMessage,
 )
 from azure.core.credentials import AzureKeyCredential
-from llm.models import Attachment, Conversation, EmbeddingModel, Prompt, Response
+from llm.models import (
+    AsyncConversation,
+    AsyncModel,
+    AsyncResponse,
+    Attachment,
+    Conversation,
+    EmbeddingModel,
+    Prompt,
+    Response,
+)
 from pydantic import BaseModel
 
 INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
@@ -114,7 +124,14 @@ def register_models(register):
                 supports_schema=supports_schema,
                 input_modalities=input_modalities,
                 output_modalities=output_modalities,
-            )
+            ),
+            GitHubAsyncModels(
+                model_id,
+                can_stream=can_stream,
+                supports_schema=supports_schema,
+                input_modalities=input_modalities,
+                output_modalities=output_modalities,
+            ),
         )
 
 
@@ -177,7 +194,7 @@ def attachment_as_content_item(attachment: Attachment) -> ContentItem:
 
 
 def build_messages(
-    prompt: Prompt, conversation: Optional[Conversation]
+    prompt: Prompt, conversation: Optional[Union[Conversation, AsyncConversation]] = None
 ) -> List[ChatRequestMessage]:
     messages: List[ChatRequestMessage] = []
     current_system = None
@@ -210,15 +227,15 @@ def build_messages(
     return messages
 
 
-class GitHubModels(llm.Model):
+class _Shared:
     needs_key = "github"
     key_env_var = "GITHUB_MODELS_KEY"
 
     def __init__(
         self,
         model_id: str,
-        can_stream: bool,
-        supports_schema: bool,
+        can_stream: bool = True,
+        supports_schema: bool = False,
         input_modalities: Optional[List[str]] = None,
         output_modalities: Optional[List[str]] = None,
     ):
@@ -235,6 +252,16 @@ class GitHubModels(llm.Model):
         self.input_modalities = input_modalities
         self.output_modalities = output_modalities
 
+        self.client_kwargs = {}
+        self.client_kwargs["api_version"] = "2025-03-01-preview"  # Use latest version
+
+    # Using the same display string for both the sync and async models
+    # makes them not show up twice in `llm models`
+    def __str__(self) -> str:
+        return f"GitHub Models: {self.model_id}"
+
+
+class GitHubModels(_Shared, llm.Model):
     def execute(
         self,
         prompt: Prompt,
@@ -245,54 +272,103 @@ class GitHubModels(llm.Model):
         # unset keys are handled by llm.Model.get_key()
         key: str = self.get_key()  # type: ignore
 
-        extra = {}
-        extra["api_version"] = "2025-03-01-preview"  # Use latest version
-
-        client = ChatCompletionsClient(
+        with ChatCompletionsClient(
             endpoint=INFERENCE_ENDPOINT,
             credential=AzureKeyCredential(key),
             model=self.model_name,
-            **extra,
-        )
-
-        if prompt.schema:
-            if not isinstance(prompt.schema, dict) and issubclass(prompt.schema, BaseModel):
-                response_format = JsonSchemaFormat(
-                    name="output", schema=prompt.schema.model_json_schema()
-                )
+            **self.client_kwargs,
+        ) as client:
+            if prompt.schema:
+                if not isinstance(prompt.schema, dict) and issubclass(prompt.schema, BaseModel):
+                    response_format = JsonSchemaFormat(
+                        name="output", schema=prompt.schema.model_json_schema()
+                    )
+                else:
+                    response_format = JsonSchemaFormat(
+                        name="output",
+                        schema=prompt.schema,  # type: ignore[variable]
+                    )
             else:
-                response_format = JsonSchemaFormat(
-                    name="output",
-                    schema=prompt.schema,  # type: ignore[variable]
+                response_format = "text"
+            messages = build_messages(prompt, conversation)
+            if stream:
+                completion = client.complete(
+                    messages=messages,
+                    stream=True,
+                    response_format=response_format,
                 )
-        else:
-            response_format = "text"
+                chunks = []
+                for chunk in completion:
+                    chunks.append(chunk)
+                    try:
+                        content = chunk.choices[0].delta.content
+                    except IndexError:
+                        content = None
+                    if content is not None:
+                        yield content
+                response.response_json = None  # TODO
+            else:
+                completion = client.complete(
+                    messages=messages,
+                    stream=False,
+                    response_format=response_format,
+                )
+                response.response_json = None  # TODO
+                yield completion.choices[0].message.content
 
-        messages = build_messages(prompt, conversation)
-        if stream:
-            completion = client.complete(
-                messages=messages,
-                stream=True,
-                response_format=response_format,
-            )
-            chunks = []
-            for chunk in completion:
-                chunks.append(chunk)
-                try:
-                    content = chunk.choices[0].delta.content
-                except IndexError:
-                    content = None
-                if content is not None:
-                    yield content
-            response.response_json = None  # TODO
-        else:
-            completion = client.complete(
-                messages=messages,
-                stream=False,
-                response_format=response_format,
-            )
-            response.response_json = None  # TODO
-            yield completion.choices[0].message.content
+
+class GitHubAsyncModels(_Shared, AsyncModel):
+    async def execute(
+        self,
+        prompt: Prompt,
+        stream: bool,
+        response: AsyncResponse,
+        conversation: Optional[AsyncConversation],
+    ) -> AsyncGenerator[str, None]:
+        key = self.get_key()
+
+        async with AsyncChatCompletionsClient(
+            endpoint=INFERENCE_ENDPOINT,
+            credential=AzureKeyCredential(key),  # type: ignore[variable]
+            model=self.model_name,
+            **self.client_kwargs,
+        ) as client:
+            if prompt.schema:
+                if not isinstance(prompt.schema, dict) and issubclass(prompt.schema, BaseModel):
+                    response_format = JsonSchemaFormat(
+                        name="output", schema=prompt.schema.model_json_schema()
+                    )
+                else:
+                    response_format = JsonSchemaFormat(
+                        name="output",
+                        schema=prompt.schema,  # type: ignore[variable]
+                    )
+            else:
+                response_format = "text"
+
+            messages = build_messages(prompt, conversation)
+            if stream:
+                completion = await client.complete(
+                    messages=messages,
+                    stream=True,
+                    response_format=response_format,
+                )
+                async for chunk in completion:
+                    try:
+                        content = chunk.choices[0].delta.content
+                    except IndexError:
+                        content = None
+                    if content is not None:
+                        yield content
+                response.response_json = None  # TODO
+            else:
+                completion = await client.complete(
+                    messages=messages,
+                    stream=False,
+                    response_format=response_format,
+                )
+                response.response_json = None  # TODO
+                yield completion.choices[0].message.content
 
 
 class GitHubEmbeddingModel(EmbeddingModel):

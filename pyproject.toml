@@ -9,6 +9,7 @@ classifiers = [
     "License :: OSI Approved :: Apache Software License"
 ]
 dependencies = [
+    "aiohttp>=3.11.18",
     "llm>=0.23",
     "azure-ai-inference>=1.0.0b8",
 ]
@@ -23,7 +24,7 @@ CI = "https://github.com/tonybaloney/llm-github-models/actions"
 github = "llm_github_models"
 
 [project.optional-dependencies]
-test = ["pytest", "pytest-recording", "ruff", "pyright"]
+test = ["pytest", "pytest-recording", "pytest-asyncio", "ruff", "pyright"]
 
 [tool.ruff]
 line-length = 100
