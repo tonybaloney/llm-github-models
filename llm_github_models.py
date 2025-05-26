@@ -32,10 +32,8 @@ CHAT_MODELS = [
     ("DeepSeek-R1", True, ["text"], ["text"]),
     ("DeepSeek-V3", True, ["text"], ["text"]),
     ("DeepSeek-V3-0324", True, ["text"], ["text"]),
-    ("Llama-3.2-11B-Vision-Instruct", True,
-     ["text", "image", "audio"], ["text"]),
-    ("Llama-3.2-90B-Vision-Instruct", True,
-     ["text", "image", "audio"], ["text"]),
+    ("Llama-3.2-11B-Vision-Instruct", True, ["text", "image", "audio"], ["text"]),
+    ("Llama-3.2-90B-Vision-Instruct", True, ["text", "image", "audio"], ["text"]),
     ("Llama-3.3-70B-Instruct", True, ["text"], ["text"]),
     ("Meta-Llama-3-70B-Instruct", True, ["text"], ["text"]),
     ("Meta-Llama-3-8B-Instruct", True, ["text"], ["text"]),
@@ -97,16 +95,9 @@ def register_models(register):
 def register_embedding_models(register):
     # Register embedding models
     for model_id, supported_dimensions in EMBEDDING_MODELS:
-        register(
-            GitHubEmbeddingModel(model_id)
-        )
+        register(GitHubEmbeddingModel(model_id))
         for dimensions in supported_dimensions:
-            register(
-                GitHubEmbeddingModel(
-                    model_id,
-                    dimensions=dimensions
-                )
-            )
+            register(GitHubEmbeddingModel(model_id, dimensions=dimensions))
 
 
 IMAGE_ATTACHMENTS = {
@@ -151,8 +142,7 @@ def attachment_as_content_item(attachment: Attachment) -> ContentItem:
                 ),
             )
 
-    raise ValueError(
-        f"Unsupported attachment type: {attachment.resolve_type()}")
+    raise ValueError(f"Unsupported attachment type: {attachment.resolve_type()}")
 
 
 def build_messages(
@@ -175,8 +165,7 @@ def build_messages(
                         TextContentItem(text=prev_response.prompt.prompt)
                     )
                 for attachment in prev_response.attachments:
-                    attachment_message.append(
-                        attachment_as_content_item(attachment))
+                    attachment_message.append(attachment_as_content_item(attachment))
                 messages.append(UserMessage(attachment_message))
             else:
                 messages.append(UserMessage(prev_response.prompt.prompt))
