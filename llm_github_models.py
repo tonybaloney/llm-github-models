@@ -1,23 +1,23 @@
-import llm
-from llm.models import Attachment, Conversation, Prompt, Response
-from typing import Optional, Iterator, List
+from typing import Iterator, List, Optional
 
+import llm
 from azure.ai.inference import ChatCompletionsClient
-from azure.core.credentials import AzureKeyCredential
 from azure.ai.inference.models import (
-    ChatRequestMessage,
     AssistantMessage,
-    AudioContentItem,
-    TextContentItem,
-    ImageContentItem,
-    ContentItem,
-    InputAudio,
     AudioContentFormat,
+    AudioContentItem,
+    ChatRequestMessage,
+    ContentItem,
+    ImageContentItem,
     ImageDetailLevel,
     ImageUrl,
+    InputAudio,
     SystemMessage,
+    TextContentItem,
     UserMessage,
 )
+from azure.core.credentials import AzureKeyCredential
+from llm.models import Attachment, Conversation, Prompt, Response
 
 INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
 

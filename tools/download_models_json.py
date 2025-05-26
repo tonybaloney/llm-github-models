@@ -1,5 +1,6 @@
-import requests
 import json
+
+import requests
 
 url = "https://api.catalog.azureml.ms/asset-gallery/v1.0/models"
 headers = {
