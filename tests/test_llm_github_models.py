@@ -234,6 +234,22 @@ def test_sync_returns_usage():
     assert usage.output > 0
 
 
+def test_usage_returns_details():
+    """
+    Test that models which return extra usage details (e.g. thinking models) return them correctly.
+    """
+    model = get_model("github/o3-mini")
+    # We use a different question here because some questsions don't require reasoning and so don't output the details.
+    response = model.prompt("What is the best type of cheese? Just say it", stream=True)
+    usage = response.usage()
+
+    assert usage is not None
+    assert usage.input > 0
+    assert usage.output > 0
+    assert usage.details is not None
+    assert len(usage.details) > 0
+
+
 @pytest.mark.asyncio
 async def test_async_returns_usage():
     """
