@@ -8,6 +8,7 @@ from azure.ai.inference.models import (
     AudioContentFormat,
     AudioContentItem,
     ChatRequestMessage,
+    CompletionsUsage,
     ContentItem,
     ImageContentItem,
     ImageDetailLevel,
@@ -17,7 +18,6 @@ from azure.ai.inference.models import (
     SystemMessage,
     TextContentItem,
     UserMessage,
-    CompletionsUsage,
 )
 from azure.core.credentials import AzureKeyCredential
 from llm.models import (

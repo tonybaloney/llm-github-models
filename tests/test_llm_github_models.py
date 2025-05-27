@@ -5,14 +5,14 @@ from unittest.mock import Mock, patch
 import pytest
 from azure.ai.inference.models import (
     AudioContentItem,
+    CompletionsUsage,
     ImageContentItem,
     ImageUrl,
     InputAudio,
+    StreamingChatChoiceUpdate,
+    StreamingChatCompletionsUpdate,
     SystemMessage,
     UserMessage,
-    CompletionsUsage,
-    StreamingChatCompletionsUpdate,
-    StreamingChatChoiceUpdate,
 )
 from llm import get_async_model, get_model
 from llm.models import Attachment, Conversation, Prompt, Response
