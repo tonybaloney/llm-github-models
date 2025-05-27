@@ -231,9 +231,9 @@ def set_usage(usage: CompletionsUsage, response: Response) -> None:
         return obj
 
     details = usage.as_dict()
-    details.pop("prompt_tokens")
-    details.pop("completion_tokens")
-    details.pop("total_tokens")
+    details.pop("prompt_tokens", None)
+    details.pop("completion_tokens", None)
+    details.pop("total_tokens", None)
 
     response.set_usage(
         input=usage.prompt_tokens,

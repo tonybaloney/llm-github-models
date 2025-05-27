@@ -1,5 +1,6 @@
 import json
 import pathlib
+from unittest.mock import Mock
 
 import pytest
 from azure.ai.inference.models import (
@@ -9,12 +10,13 @@ from azure.ai.inference.models import (
     InputAudio,
     SystemMessage,
     UserMessage,
+    CompletionsUsage,
 )
 from llm import get_async_model, get_model
 from llm.models import Attachment, Conversation, Prompt, Response
 from pydantic import BaseModel
 
-from llm_github_models import build_messages
+from llm_github_models import build_messages, set_usage
 
 MODELS = ["github/gpt-4.1-mini", "github/gpt-4o-mini", "github/Llama-3.2-11B-Vision-Instruct"]
 
@@ -234,20 +236,44 @@ def test_sync_returns_usage():
     assert usage.output > 0
 
 
-def test_usage_returns_details():
-    """
-    Test that models which return extra usage details (e.g. thinking models) return them correctly.
-    """
-    model = get_model("github/o3-mini")
-    # We use a different question here because some questsions don't require reasoning and so don't output the details.
-    response = model.prompt("What is the best type of cheese? Just say it", stream=True)
-    usage = response.usage()
+def test_set_usage():
+    usage = CompletionsUsage(
+        {
+            "completion_tokens": 10,
+            "prompt_tokens": 5,
+            "extra": {
+                "value": 123,
+                "inner_empty": {},
+                "inner_zero": 0,
+            },
+            "other": "data",
+            "zero": 0,
+            "empty": {},
+        }
+    )
 
-    assert usage is not None
-    assert usage.input > 0
-    assert usage.output > 0
-    assert usage.details is not None
-    assert len(usage.details) > 0
+    captured_usage = {}
+
+    def usage_callback(input=None, output=None, details=None):
+        captured_usage["input"] = input
+        captured_usage["output"] = output
+        captured_usage["details"] = details
+
+    mock_response = Mock(spec=Response)
+    mock_response.set_usage.side_effect = usage_callback
+
+    set_usage(usage, mock_response)
+
+    assert captured_usage["input"] == 5
+    assert captured_usage["output"] == 10
+
+    # Everything that is 0 or empty should be filtered out.
+    assert captured_usage["details"] == {
+        "extra": {
+            "value": 123,
+        },
+        "other": "data",
+    }
 
 
 @pytest.mark.asyncio
