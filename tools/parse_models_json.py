@@ -29,7 +29,7 @@ def supports_schemas(name):
     return False
 
 
-def supports_streaming_usage(name):
+def requires_usage_stream_option(name):
     if name.lower().startswith("mistral") or name.lower().startswith("codestral"):
         return False
     return True
@@ -44,7 +44,7 @@ with open("models.json", "r", encoding="utf-8") as f:
                     model["name"],
                     supports_streaming(model["name"]),
                     supports_schemas(model["name"]),
-                    supports_streaming_usage(model["name"]),
+                    requires_usage_stream_option(model["name"]),
                     model["modelLimits"]["supportedInputModalities"],
                     model["modelLimits"]["supportedOutputModalities"],
                 )

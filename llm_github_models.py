@@ -112,7 +112,7 @@ def register_models(register):
         model_id,
         can_stream,
         supports_schema,
-        supports_streaming_usage,
+        requires_usage_stream_option,
         input_modalities,
         output_modalities,
     ) in CHAT_MODELS:
@@ -121,7 +121,7 @@ def register_models(register):
                 model_id,
                 can_stream=can_stream,
                 supports_schema=supports_schema,
-                supports_streaming_usage=supports_streaming_usage,
+                requires_usage_stream_option=requires_usage_stream_option,
                 input_modalities=input_modalities,
                 output_modalities=output_modalities,
             ),
@@ -129,7 +129,7 @@ def register_models(register):
                 model_id,
                 can_stream=can_stream,
                 supports_schema=supports_schema,
-                supports_streaming_usage=supports_streaming_usage,
+                requires_usage_stream_option=requires_usage_stream_option,
                 input_modalities=input_modalities,
                 output_modalities=output_modalities,
             ),
@@ -229,9 +229,6 @@ def build_messages(
 
 
 def set_usage(usage: CompletionsUsage, response: Union[Response, AsyncResponse]) -> None:
-    if not usage:
-        return
-
     # Recursively remove keys with value 0 and empty dictionaries
     def remove_empty_and_zero(obj):
         if isinstance(obj, dict):
@@ -260,7 +257,7 @@ class _Shared:
         model_id: str,
         can_stream: bool = True,
         supports_schema: bool = False,
-        supports_streaming_usage: bool = True,
+        requires_usage_stream_option: bool = True,
         input_modalities: Optional[List[str]] = None,
         output_modalities: Optional[List[str]] = None,
     ):
@@ -282,7 +279,7 @@ class _Shared:
         self.client_kwargs["api_version"] = "2025-03-01-preview"
 
         self.streaming_model_extras = {}
-        if supports_streaming_usage:
+        if requires_usage_stream_option:
             self.streaming_model_extras["stream_options"] = {
                 "include_usage": True,
             }
@@ -323,6 +320,9 @@ class GitHubModels(_Shared, llm.Model):
             else:
                 response_format = "text"
             messages = build_messages(prompt, conversation)
+
+            usage: Optional[CompletionsUsage] = None
+
             if stream:
                 completion = client.complete(
                     messages=messages,
@@ -332,8 +332,7 @@ class GitHubModels(_Shared, llm.Model):
                 )
                 chunks = []
                 for chunk in completion:
-                    if chunk.usage:
-                        set_usage(chunk.usage, response)
+                    usage = usage or chunk.usage
                     chunks.append(chunk)
                     try:
                         content = chunk.choices[0].delta.content
@@ -349,10 +348,12 @@ class GitHubModels(_Shared, llm.Model):
                     stream=False,
                     response_format=response_format,
                 )
-                if completion.usage:
-                    set_usage(completion.usage, response)
+                usage = completion.usage
                 response.response_json = None  # TODO
                 yield completion.choices[0].message.content
+
+            if usage is not None:
+                set_usage(usage, response)
 
 
 class GitHubAsyncModels(_Shared, AsyncModel):
@@ -384,6 +385,7 @@ class GitHubAsyncModels(_Shared, AsyncModel):
             else:
                 response_format = "text"
 
+            usage: Optional[CompletionsUsage] = None
             messages = build_messages(prompt, conversation)
             if stream:
                 completion = await client.complete(
@@ -393,8 +395,7 @@ class GitHubAsyncModels(_Shared, AsyncModel):
                     model_extras=self.streaming_model_extras,
                 )
                 async for chunk in completion:
-                    if chunk.usage:
-                        set_usage(chunk.usage, response)
+                    usage = usage or chunk.usage
 
                     try:
                         content = chunk.choices[0].delta.content
@@ -409,10 +410,12 @@ class GitHubAsyncModels(_Shared, AsyncModel):
                     stream=False,
                     response_format=response_format,
                 )
-                if completion.usage:
-                    set_usage(completion.usage, response)
+                usage = usage or completion.usage
                 response.response_json = None  # TODO
                 yield completion.choices[0].message.content
+
+            if usage is not None:
+                set_usage(usage, response)
 
 
 class GitHubEmbeddingModel(EmbeddingModel):

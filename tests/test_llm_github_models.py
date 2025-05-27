@@ -233,7 +233,7 @@ def test_doesnt_request_streaming_usage_when_not_supported(MockChatCompletionsCl
     # `for chunk in client.complete(...)`
     mock_instance.complete.return_value.__iter__.return_value = [mock_update]
 
-    model = GitHubModels("test-model", supports_streaming_usage=False)
+    model = GitHubModels("test-model", requires_usage_stream_option=False)
 
     # Patch the get_key method to avoid actual key retrieval
     with patch.object(model, "get_key", return_value="test-key"):
