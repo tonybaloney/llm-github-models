@@ -1,6 +1,6 @@
 import json
 import pathlib
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 import pytest
 from azure.ai.inference.models import (
@@ -11,12 +11,14 @@ from azure.ai.inference.models import (
     SystemMessage,
     UserMessage,
     CompletionsUsage,
+    StreamingChatCompletionsUpdate,
+    StreamingChatChoiceUpdate,
 )
 from llm import get_async_model, get_model
 from llm.models import Attachment, Conversation, Prompt, Response
 from pydantic import BaseModel
 
-from llm_github_models import build_messages, set_usage
+from llm_github_models import GitHubModels, build_messages, set_usage
 
 MODELS = ["github/gpt-4.1-mini", "github/gpt-4o-mini", "github/Llama-3.2-11B-Vision-Instruct"]
 
@@ -216,24 +218,29 @@ async def test_async_model_prompt():
     assert "Paris" in await response.text()
 
 
-def test_sync_returns_usage():
-    """
-    Test that the sync model returns usage information for streaming and non-streaming.
-    """
-    model = get_model("github/gpt-4.1-mini")
-    response = model.prompt("What is the capital of France?")
-    usage = response.usage()
+@patch("llm_github_models.ChatCompletionsClient", autospec=True)
+def test_doesnt_request_streaming_usage_when_not_supported(MockChatCompletionsClient):
+    # Setup mock
+    mock_update = StreamingChatCompletionsUpdate(
+        choices=[StreamingChatChoiceUpdate(delta=Mock(content="Paris"))],
+    )
 
-    assert usage is not None
-    assert usage.input > 0
-    assert usage.output > 0
+    mock_instance = MockChatCompletionsClient.return_value.__enter__.return_value
+    mock_instance.complete.return_value.__iter__.return_value = [mock_update]
 
-    response = model.prompt("What is the capital of France?", stream=True)
-    usage = response.usage()
+    model = GitHubModels("test-model", supports_streaming_usage=False)
 
-    assert usage is not None
-    assert usage.input > 0
-    assert usage.output > 0
+    # Patch the get_key method to avoid actual key retrieval
+    with patch.object(model, "get_key", return_value="test-key"):
+        result = model.prompt("What is the capital of France", stream=True)
+
+    assert result.text() == "Paris"
+
+    # Assertions
+    call_kwargs = mock_instance.complete.call_args.kwargs
+    assert call_kwargs["model_extras"] == {}, (
+        "model_extras should be empty when supports_streaming_usage is False"
+    )
 
 
 def test_set_usage():
@@ -274,6 +281,26 @@ def test_set_usage():
         },
         "other": "data",
     }
+
+
+def test_sync_returns_usage():
+    """
+    Test that the sync model returns usage information for streaming and non-streaming.
+    """
+    model = get_model("github/gpt-4.1-mini")
+    response = model.prompt("What is the capital of France?")
+    usage = response.usage()
+
+    assert usage is not None
+    assert usage.input > 0
+    assert usage.output > 0
+
+    response = model.prompt("What is the capital of France?", stream=True)
+    usage = response.usage()
+
+    assert usage is not None
+    assert usage.input > 0
+    assert usage.output > 0
 
 
 @pytest.mark.asyncio

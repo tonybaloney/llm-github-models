@@ -29,6 +29,12 @@ def supports_schemas(name):
     return False
 
 
+def supports_streaming_usage(name):
+    if name.lower().startswith("mistral") or name.lower().startswith("codestral"):
+        return False
+    return True
+
+
 with open("models.json", "r", encoding="utf-8") as f:
     models = json.load(f)
     for model in models:
@@ -38,6 +44,7 @@ with open("models.json", "r", encoding="utf-8") as f:
                     model["name"],
                     supports_streaming(model["name"]),
                     supports_schemas(model["name"]),
+                    supports_streaming_usage(model["name"]),
                     model["modelLimits"]["supportedInputModalities"],
                     model["modelLimits"]["supportedOutputModalities"],
                 )
@@ -56,7 +63,7 @@ print("Embedding models:")
 embedding_models = sorted(embedding_models)
 pprint(embedding_models, indent=4)
 
-## Make a Markdown series for the models
+# Make a Markdown series for the models
 
 with open("models.fragment.md", "w", encoding="utf-8") as f:
     f.write("## Supported Models\n\n")

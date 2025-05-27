@@ -35,64 +35,64 @@ from pydantic import BaseModel
 INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
 
 CHAT_MODELS = [
-    ("AI21-Jamba-1.5-Large", True, False, ["text"], ["text"]),
-    ("AI21-Jamba-1.5-Mini", True, False, ["text"], ["text"]),
-    ("Codestral-2501", True, False, ["text"], ["text"]),
-    ("Cohere-command-r", True, False, ["text"], ["text"]),
-    ("Cohere-command-r-08-2024", True, False, ["text"], ["text"]),
-    ("Cohere-command-r-plus", True, False, ["text"], ["text"]),
-    ("Cohere-command-r-plus-08-2024", True, False, ["text"], ["text"]),
-    ("DeepSeek-R1", True, False, ["text"], ["text"]),
-    ("DeepSeek-V3", True, False, ["text"], ["text"]),
-    ("DeepSeek-V3-0324", True, False, ["text"], ["text"]),
-    ("Llama-3.2-11B-Vision-Instruct", True, False, ["text", "image", "audio"], ["text"]),
-    ("Llama-3.2-90B-Vision-Instruct", True, False, ["text", "image", "audio"], ["text"]),
-    ("Llama-3.3-70B-Instruct", True, False, ["text"], ["text"]),
-    ("Llama-4-Maverick-17B-128E-Instruct-FP8", True, False, ["text", "image"], ["text"]),
-    ("Llama-4-Scout-17B-16E-Instruct", True, False, ["text", "image"], ["text"]),
-    ("MAI-DS-R1", True, False, ["text"], ["text"]),
-    ("Meta-Llama-3-70B-Instruct", True, False, ["text"], ["text"]),
-    ("Meta-Llama-3-8B-Instruct", True, False, ["text"], ["text"]),
-    ("Meta-Llama-3.1-405B-Instruct", True, False, ["text"], ["text"]),
-    ("Meta-Llama-3.1-70B-Instruct", True, False, ["text"], ["text"]),
-    ("Meta-Llama-3.1-8B-Instruct", True, False, ["text"], ["text"]),
-    ("Ministral-3B", True, False, ["text"], ["text"]),
-    ("Mistral-Large-2411", True, False, ["text"], ["text"]),
-    ("Mistral-Nemo", True, False, ["text"], ["text"]),
-    ("Mistral-large", True, False, ["text"], ["text"]),
-    ("Mistral-large-2407", True, False, ["text"], ["text"]),
-    ("Mistral-small", True, False, ["text"], ["text"]),
-    ("Phi-3-medium-128k-instruct", True, False, ["text"], ["text"]),
-    ("Phi-3-medium-4k-instruct", True, False, ["text"], ["text"]),
-    ("Phi-3-mini-128k-instruct", True, False, ["text"], ["text"]),
-    ("Phi-3-mini-4k-instruct", True, False, ["text"], ["text"]),
-    ("Phi-3-small-128k-instruct", True, False, ["text"], ["text"]),
-    ("Phi-3-small-8k-instruct", True, False, ["text"], ["text"]),
-    ("Phi-3.5-MoE-instruct", True, False, ["text"], ["text"]),
-    ("Phi-3.5-mini-instruct", True, False, ["text"], ["text"]),
-    ("Phi-3.5-vision-instruct", True, False, ["text", "image"], None),
-    ("Phi-4", True, False, ["text"], ["text"]),
-    ("Phi-4-mini-instruct", True, False, ["text"], ["text"]),
-    ("Phi-4-mini-reasoning", True, False, ["text"], ["text"]),
-    ("Phi-4-multimodal-instruct", True, False, ["audio", "image", "text"], ["text"]),
-    ("Phi-4-reasoning", True, False, ["text"], ["text"]),
-    ("cohere-command-a", True, False, ["text"], ["text"]),
-    ("gpt-4.1", True, True, ["text", "image"], ["text"]),
-    ("gpt-4.1-mini", True, True, ["text", "image"], ["text"]),
-    ("gpt-4.1-nano", True, True, ["text", "image"], ["text"]),
-    ("gpt-4o", True, True, ["text", "image", "audio"], ["text"]),
-    ("gpt-4o-mini", True, True, ["text", "image", "audio"], ["text"]),
-    ("grok-3", True, False, ["text"], ["text"]),
-    ("grok-3-mini", True, False, ["text"], ["text"]),
-    ("jais-30b-chat", True, False, ["text"], ["text"]),
-    ("mistral-medium-2505", True, False, ["text", "image"], ["text"]),
-    ("mistral-small-2503", True, False, ["text", "image"], ["text"]),
-    ("o1", False, True, ["text", "image"], ["text"]),
-    ("o1-mini", False, False, ["text"], ["text"]),
-    ("o1-preview", False, False, ["text"], ["text"]),
-    ("o3", True, False, ["text", "image"], ["text"]),
-    ("o3-mini", False, True, ["text"], ["text"]),
-    ("o4-mini", True, False, ["text", "image"], ["text"]),
+    ("AI21-Jamba-1.5-Large", True, False, True, ["text"], ["text"]),
+    ("AI21-Jamba-1.5-Mini", True, False, True, ["text"], ["text"]),
+    ("Codestral-2501", True, False, False, ["text"], ["text"]),
+    ("Cohere-command-r", True, False, True, ["text"], ["text"]),
+    ("Cohere-command-r-08-2024", True, False, True, ["text"], ["text"]),
+    ("Cohere-command-r-plus", True, False, True, ["text"], ["text"]),
+    ("Cohere-command-r-plus-08-2024", True, False, True, ["text"], ["text"]),
+    ("DeepSeek-R1", True, False, True, ["text"], ["text"]),
+    ("DeepSeek-V3", True, False, True, ["text"], ["text"]),
+    ("DeepSeek-V3-0324", True, False, True, ["text"], ["text"]),
+    ("Llama-3.2-11B-Vision-Instruct", True, False, True, ["text", "image", "audio"], ["text"]),
+    ("Llama-3.2-90B-Vision-Instruct", True, False, True, ["text", "image", "audio"], ["text"]),
+    ("Llama-3.3-70B-Instruct", True, False, True, ["text"], ["text"]),
+    ("Llama-4-Maverick-17B-128E-Instruct-FP8", True, False, True, ["text", "image"], ["text"]),
+    ("Llama-4-Scout-17B-16E-Instruct", True, False, True, ["text", "image"], ["text"]),
+    ("MAI-DS-R1", True, False, True, ["text"], ["text"]),
+    ("Meta-Llama-3-70B-Instruct", True, False, True, ["text"], ["text"]),
+    ("Meta-Llama-3-8B-Instruct", True, False, True, ["text"], ["text"]),
+    ("Meta-Llama-3.1-405B-Instruct", True, False, True, ["text"], ["text"]),
+    ("Meta-Llama-3.1-70B-Instruct", True, False, True, ["text"], ["text"]),
+    ("Meta-Llama-3.1-8B-Instruct", True, False, True, ["text"], ["text"]),
+    ("Ministral-3B", True, False, True, ["text"], ["text"]),
+    ("Mistral-Large-2411", True, False, False, ["text"], ["text"]),
+    ("Mistral-Nemo", True, False, False, ["text"], ["text"]),
+    ("Mistral-large", True, False, False, ["text"], ["text"]),
+    ("Mistral-large-2407", True, False, False, ["text"], ["text"]),
+    ("Mistral-small", True, False, False, ["text"], ["text"]),
+    ("Phi-3-medium-128k-instruct", True, False, True, ["text"], ["text"]),
+    ("Phi-3-medium-4k-instruct", True, False, True, ["text"], ["text"]),
+    ("Phi-3-mini-128k-instruct", True, False, True, ["text"], ["text"]),
+    ("Phi-3-mini-4k-instruct", True, False, True, ["text"], ["text"]),
+    ("Phi-3-small-128k-instruct", True, False, True, ["text"], ["text"]),
+    ("Phi-3-small-8k-instruct", True, False, True, ["text"], ["text"]),
+    ("Phi-3.5-MoE-instruct", True, False, True, ["text"], ["text"]),
+    ("Phi-3.5-mini-instruct", True, False, True, ["text"], ["text"]),
+    ("Phi-3.5-vision-instruct", True, False, True, ["text", "image"], None),
+    ("Phi-4", True, False, True, ["text"], ["text"]),
+    ("Phi-4-mini-instruct", True, False, True, ["text"], ["text"]),
+    ("Phi-4-mini-reasoning", True, False, True, ["text"], ["text"]),
+    ("Phi-4-multimodal-instruct", True, False, True, ["audio", "image", "text"], ["text"]),
+    ("Phi-4-reasoning", True, False, True, ["text"], ["text"]),
+    ("cohere-command-a", True, False, True, ["text"], ["text"]),
+    ("gpt-4.1", True, True, True, ["text", "image"], ["text"]),
+    ("gpt-4.1-mini", True, True, True, ["text", "image"], ["text"]),
+    ("gpt-4.1-nano", True, True, True, ["text", "image"], ["text"]),
+    ("gpt-4o", True, True, True, ["text", "image", "audio"], ["text"]),
+    ("gpt-4o-mini", True, True, True, ["text", "image", "audio"], ["text"]),
+    ("grok-3", True, False, True, ["text"], ["text"]),
+    ("grok-3-mini", True, False, True, ["text"], ["text"]),
+    ("jais-30b-chat", True, False, True, ["text"], ["text"]),
+    ("mistral-medium-2505", True, False, False, ["text", "image"], ["text"]),
+    ("mistral-small-2503", True, False, False, ["text", "image"], ["text"]),
+    ("o1", False, True, True, ["text", "image"], ["text"]),
+    ("o1-mini", False, False, True, ["text"], ["text"]),
+    ("o1-preview", False, False, True, ["text"], ["text"]),
+    ("o3", True, False, True, ["text", "image"], ["text"]),
+    ("o3-mini", False, True, True, ["text"], ["text"]),
+    ("o4-mini", True, False, True, ["text", "image"], ["text"]),
 ]
 
 
@@ -108,12 +108,20 @@ EMBEDDING_MODELS = [
 def register_models(register):
     # Register both sync and async versions of each model
     # TODO: Dynamically fetch this list
-    for model_id, can_stream, supports_schema, input_modalities, output_modalities in CHAT_MODELS:
+    for (
+        model_id,
+        can_stream,
+        supports_schema,
+        supports_streaming_usage,
+        input_modalities,
+        output_modalities,
+    ) in CHAT_MODELS:
         register(
             GitHubModels(
                 model_id,
                 can_stream=can_stream,
                 supports_schema=supports_schema,
+                supports_streaming_usage=supports_streaming_usage,
                 input_modalities=input_modalities,
                 output_modalities=output_modalities,
             ),
@@ -121,6 +129,7 @@ def register_models(register):
                 model_id,
                 can_stream=can_stream,
                 supports_schema=supports_schema,
+                supports_streaming_usage=supports_streaming_usage,
                 input_modalities=input_modalities,
                 output_modalities=output_modalities,
             ),
@@ -251,6 +260,7 @@ class _Shared:
         model_id: str,
         can_stream: bool = True,
         supports_schema: bool = False,
+        supports_streaming_usage: bool = True,
         input_modalities: Optional[List[str]] = None,
         output_modalities: Optional[List[str]] = None,
     ):
@@ -270,6 +280,12 @@ class _Shared:
         self.client_kwargs = {}
         # Use latest version
         self.client_kwargs["api_version"] = "2025-03-01-preview"
+
+        self.streaming_model_extras = {}
+        if supports_streaming_usage:
+            self.streaming_model_extras["stream_options"] = {
+                "include_usage": True,
+            }
 
     # Using the same display string for both the sync and async models
     # makes them not show up twice in `llm models`
@@ -312,7 +328,7 @@ class GitHubModels(_Shared, llm.Model):
                     messages=messages,
                     stream=True,
                     response_format=response_format,
-                    model_extras={"stream_options": {"include_usage": True}},
+                    model_extras=self.streaming_model_extras,
                 )
                 chunks = []
                 for chunk in completion:
@@ -323,7 +339,6 @@ class GitHubModels(_Shared, llm.Model):
                         content = None
                     if content is not None:
                         yield content
-
                 if chunk.usage:
                     set_usage(chunk.usage, response)
                 response.response_json = None  # TODO
@@ -333,10 +348,10 @@ class GitHubModels(_Shared, llm.Model):
                     stream=False,
                     response_format=response_format,
                 )
-                response.response_json = None  # TODO
-                yield completion.choices[0].message.content
                 if completion.usage:
                     set_usage(completion.usage, response)
+                response.response_json = None  # TODO
+                yield completion.choices[0].message.content
 
 
 class GitHubAsyncModels(_Shared, AsyncModel):
@@ -374,9 +389,12 @@ class GitHubAsyncModels(_Shared, AsyncModel):
                     messages=messages,
                     stream=True,
                     response_format=response_format,
-                    model_extras={"stream_options": {"include_usage": True}},
+                    model_extras=self.streaming_model_extras,
                 )
                 async for chunk in completion:
+                    if chunk.usage:
+                        set_usage(chunk.usage, response)
+
                     try:
                         content = chunk.choices[0].delta.content
                     except IndexError:
@@ -384,18 +402,16 @@ class GitHubAsyncModels(_Shared, AsyncModel):
                     if content is not None:
                         yield content
                 response.response_json = None  # TODO
-                if chunk.usage:
-                    set_usage(chunk.usage, response)
             else:
                 completion = await client.complete(
                     messages=messages,
                     stream=False,
                     response_format=response_format,
                 )
-                response.response_json = None  # TODO
-                yield completion.choices[0].message.content
                 if completion.usage:
                     set_usage(completion.usage, response)
+                response.response_json = None  # TODO
+                yield completion.choices[0].message.content
 
 
 class GitHubEmbeddingModel(EmbeddingModel):
