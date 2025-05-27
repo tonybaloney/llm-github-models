@@ -332,6 +332,8 @@ class GitHubModels(_Shared, llm.Model):
                 )
                 chunks = []
                 for chunk in completion:
+                    if chunk.usage:
+                        set_usage(chunk.usage, response)
                     chunks.append(chunk)
                     try:
                         content = chunk.choices[0].delta.content
@@ -339,8 +341,7 @@ class GitHubModels(_Shared, llm.Model):
                         content = None
                     if content is not None:
                         yield content
-                if chunk.usage:
-                    set_usage(chunk.usage, response)
+
                 response.response_json = None  # TODO
             else:
                 completion = client.complete(
