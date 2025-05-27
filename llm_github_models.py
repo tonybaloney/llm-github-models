@@ -228,7 +228,7 @@ def build_messages(
     return messages
 
 
-def set_usage(usage: CompletionsUsage, response: Union[Response | AsyncResponse]) -> None:
+def set_usage(usage: CompletionsUsage, response: Union[Response, AsyncResponse]) -> None:
     if not usage:
         return
 

@@ -222,10 +222,15 @@ async def test_async_model_prompt():
 def test_doesnt_request_streaming_usage_when_not_supported(MockChatCompletionsClient):
     # Setup mock
     mock_update = StreamingChatCompletionsUpdate(
-        choices=[StreamingChatChoiceUpdate(delta=Mock(content="Paris"))],
+        {
+            "choices": [StreamingChatChoiceUpdate({"delta": {"content": "Paris"}})],
+        }
     )
 
+    # `with ChatCompletionsClient(...) as client:`
     mock_instance = MockChatCompletionsClient.return_value.__enter__.return_value
+
+    # `for chunk in client.complete(...)`
     mock_instance.complete.return_value.__iter__.return_value = [mock_update]
 
     model = GitHubModels("test-model", supports_streaming_usage=False)
@@ -288,19 +293,14 @@ def test_sync_returns_usage():
     Test that the sync model returns usage information for streaming and non-streaming.
     """
     model = get_model("github/gpt-4.1-mini")
+
     response = model.prompt("What is the capital of France?")
     usage = response.usage()
-
-    assert usage is not None
-    assert usage.input > 0
-    assert usage.output > 0
+    assert_has_usage(usage)
 
     response = model.prompt("What is the capital of France?", stream=True)
     usage = response.usage()
-
-    assert usage is not None
-    assert usage.input > 0
-    assert usage.output > 0
+    assert_has_usage(usage)
 
 
 @pytest.mark.asyncio
@@ -309,16 +309,22 @@ async def test_async_returns_usage():
     Test that the async model returns usage information for streaming and non-streaming.
     """
     model = get_async_model("github/gpt-4.1-mini")
+
     response = await model.prompt("What is the capital of France?")
     usage = await response.usage()
-
-    assert usage is not None
-    assert usage.input > 0
-    assert usage.output > 0
+    assert_has_usage(usage)
 
     response = await model.prompt("What is the capital of France?", stream=True)
     usage = await response.usage()
+    assert_has_usage(usage)
 
+
+def assert_has_usage(usage):
+    """
+    Helper function to assert that usage has input and output tokens.
+    """
     assert usage is not None
-    assert usage.input > 0
-    assert usage.output > 0
+    assert usage.input is not None, "Usage input should not be None"
+    assert usage.input > 0, "Usage input should be greater than 0"
+    assert usage.output is not None, "Usage output should not be None"
+    assert usage.output > 0, "Usage output should be greater than 0"
