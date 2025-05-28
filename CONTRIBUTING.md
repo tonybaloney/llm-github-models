@@ -13,3 +13,13 @@
 ## Running tests
 
 1. `pytest` to run tests
+
+## Code formatting and type checks
+
+Pull-requests will only pass in CI/CD if the following are met:
+
+1. `ruff check`
+2. `pyright llm_github_models.py`
+3. `ruff format --check`
+
+Run `ruff check --fix` to resort imports before submitting PRs, or commit another change. Run `ruff format` to bring the code file up to our style guidelines.
