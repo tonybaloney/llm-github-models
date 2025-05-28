@@ -1,5 +1,5 @@
 import json
-from typing import AsyncGenerator, Iterable, Iterator, List, Optional, Union
+from typing import AsyncGenerator, Dict, Iterable, Iterator, List, Optional, Union
 
 import llm
 from azure.ai.inference import ChatCompletionsClient, EmbeddingsClient
@@ -20,6 +20,8 @@ from azure.ai.inference.models import (
     ImageUrl,
     InputAudio,
     JsonSchemaFormat,
+    StreamingChatResponseMessageUpdate,
+    StreamingChatResponseToolCallUpdate,
     SystemMessage,
     TextContentItem,
     ToolMessage,
@@ -250,14 +252,15 @@ def build_messages(
             # Add any tool results from the previous prompt
             for tool_result in prev_response.prompt.tool_results:
                 messages.append(
-                    ToolMessage(tool_call_id=tool_result.tool_call_id, content=tool_result.output)
+                    ToolMessage(
+                        tool_call_id=tool_result.tool_call_id or "", content=tool_result.output
+                    )
                 )
 
             # Add the assistant's response
             assistant_msg = AssistantMessage(prev_response.text_or_raise())  # type: ignore
 
-            # Add any tool calls that the assistant generated
-            tool_calls = prev_response.tool_calls_or_raise()
+            tool_calls = prev_response.tool_calls_or_raise()  # type: ignore
             if tool_calls:
                 assistant_tool_calls = []
                 for tool_call in tool_calls:
@@ -290,7 +293,7 @@ def build_messages(
     # Add any tool results for the current prompt
     for tool_result in prompt.tool_results:
         messages.append(
-            ToolMessage(tool_call_id=tool_result.tool_call_id, content=tool_result.output)
+            ToolMessage(tool_call_id=tool_result.tool_call_id or "", content=tool_result.output)
         )
 
     return messages
@@ -314,6 +317,40 @@ def set_usage(usage: CompletionsUsage, response: Union[Response, AsyncResponse])
         output=usage.completion_tokens,
         details=remove_empty_and_zero(details),
     )
+
+
+def append_streaming_tool_calls(
+    tool_calls: Dict[str, StreamingChatResponseToolCallUpdate],
+    delta: StreamingChatResponseMessageUpdate,
+):
+    if not delta.tool_calls:
+        return
+
+    for tool_call in delta.tool_calls:
+        index = tool_call.get("index")
+        if index not in tool_calls:
+            tool_calls[index] = tool_call
+        else:
+            tool_calls[index].function.arguments += tool_call.function.arguments
+
+
+def add_tool_calls(
+    tool_calls: Iterable[Union[ChatCompletionsToolCall, StreamingChatResponseToolCallUpdate]],
+    response: Union[Response, AsyncResponse],
+):
+    for tool_call in tool_calls:
+        try:
+            arguments = json.loads(tool_call.function.arguments)
+        except json.JSONDecodeError:
+            arguments = {"error": "Invalid JSON in arguments"}
+
+        response.add_tool_call(
+            llm.ToolCall(
+                tool_call_id=tool_call.id,
+                name=tool_call.function.name,
+                arguments=arguments,
+            )
+        )
 
 
 class _Shared:
@@ -359,6 +396,21 @@ class _Shared:
     def __str__(self) -> str:
         return f"GitHub Models: {self.model_id}"
 
+    def get_tools(self, prompt: Prompt) -> Optional[List[ChatCompletionsToolDefinition]]:
+        if not self.supports_tools or not prompt.tools:
+            return None
+
+        return [
+            ChatCompletionsToolDefinition(
+                function=FunctionDefinition(
+                    name=t.name,
+                    description=t.description or None,
+                    parameters=t.input_schema,
+                ),
+            )
+            for t in prompt.tools
+        ]
+
 
 class GitHubModels(_Shared, llm.Model):
     def execute(
@@ -392,21 +444,7 @@ class GitHubModels(_Shared, llm.Model):
             usage: Optional[CompletionsUsage] = None
             messages = build_messages(prompt, conversation)
 
-            # Set up tools if they're provided and the model supports them
-            tools = None
-            if prompt.tools and self.supports_tools:
-                tools = []
-                for tool in prompt.tools:
-                    tools.append(
-                        ChatCompletionsToolDefinition(
-                            type="function",
-                            function=FunctionDefinition(
-                                name=tool.name,
-                                description=tool.description or None,
-                                parameters=tool.input_schema,
-                            ),
-                        )
-                    )
+            tools = self.get_tools(prompt)
 
             if stream:
                 completion = client.complete(
@@ -416,55 +454,24 @@ class GitHubModels(_Shared, llm.Model):
                     model_extras=self.streaming_model_extras,
                     tools=tools,
                 )
-                chunks = []
                 tool_calls = {}
 
                 for chunk in completion:
                     usage = usage or chunk.usage
-                    chunks.append(chunk)
+                    append_streaming_tool_calls(tool_calls, chunk.choices[0].delta)
+
                     try:
                         content = chunk.choices[0].delta.content
                     except (IndexError, AttributeError):
                         content = None
 
-                    # Track tool calls in streaming mode
-                    # Check if there are tool calls in the chunk
-                    has_tool_calls = (
-                        hasattr(chunk.choices[0].delta, "tool_calls")
-                        and chunk.choices[0].delta.tool_calls
-                    )
-                    if has_tool_calls:
-                        # StreamingChatResponseToolCallUpdate doesn't expose `index` directly,
-                        # so we have to get the raw values.
-                        chunk_tool_calls = [
-                            tc.as_dict() for tc in chunk.choices[0].delta.tool_calls
-                        ]
-                        for tool_call in chunk_tool_calls:
-                            if tool_call["index"] not in tool_calls:
-                                tool_calls[tool_call["index"]] = tool_call
-                            else:
-                                tool_calls[tool_call["index"]]["function"]["arguments"] += (
-                                    tool_call["function"]["arguments"]
-                                )
-
                     if content is not None:
                         yield content
 
-                # Add any collected tool calls to the response
-                if tool_calls:
-                    for _, tool_call in tool_calls.items():
-                        try:
-                            arguments = json.loads(tool_call["function"]["arguments"])
-                        except json.JSONDecodeError:
-                            arguments = {"error": "Invalid JSON in arguments"}
-
-                        response.add_tool_call(
-                            llm.ToolCall(
-                                tool_call_id=tool_call["id"],
-                                name=tool_call["function"]["name"],
-                                arguments=arguments,
-                            )
-                        )
+                add_tool_calls(
+                    tool_calls.values(),
+                    response,
+                )
 
                 response.response_json = None  # TODO
             else:
@@ -476,24 +483,8 @@ class GitHubModels(_Shared, llm.Model):
                 )
                 usage = completion.usage
 
-                # Handle tool calls in non-streaming mode
-                if (
-                    hasattr(completion.choices[0].message, "tool_calls")
-                    and completion.choices[0].message.tool_calls
-                ):
-                    for tool_call in completion.choices[0].message.tool_calls:
-                        try:
-                            arguments = json.loads(tool_call.function.arguments)
-                        except json.JSONDecodeError:
-                            arguments = {"error": "Invalid JSON in arguments"}
-
-                        response.add_tool_call(
-                            llm.ToolCall(
-                                tool_call_id=tool_call.id,
-                                name=tool_call.function.name,
-                                arguments=arguments,
-                            )
-                        )
+                tool_calls = completion.choices[0].message.tool_calls or []
+                add_tool_calls(tool_calls, response)
 
                 response.response_json = None  # TODO
                 if completion.choices[0].message.content:
@@ -534,21 +525,7 @@ class GitHubAsyncModels(_Shared, AsyncModel):
             usage: Optional[CompletionsUsage] = None
             messages = build_messages(prompt, conversation)
 
-            # Set up tools if they're provided and the model supports them
-            tools = None
-            if prompt.tools and self.supports_tools:
-                tools = []
-                for tool in prompt.tools:
-                    tools.append(
-                        ChatCompletionsToolDefinition(
-                            type="function",
-                            function=FunctionDefinition(
-                                name=tool.name,
-                                description=tool.description or None,
-                                parameters=tool.input_schema,
-                            ),
-                        )
-                    )
+            tools = self.get_tools(prompt)
 
             if stream:
                 completion = await client.complete(
@@ -562,49 +539,20 @@ class GitHubAsyncModels(_Shared, AsyncModel):
                 tool_calls = {}
                 async for chunk in completion:
                     usage = usage or chunk.usage
+                    append_streaming_tool_calls(tool_calls, chunk.choices[0].delta)
 
                     try:
                         content = chunk.choices[0].delta.content
                     except (IndexError, AttributeError):
                         content = None
 
-                    # Track tool calls in streaming mode
-                    # Check if there are tool calls in the chunk
-                    has_tool_calls = (
-                        hasattr(chunk.choices[0].delta, "tool_calls")
-                        and chunk.choices[0].delta.tool_calls
-                    )
-                    if has_tool_calls:
-                        # StreamingChatResponseToolCallUpdate doesn't expose `index` directly,
-                        # so we have to get the raw values.
-                        chunk_tool_calls = [
-                            tc.as_dict() for tc in chunk.choices[0].delta.tool_calls
-                        ]
-                        for tool_call in chunk_tool_calls:
-                            if tool_call["index"] not in tool_calls:
-                                tool_calls[tool_call["index"]] = tool_call
-                            else:
-                                tool_calls[tool_call["index"]]["function"]["arguments"] += (
-                                    tool_call["function"]["arguments"]
-                                )
                     if content is not None:
                         yield content
 
-                # Add any collected tool calls to the response
-                if tool_calls:
-                    for _, tool_call in tool_calls.items():
-                        try:
-                            arguments = json.loads(tool_call["function"]["arguments"])
-                        except json.JSONDecodeError:
-                            arguments = {"error": "Invalid JSON in arguments"}
-
-                        response.add_tool_call(
-                            llm.ToolCall(
-                                tool_call_id=tool_call["id"],
-                                name=tool_call["function"]["name"],
-                                arguments=arguments,
-                            )
-                        )
+                add_tool_calls(
+                    tool_calls.values(),
+                    response,
+                )
 
                 response.response_json = None  # TODO
             else:
@@ -616,24 +564,8 @@ class GitHubAsyncModels(_Shared, AsyncModel):
                 )
                 usage = usage or completion.usage
 
-                # Handle tool calls in non-streaming mode
-                if (
-                    hasattr(completion.choices[0].message, "tool_calls")
-                    and completion.choices[0].message.tool_calls
-                ):
-                    for tool_call in completion.choices[0].message.tool_calls:
-                        try:
-                            arguments = json.loads(tool_call.function.arguments)
-                        except json.JSONDecodeError:
-                            arguments = {"error": "Invalid JSON in arguments"}
-
-                        response.add_tool_call(
-                            llm.ToolCall(
-                                tool_call_id=tool_call.id,
-                                name=tool_call.function.name,
-                                arguments=arguments,
-                            )
-                        )
+                tool_calls = completion.choices[0].message.tool_calls or []
+                add_tool_calls(tool_calls, response)
 
                 response.response_json = None  # TODO
                 if completion.choices[0].message.content:
