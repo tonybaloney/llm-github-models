@@ -5,7 +5,21 @@
       "type": "debugpy",
       "request": "launch",
       "module": "llm",
-      "args": ["what is happening in this audio?", "-m", "github/gpt-4o", "-a", "tests/files/kick.wav"],
+      "args": [
+        "what is happening in this audio?",
+        "-m",
+        "github/gpt-4o",
+        "-a",
+        "tests/files/kick.wav"
+      ],
+    },
+    {
+      "name": "GPT-4o with function",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "llm",
+      // This needs to be string instead of an array so the the whitespace is preserved
+      "args": "'what is 34234 * 213345?' -m github/gpt-4o --functions 'def multiply(x: int, y: int) -> int:\n    \"\"\"Multiply two numbers.\"\"\"\n    return x * y\n' --td"
     }
   ]
 }

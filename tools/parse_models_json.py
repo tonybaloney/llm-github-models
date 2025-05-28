@@ -41,6 +41,37 @@ def requires_usage_stream_option(name):
     ]
 
 
+def supports_tools(name):
+    tool_supporting_models = [
+        "AI21-Jamba-1.5-Mini",
+        "AI21-Jamba-1.5-Large",
+        "o3-mini",
+        "o1",
+        "o1-preview",
+        "o1-mini",
+        "gpt-4o-realtime-preview",
+        "gpt-4o",
+        "gpt-4o-mini",
+        "cohere-command-a",
+        "Cohere-command-a",
+        "Cohere-command-r-plus-08-2024",
+        "Cohere-command-r-08-2024",
+        "Cohere-command-r-plus",
+        "Cohere-command-r",
+        "jais-30b-chat",
+        "DeepSeek-V3-0324",
+        "DeepSeek-V3",
+        "Llama-4-Scout-17B-16E-Instruct",
+        "Llama-4-Maverick-17B-128E-Instruct-FP8",
+        "Mistral-Large-2411",
+        "Mistral-large-2407",
+        "Mistral-large",
+        "Mistral-small-2503",
+        "Mistral-small",
+    ]
+    return name in tool_supporting_models
+
+
 with open("models.json", "r", encoding="utf-8") as f:
     models = json.load(f)
     for model in models:
@@ -51,6 +82,7 @@ with open("models.json", "r", encoding="utf-8") as f:
                     supports_streaming(model["name"]),
                     supports_schemas(model["name"]),
                     requires_usage_stream_option(model["name"]),
+                    supports_tools(model["name"]),
                     model["modelLimits"]["supportedInputModalities"],
                     model["modelLimits"]["supportedOutputModalities"],
                 )
