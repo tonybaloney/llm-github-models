@@ -118,7 +118,7 @@ CHAT_MODELS = [
     ("grok-3-mini", True, False, False, False, ["text"], ["text"]),
     ("jais-30b-chat", True, False, False, True, ["text"], ["text"]),
     ("mistral-medium-2505", True, False, False, False, ["text", "image"], ["text"]),
-    ("mistral-small-2503", True, False, False, False, ["text", "image"], ["text"]),
+    ("mistral-small-2503", True, False, False, True, ["text", "image"], ["text"]),
     ("o1", False, True, False, True, ["text", "image"], ["text"]),
     ("o1-mini", False, False, False, True, ["text"], ["text"]),
     ("o1-preview", False, False, False, True, ["text"], ["text"]),

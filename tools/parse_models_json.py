@@ -49,11 +49,8 @@ def supports_tools(name):
         "o1",
         "o1-preview",
         "o1-mini",
-        "gpt-4o-realtime-preview",
         "gpt-4o",
         "gpt-4o-mini",
-        "cohere-command-a",
-        "Cohere-command-a",
         "Cohere-command-r-plus-08-2024",
         "Cohere-command-r-08-2024",
         "Cohere-command-r-plus",
@@ -66,7 +63,7 @@ def supports_tools(name):
         "Mistral-Large-2411",
         "Mistral-large-2407",
         "Mistral-large",
-        "Mistral-small-2503",
+        "mistral-small-2503",
         "Mistral-small",
     ]
     return name in tool_supporting_models
