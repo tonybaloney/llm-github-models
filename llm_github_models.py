@@ -540,7 +540,6 @@ class GitHubAsyncModels(_Shared, AsyncModel):
                 tool_calls = {}
                 async for chunk in completion:
                     usage = usage or chunk.usage
-                    append_streaming_tool_calls(tool_calls, chunk.choices[0].delta)
 
                     if len(chunk.choices) == 0:
                         continue
