@@ -2,8 +2,16 @@
 [![PyPI](https://img.shields.io/pypi/v/llm-github-models.svg)](https://pypi.org/project/llm-github-models/)
 [![Changelog](https://img.shields.io/github/v/release/tonybaloney/llm-github-models?include_prereleases&label=changelog)](https://github.com/tonybaloney/llm-github-models/releases)
 
+This is a plugin for [llm](https://llm.datasette.io) that uses [GitHub Models](https://github.blog/news-insights/product-news/introducing-github-models/) via the Azure AI Inference SDK. GitHub Models is available to all GitHub users and offers **free** usage of many AI LLMs. 
 
-This is a plugin for [llm](https://llm.datasette.io) that uses [GitHub Models](https://github.blog/news-insights/product-news/introducing-github-models/) via the Azure AI Inference SDK.
+## Features
+
+- Support for all >30 models, including GPT-4o, 4.1, o3, DeepSeek-R1, Llama3.x and more
+- Support for [schemas](https://llm.datasette.io/en/stable/schemas.html)
+- Output token usage
+- Support for [Embedding Models](https://llm.datasette.io/en/stable/embeddings/index.html)
+- Async and streaming outputs (model dependent)
+- Support for model attachments 
 
 ## Installation
 
