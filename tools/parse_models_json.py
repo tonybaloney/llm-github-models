@@ -30,9 +30,15 @@ def supports_schemas(name):
 
 
 def requires_usage_stream_option(name):
-    if name.lower().startswith("mistral") or name.lower().startswith("codestral"):
-        return False
-    return True
+    return name in [
+        "gpt-4o",
+        "gpt-4o-mini",
+        "gpt-4.1",
+        "gpt-4.1-mini",
+        "gpt-4.1-nano",
+        "o3",
+        "o4-mini",
+    ]
 
 
 with open("models.json", "r", encoding="utf-8") as f:

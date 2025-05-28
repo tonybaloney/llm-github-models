@@ -219,7 +219,7 @@ async def test_async_model_prompt():
 
 
 @patch("llm_github_models.ChatCompletionsClient", autospec=True)
-def test_doesnt_request_streaming_usage_when_not_supported(MockChatCompletionsClient):
+def test_doesnt_request_streaming_usage_when_not_required(MockChatCompletionsClient):
     # Setup mock
     mock_update = StreamingChatCompletionsUpdate(
         {
@@ -244,7 +244,7 @@ def test_doesnt_request_streaming_usage_when_not_supported(MockChatCompletionsCl
     # Assertions
     call_kwargs = mock_instance.complete.call_args.kwargs
     assert call_kwargs["model_extras"] == {}, (
-        "model_extras should be empty when supports_streaming_usage is False"
+        "model_extras should be empty when requires_usage_stream_option is False"
     )
 
 
