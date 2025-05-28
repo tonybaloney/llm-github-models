@@ -458,12 +458,13 @@ class GitHubModels(_Shared, llm.Model):
 
                 for chunk in completion:
                     usage = usage or chunk.usage
-                    append_streaming_tool_calls(tool_calls, chunk.choices[0].delta)
 
-                    try:
-                        content = chunk.choices[0].delta.content
-                    except (IndexError, AttributeError):
-                        content = None
+                    if len(chunk.choices) == 0:
+                        continue
+
+                    delta = chunk.choices[0].delta
+                    content = delta.content
+                    append_streaming_tool_calls(tool_calls, delta)
 
                     if content is not None:
                         yield content
@@ -541,10 +542,12 @@ class GitHubAsyncModels(_Shared, AsyncModel):
                     usage = usage or chunk.usage
                     append_streaming_tool_calls(tool_calls, chunk.choices[0].delta)
 
-                    try:
-                        content = chunk.choices[0].delta.content
-                    except (IndexError, AttributeError):
-                        content = None
+                    if len(chunk.choices) == 0:
+                        continue
+
+                    delta = chunk.choices[0].delta
+                    content = delta.content
+                    append_streaming_tool_calls(tool_calls, delta)
 
                     if content is not None:
                         yield content
