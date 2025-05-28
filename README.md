@@ -19,6 +19,8 @@ This is a plugin for [llm](https://llm.datasette.io) that uses [GitHub Models](h
 $ llm install llm-github-models
 ```
 
+or `pip install llm-github-models`
+
 ## Usage
 
 To set the API key, use the `llm keys set github` command or use the `GITHUB_MODELS_KEY` environment variable.
