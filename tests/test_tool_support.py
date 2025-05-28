@@ -108,7 +108,7 @@ def test_sync_uses_tools(stream):
         """Multiply two numbers."""
         return x * y
 
-    chain = model.chain("What is 34234 * 213345?", tools=[multiply], stream=stream).responses()
+    chain = model.chain("What is 34234 * 213345?", tools=[multiply], stream=stream).responses()  # type: ignore
 
     tool_call_resp = next(chain)
 
@@ -133,7 +133,7 @@ async def test_async_uses_tools(stream):
         """Multiply two numbers."""
         return x * y
 
-    chain = model.chain("What is 34234 * 213345?", tools=[multiply], stream=stream).responses()
+    chain = model.chain("What is 34234 * 213345?", tools=[multiply], stream=stream).responses()  # type: ignore
 
     responses = []
     async for resp in chain:
