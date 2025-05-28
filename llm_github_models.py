@@ -8,6 +8,7 @@ from azure.ai.inference.models import (
     AudioContentFormat,
     AudioContentItem,
     ChatRequestMessage,
+    CompletionsUsage,
     ContentItem,
     ImageContentItem,
     ImageDetailLevel,
@@ -34,64 +35,64 @@ from pydantic import BaseModel
 INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
 
 CHAT_MODELS = [
-    ("AI21-Jamba-1.5-Large", True, False, ["text"], ["text"]),
-    ("AI21-Jamba-1.5-Mini", True, False, ["text"], ["text"]),
-    ("Codestral-2501", True, False, ["text"], ["text"]),
-    ("Cohere-command-r", True, False, ["text"], ["text"]),
-    ("Cohere-command-r-08-2024", True, False, ["text"], ["text"]),
-    ("Cohere-command-r-plus", True, False, ["text"], ["text"]),
-    ("Cohere-command-r-plus-08-2024", True, False, ["text"], ["text"]),
-    ("DeepSeek-R1", True, False, ["text"], ["text"]),
-    ("DeepSeek-V3", True, False, ["text"], ["text"]),
-    ("DeepSeek-V3-0324", True, False, ["text"], ["text"]),
-    ("Llama-3.2-11B-Vision-Instruct", True, False, ["text", "image", "audio"], ["text"]),
-    ("Llama-3.2-90B-Vision-Instruct", True, False, ["text", "image", "audio"], ["text"]),
-    ("Llama-3.3-70B-Instruct", True, False, ["text"], ["text"]),
-    ("Llama-4-Maverick-17B-128E-Instruct-FP8", True, False, ["text", "image"], ["text"]),
-    ("Llama-4-Scout-17B-16E-Instruct", True, False, ["text", "image"], ["text"]),
-    ("MAI-DS-R1", True, False, ["text"], ["text"]),
-    ("Meta-Llama-3-70B-Instruct", True, False, ["text"], ["text"]),
-    ("Meta-Llama-3-8B-Instruct", True, False, ["text"], ["text"]),
-    ("Meta-Llama-3.1-405B-Instruct", True, False, ["text"], ["text"]),
-    ("Meta-Llama-3.1-70B-Instruct", True, False, ["text"], ["text"]),
-    ("Meta-Llama-3.1-8B-Instruct", True, False, ["text"], ["text"]),
-    ("Ministral-3B", True, False, ["text"], ["text"]),
-    ("Mistral-Large-2411", True, False, ["text"], ["text"]),
-    ("Mistral-Nemo", True, False, ["text"], ["text"]),
-    ("Mistral-large", True, False, ["text"], ["text"]),
-    ("Mistral-large-2407", True, False, ["text"], ["text"]),
-    ("Mistral-small", True, False, ["text"], ["text"]),
-    ("Phi-3-medium-128k-instruct", True, False, ["text"], ["text"]),
-    ("Phi-3-medium-4k-instruct", True, False, ["text"], ["text"]),
-    ("Phi-3-mini-128k-instruct", True, False, ["text"], ["text"]),
-    ("Phi-3-mini-4k-instruct", True, False, ["text"], ["text"]),
-    ("Phi-3-small-128k-instruct", True, False, ["text"], ["text"]),
-    ("Phi-3-small-8k-instruct", True, False, ["text"], ["text"]),
-    ("Phi-3.5-MoE-instruct", True, False, ["text"], ["text"]),
-    ("Phi-3.5-mini-instruct", True, False, ["text"], ["text"]),
-    ("Phi-3.5-vision-instruct", True, False, ["text", "image"], None),
-    ("Phi-4", True, False, ["text"], ["text"]),
-    ("Phi-4-mini-instruct", True, False, ["text"], ["text"]),
-    ("Phi-4-mini-reasoning", True, False, ["text"], ["text"]),
-    ("Phi-4-multimodal-instruct", True, False, ["audio", "image", "text"], ["text"]),
-    ("Phi-4-reasoning", True, False, ["text"], ["text"]),
-    ("cohere-command-a", True, False, ["text"], ["text"]),
-    ("gpt-4.1", True, True, ["text", "image"], ["text"]),
-    ("gpt-4.1-mini", True, True, ["text", "image"], ["text"]),
-    ("gpt-4.1-nano", True, True, ["text", "image"], ["text"]),
-    ("gpt-4o", True, True, ["text", "image", "audio"], ["text"]),
-    ("gpt-4o-mini", True, True, ["text", "image", "audio"], ["text"]),
-    ("grok-3", True, False, ["text"], ["text"]),
-    ("grok-3-mini", True, False, ["text"], ["text"]),
-    ("jais-30b-chat", True, False, ["text"], ["text"]),
-    ("mistral-medium-2505", True, False, ["text", "image"], ["text"]),
-    ("mistral-small-2503", True, False, ["text", "image"], ["text"]),
-    ("o1", False, True, ["text", "image"], ["text"]),
-    ("o1-mini", False, False, ["text"], ["text"]),
-    ("o1-preview", False, False, ["text"], ["text"]),
-    ("o3", True, False, ["text", "image"], ["text"]),
-    ("o3-mini", False, True, ["text"], ["text"]),
-    ("o4-mini", True, False, ["text", "image"], ["text"]),
+    ("AI21-Jamba-1.5-Large", True, False, False, ["text"], ["text"]),
+    ("AI21-Jamba-1.5-Mini", True, False, False, ["text"], ["text"]),
+    ("Codestral-2501", True, False, False, ["text"], ["text"]),
+    ("Cohere-command-r", True, False, False, ["text"], ["text"]),
+    ("Cohere-command-r-08-2024", True, False, False, ["text"], ["text"]),
+    ("Cohere-command-r-plus", True, False, False, ["text"], ["text"]),
+    ("Cohere-command-r-plus-08-2024", True, False, False, ["text"], ["text"]),
+    ("DeepSeek-R1", True, False, False, ["text"], ["text"]),
+    ("DeepSeek-V3", True, False, False, ["text"], ["text"]),
+    ("DeepSeek-V3-0324", True, False, False, ["text"], ["text"]),
+    ("Llama-3.2-11B-Vision-Instruct", True, False, False, ["text", "image", "audio"], ["text"]),
+    ("Llama-3.2-90B-Vision-Instruct", True, False, False, ["text", "image", "audio"], ["text"]),
+    ("Llama-3.3-70B-Instruct", True, False, False, ["text"], ["text"]),
+    ("Llama-4-Maverick-17B-128E-Instruct-FP8", True, False, False, ["text", "image"], ["text"]),
+    ("Llama-4-Scout-17B-16E-Instruct", True, False, False, ["text", "image"], ["text"]),
+    ("MAI-DS-R1", True, False, False, ["text"], ["text"]),
+    ("Meta-Llama-3-70B-Instruct", True, False, False, ["text"], ["text"]),
+    ("Meta-Llama-3-8B-Instruct", True, False, False, ["text"], ["text"]),
+    ("Meta-Llama-3.1-405B-Instruct", True, False, False, ["text"], ["text"]),
+    ("Meta-Llama-3.1-70B-Instruct", True, False, False, ["text"], ["text"]),
+    ("Meta-Llama-3.1-8B-Instruct", True, False, False, ["text"], ["text"]),
+    ("Ministral-3B", True, False, False, ["text"], ["text"]),
+    ("Mistral-Large-2411", True, False, False, ["text"], ["text"]),
+    ("Mistral-Nemo", True, False, False, ["text"], ["text"]),
+    ("Mistral-large", True, False, False, ["text"], ["text"]),
+    ("Mistral-large-2407", True, False, False, ["text"], ["text"]),
+    ("Mistral-small", True, False, False, ["text"], ["text"]),
+    ("Phi-3-medium-128k-instruct", True, False, False, ["text"], ["text"]),
+    ("Phi-3-medium-4k-instruct", True, False, False, ["text"], ["text"]),
+    ("Phi-3-mini-128k-instruct", True, False, False, ["text"], ["text"]),
+    ("Phi-3-mini-4k-instruct", True, False, False, ["text"], ["text"]),
+    ("Phi-3-small-128k-instruct", True, False, False, ["text"], ["text"]),
+    ("Phi-3-small-8k-instruct", True, False, False, ["text"], ["text"]),
+    ("Phi-3.5-MoE-instruct", True, False, False, ["text"], ["text"]),
+    ("Phi-3.5-mini-instruct", True, False, False, ["text"], ["text"]),
+    ("Phi-3.5-vision-instruct", True, False, False, ["text", "image"], None),
+    ("Phi-4", True, False, False, ["text"], ["text"]),
+    ("Phi-4-mini-instruct", True, False, False, ["text"], ["text"]),
+    ("Phi-4-mini-reasoning", True, False, False, ["text"], ["text"]),
+    ("Phi-4-multimodal-instruct", True, False, False, ["audio", "image", "text"], ["text"]),
+    ("Phi-4-reasoning", True, False, False, ["text"], ["text"]),
+    ("cohere-command-a", True, False, False, ["text"], ["text"]),
+    ("gpt-4.1", True, True, True, ["text", "image"], ["text"]),
+    ("gpt-4.1-mini", True, True, True, ["text", "image"], ["text"]),
+    ("gpt-4.1-nano", True, True, True, ["text", "image"], ["text"]),
+    ("gpt-4o", True, True, True, ["text", "image", "audio"], ["text"]),
+    ("gpt-4o-mini", True, True, True, ["text", "image", "audio"], ["text"]),
+    ("grok-3", True, False, False, ["text"], ["text"]),
+    ("grok-3-mini", True, False, False, ["text"], ["text"]),
+    ("jais-30b-chat", True, False, False, ["text"], ["text"]),
+    ("mistral-medium-2505", True, False, False, ["text", "image"], ["text"]),
+    ("mistral-small-2503", True, False, False, ["text", "image"], ["text"]),
+    ("o1", False, True, False, ["text", "image"], ["text"]),
+    ("o1-mini", False, False, False, ["text"], ["text"]),
+    ("o1-preview", False, False, False, ["text"], ["text"]),
+    ("o3", True, False, True, ["text", "image"], ["text"]),
+    ("o3-mini", False, True, False, ["text"], ["text"]),
+    ("o4-mini", True, False, True, ["text", "image"], ["text"]),
 ]
 
 
@@ -107,12 +108,20 @@ EMBEDDING_MODELS = [
 def register_models(register):
     # Register both sync and async versions of each model
     # TODO: Dynamically fetch this list
-    for model_id, can_stream, supports_schema, input_modalities, output_modalities in CHAT_MODELS:
+    for (
+        model_id,
+        can_stream,
+        supports_schema,
+        requires_usage_stream_option,
+        input_modalities,
+        output_modalities,
+    ) in CHAT_MODELS:
         register(
             GitHubModels(
                 model_id,
                 can_stream=can_stream,
                 supports_schema=supports_schema,
+                requires_usage_stream_option=requires_usage_stream_option,
                 input_modalities=input_modalities,
                 output_modalities=output_modalities,
             ),
@@ -120,6 +129,7 @@ def register_models(register):
                 model_id,
                 can_stream=can_stream,
                 supports_schema=supports_schema,
+                requires_usage_stream_option=requires_usage_stream_option,
                 input_modalities=input_modalities,
                 output_modalities=output_modalities,
             ),
@@ -218,6 +228,26 @@ def build_messages(
     return messages
 
 
+def set_usage(usage: CompletionsUsage, response: Union[Response, AsyncResponse]) -> None:
+    # Recursively remove keys with value 0 and empty dictionaries
+    def remove_empty_and_zero(obj):
+        if isinstance(obj, dict):
+            cleaned = {k: remove_empty_and_zero(v) for k, v in obj.items() if v != 0 and v != {}}
+            return {k: v for k, v in cleaned.items() if v is not None and v != {}}
+        return obj
+
+    details = usage.as_dict()
+    details.pop("prompt_tokens", None)
+    details.pop("completion_tokens", None)
+    details.pop("total_tokens", None)
+
+    response.set_usage(
+        input=usage.prompt_tokens,
+        output=usage.completion_tokens,
+        details=remove_empty_and_zero(details),
+    )
+
+
 class _Shared:
     needs_key = "github"
     key_env_var = "GITHUB_MODELS_KEY"
@@ -227,6 +257,7 @@ class _Shared:
         model_id: str,
         can_stream: bool = True,
         supports_schema: bool = False,
+        requires_usage_stream_option: bool = True,
         input_modalities: Optional[List[str]] = None,
         output_modalities: Optional[List[str]] = None,
     ):
@@ -244,7 +275,14 @@ class _Shared:
         self.output_modalities = output_modalities
 
         self.client_kwargs = {}
-        self.client_kwargs["api_version"] = "2025-03-01-preview"  # Use latest version
+        # Use latest version
+        self.client_kwargs["api_version"] = "2025-03-01-preview"
+
+        self.streaming_model_extras = {}
+        if requires_usage_stream_option:
+            self.streaming_model_extras["stream_options"] = {
+                "include_usage": True,
+            }
 
     # Using the same display string for both the sync and async models
     # makes them not show up twice in `llm models`
@@ -282,14 +320,19 @@ class GitHubModels(_Shared, llm.Model):
             else:
                 response_format = "text"
             messages = build_messages(prompt, conversation)
+
+            usage: Optional[CompletionsUsage] = None
+
             if stream:
                 completion = client.complete(
                     messages=messages,
                     stream=True,
                     response_format=response_format,
+                    model_extras=self.streaming_model_extras,
                 )
                 chunks = []
                 for chunk in completion:
+                    usage = usage or chunk.usage
                     chunks.append(chunk)
                     try:
                         content = chunk.choices[0].delta.content
@@ -297,6 +340,7 @@ class GitHubModels(_Shared, llm.Model):
                         content = None
                     if content is not None:
                         yield content
+
                 response.response_json = None  # TODO
             else:
                 completion = client.complete(
@@ -304,8 +348,12 @@ class GitHubModels(_Shared, llm.Model):
                     stream=False,
                     response_format=response_format,
                 )
+                usage = completion.usage
                 response.response_json = None  # TODO
                 yield completion.choices[0].message.content
+
+            if usage is not None:
+                set_usage(usage, response)
 
 
 class GitHubAsyncModels(_Shared, AsyncModel):
@@ -337,14 +385,18 @@ class GitHubAsyncModels(_Shared, AsyncModel):
             else:
                 response_format = "text"
 
+            usage: Optional[CompletionsUsage] = None
             messages = build_messages(prompt, conversation)
             if stream:
                 completion = await client.complete(
                     messages=messages,
                     stream=True,
                     response_format=response_format,
+                    model_extras=self.streaming_model_extras,
                 )
                 async for chunk in completion:
+                    usage = usage or chunk.usage
+
                     try:
                         content = chunk.choices[0].delta.content
                     except IndexError:
@@ -358,8 +410,12 @@ class GitHubAsyncModels(_Shared, AsyncModel):
                     stream=False,
                     response_format=response_format,
                 )
+                usage = usage or completion.usage
                 response.response_json = None  # TODO
                 yield completion.choices[0].message.content
+
+            if usage is not None:
+                set_usage(usage, response)
 
 
 class GitHubEmbeddingModel(EmbeddingModel):

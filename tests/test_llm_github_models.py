@@ -1,12 +1,16 @@
 import json
 import pathlib
+from unittest.mock import Mock, patch
 
 import pytest
 from azure.ai.inference.models import (
     AudioContentItem,
+    CompletionsUsage,
     ImageContentItem,
     ImageUrl,
     InputAudio,
+    StreamingChatChoiceUpdate,
+    StreamingChatCompletionsUpdate,
     SystemMessage,
     UserMessage,
 )
@@ -14,7 +18,7 @@ from llm import get_async_model, get_model
 from llm.models import Attachment, Conversation, Prompt, Response
 from pydantic import BaseModel
 
-from llm_github_models import build_messages
+from llm_github_models import GitHubModels, build_messages, set_usage
 
 MODELS = ["github/gpt-4.1-mini", "github/gpt-4o-mini", "github/Llama-3.2-11B-Vision-Instruct"]
 
@@ -212,3 +216,115 @@ async def test_async_model_prompt():
     model = get_async_model("github/gpt-4.1-mini")
     response = await model.prompt("What is the capital of France?")
     assert "Paris" in await response.text()
+
+
+@patch("llm_github_models.ChatCompletionsClient", autospec=True)
+def test_doesnt_request_streaming_usage_when_not_required(MockChatCompletionsClient):
+    # Setup mock
+    mock_update = StreamingChatCompletionsUpdate(
+        {
+            "choices": [StreamingChatChoiceUpdate({"delta": {"content": "Paris"}})],
+        }
+    )
+
+    # `with ChatCompletionsClient(...) as client:`
+    mock_instance = MockChatCompletionsClient.return_value.__enter__.return_value
+
+    # `for chunk in client.complete(...)`
+    mock_instance.complete.return_value.__iter__.return_value = [mock_update]
+
+    model = GitHubModels("test-model", requires_usage_stream_option=False)
+
+    # Patch the get_key method to avoid actual key retrieval
+    with patch.object(model, "get_key", return_value="test-key"):
+        result = model.prompt("What is the capital of France", stream=True)
+
+    assert result.text() == "Paris"
+
+    # Assertions
+    call_kwargs = mock_instance.complete.call_args.kwargs
+    assert call_kwargs["model_extras"] == {}, (
+        "model_extras should be empty when requires_usage_stream_option is False"
+    )
+
+
+def test_set_usage():
+    usage = CompletionsUsage(
+        {
+            "completion_tokens": 10,
+            "prompt_tokens": 5,
+            "extra": {
+                "value": 123,
+                "inner_empty": {},
+                "inner_zero": 0,
+            },
+            "other": "data",
+            "zero": 0,
+            "empty": {},
+        }
+    )
+
+    captured_usage = {}
+
+    def usage_callback(input=None, output=None, details=None):
+        captured_usage["input"] = input
+        captured_usage["output"] = output
+        captured_usage["details"] = details
+
+    mock_response = Mock(spec=Response)
+    mock_response.set_usage.side_effect = usage_callback
+
+    set_usage(usage, mock_response)
+
+    assert captured_usage["input"] == 5
+    assert captured_usage["output"] == 10
+
+    # Everything that is 0 or empty should be filtered out.
+    assert captured_usage["details"] == {
+        "extra": {
+            "value": 123,
+        },
+        "other": "data",
+    }
+
+
+def test_sync_returns_usage():
+    """
+    Test that the sync model returns usage information for streaming and non-streaming.
+    """
+    model = get_model("github/gpt-4.1-mini")
+
+    response = model.prompt("What is the capital of France?")
+    usage = response.usage()
+    assert_has_usage(usage)
+
+    response = model.prompt("What is the capital of France?", stream=True)
+    usage = response.usage()
+    assert_has_usage(usage)
+
+
+@pytest.mark.asyncio
+async def test_async_returns_usage():
+    """
+    Test that the async model returns usage information for streaming and non-streaming.
+    """
+    model = get_async_model("github/gpt-4.1-mini")
+
+    response = await model.prompt("What is the capital of France?")
+    usage = await response.usage()
+    assert_has_usage(usage)
+
+    response = await model.prompt("What is the capital of France?", stream=True)
+    usage = await response.usage()
+    assert_has_usage(usage)
+
+
+def assert_has_usage(usage):
+    """
+    Helper function to assert that usage has input and output tokens.
+    """
+    assert usage is not None
+    assert usage.input is not None, "Usage input should not be None"
+    assert usage.input > 0, "Usage input should be greater than 0"
+    assert usage.output is not None, "Usage output should not be None"
+    assert usage.output > 0, "Usage output should be greater than 0"
