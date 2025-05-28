@@ -127,6 +127,13 @@ CHAT_MODELS = [
     ("o4-mini", True, False, True, True, ["text", "image"], ["text"]),
 ]
 
+EMBEDDING_MODELS = [
+    ("Cohere-embed-v3-english", []),
+    ("Cohere-embed-v3-multilingual", []),
+    ("text-embedding-3-large", [1024, 256]),
+    ("text-embedding-3-small", [512]),
+]
+
 
 @llm.hookimpl
 def register_models(register):
