@@ -120,52 +120,6 @@
     {
         "popularity": 1.0,
         "inferenceTasks": [
-            "environmental-forecasting"
-        ],
-        "fineTuningTasks": [],
-        "keywords": [],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": null,
-                "maxOutputTokens": null
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "EN"
-            ],
-            "supportedInputModalities": [
-                "data"
-            ],
-            "supportedOutputModalities": [
-                "data"
-            ]
-        },
-        "azureOffers": [
-            "VM"
-        ],
-        "assetId": "azureml://registries/azureml/models/Aurora/versions/3",
-        "name": "Aurora",
-        "displayName": "Aurora",
-        "version": "3",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "latest",
-            "default",
-            "invisibleLatest"
-        ],
-        "summary": "Aurora is a machine learning model that can predict general environmental variables.",
-        "createdTime": "2025-04-11T05:54:21.0023335+00:00",
-        "license": "cc-by-nc-sa-4.0",
-        "tradeRestricted": false
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
             "chat-completion"
         ],
         "fineTuningTasks": [],
@@ -1716,52 +1670,6 @@
         "tradeRestricted": true
     },
     {
-        "popularity": 55.01,
-        "inferenceTasks": [
-            "image-to-image"
-        ],
-        "fineTuningTasks": [],
-        "keywords": [],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": null,
-                "maxOutputTokens": null
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "EN"
-            ],
-            "supportedInputModalities": [
-                "image"
-            ],
-            "supportedOutputModalities": [
-                "image"
-            ]
-        },
-        "azureOffers": [
-            "VM"
-        ],
-        "assetId": "azureml://registries/azureml/models/Muse/versions/2",
-        "name": "Muse",
-        "displayName": "Muse",
-        "version": "2",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "invisibleLatest",
-            "default",
-            "latest"
-        ],
-        "summary": "Muse is a World and Human Action Model (WHAM), a generative model of gameplay (visuals and/or controller actions).",
-        "createdTime": "2025-03-27T12:34:37.8941173+00:00",
-        "license": "apache-2.0",
-        "tradeRestricted": false
-    },
-    {
         "popularity": 1.0,
         "inferenceTasks": [
             "chat-completion"
@@ -3230,8 +3138,7 @@
             ]
         },
         "azureOffers": [
-            "standard-paygo",
-            "VM"
+            "standard-paygo"
         ],
         "assetId": "azureml://registries/azureml-xai/models/grok-3/versions/1",
         "name": "grok-3",
@@ -3250,7 +3157,7 @@
         "tradeRestricted": true
     },
     {
-        "popularity": 1.0,
+        "popularity": 70.03,
         "inferenceTasks": [
             "chat-completion"
         ],
@@ -3307,8 +3214,7 @@
             ]
         },
         "azureOffers": [
-            "standard-paygo",
-            "VM"
+            "standard-paygo"
         ],
         "assetId": "azureml://registries/azureml-xai/models/grok-3-mini/versions/1",
         "name": "grok-3-mini",
@@ -3322,7 +3228,7 @@
             "latest"
         ],
         "summary": "Grok 3 Mini is a lightweight model that thinks before responding. Trained on mathematic and scientific problems, it is great for logic-based tasks.",
-        "createdTime": "2025-05-17T03:51:42.3371719+00:00",
+        "createdTime": "2025-05-17T03:50:28.7465981+00:00",
         "license": "custom",
         "tradeRestricted": true
     },
