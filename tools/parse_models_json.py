@@ -41,6 +41,40 @@ def requires_usage_stream_option(name):
     ]
 
 
+def supports_tools(name):
+    # Note: this list does not line up with the official docs at
+    # https://learn.microsoft.com/en-us/azure/machine-learning/concept-models-featured?view=azureml-api-2
+    # But in practice these are the models that work.
+    tool_supporting_models = [
+        "o3",
+        "o3-mini",
+        "o4-mini",
+        "o1",
+        "gpt-4o",
+        "gpt-4o-mini",
+        "gpt-4.1",
+        "gpt-4.1-mini",
+        "gpt-4.1-nano",
+        "grok-3",
+        "grok-3-mini",
+        "cohere-command-a",
+        "Cohere-command-r-plus-08-2024",
+        "Cohere-command-r-08-2024",
+        "Cohere-command-r-plus",
+        "Cohere-command-r",
+        "Codestral-2501",
+        "Ministral-3B",
+        "Mistral-Nemo",
+        "Mistral-Large-2411",
+        "Mistral-large-2407",
+        "Mistral-large",
+        "mistral-medium-2505",
+        "mistral-small-2503",
+        "Mistral-small",
+    ]
+    return name in tool_supporting_models
+
+
 with open("models.json", "r", encoding="utf-8") as f:
     models = json.load(f)
     for model in models:
@@ -51,6 +85,7 @@ with open("models.json", "r", encoding="utf-8") as f:
                     supports_streaming(model["name"]),
                     supports_schemas(model["name"]),
                     requires_usage_stream_option(model["name"]),
+                    supports_tools(model["name"]),
                     model["modelLimits"]["supportedInputModalities"],
                     model["modelLimits"]["supportedOutputModalities"],
                 )
