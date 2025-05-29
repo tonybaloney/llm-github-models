@@ -109,6 +109,33 @@ pprint(embedding_models, indent=4)
 with open("models.fragment.md", "w", encoding="utf-8") as f:
     f.write("## Supported Models\n\n")
 
+    # Add chat models table
+    f.write("### Chat Models\n\n")
+    f.write("| Model Name | Streaming | Schemas | Tools | Input Modalities | Output Modalities |\n")
+    f.write("|------------|-----------|---------|-------|------------------|-------------------|\n")
+
+    for (
+        model_name,
+        streaming,
+        schemas,
+        usage_stream,
+        tools,
+        input_modalities,
+        output_modalities,
+    ) in chat_models:
+        streaming_str = "✅" if streaming else "❌"
+        schemas_str = "✅" if schemas else "❌"
+        tools_str = "✅" if tools else "❌"
+        input_str = ", ".join(input_modalities) if input_modalities else "text"
+        output_str = ", ".join(output_modalities) if output_modalities else "text"
+
+        f.write(
+            f"| {model_name} | {streaming_str} | {schemas_str} |"
+            f" {tools_str} | {input_str} | {output_str} |\n"
+        )
+
+    f.write("\n")
+
     for model in models:
         f.write(f"### {model['displayName']}\n\n")
         f.write(f"Usage: `llm -m github/{model['name']}`\n\n")
