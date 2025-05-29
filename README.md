@@ -11,7 +11,8 @@ This is a plugin for [llm](https://llm.datasette.io) that uses [GitHub Models](h
 - Output token usage
 - Support for [Embedding Models](https://llm.datasette.io/en/stable/embeddings/index.html)
 - Async and streaming outputs (model dependent)
-- Support for model attachments 
+- Support for model attachments
+- Support for [tools](https://llm.datasette.io/en/stable/tools.html)
 
 ## Installation
 
