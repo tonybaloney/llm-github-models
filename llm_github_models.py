@@ -245,7 +245,7 @@ def build_messages(
                 for attachment in prev_response.attachments:
                     attachment_message.append(attachment_as_content_item(attachment))
                 messages.append(UserMessage(attachment_message))
-            else:
+            elif prev_response.prompt.prompt:
                 messages.append(UserMessage(prev_response.prompt.prompt))
 
             # Add any tool results from the previous prompt

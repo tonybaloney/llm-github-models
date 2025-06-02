@@ -150,3 +150,39 @@ async def test_async_uses_tools(stream):
     # Sometimes it likes to add commas to the output number
     response_text = (await responses[1].text()).replace(",", "")
     assert "7303652730" in response_text
+
+
+def test_multi_tool_use():
+    model = get_model("github/gpt-4o-mini")
+
+    # Create a prompt with a tool
+    def multiply(x: int, y: int) -> int:
+        """Multiply two numbers."""
+        return x * y
+
+    def add(x: int, y: int) -> int:
+        """Add two numbers."""
+        return x + y
+
+    chain = model.chain(
+        "What is (34234 * 213345) + (45345 * 324456)?",
+        tools=[multiply, add],  # type: ignore
+    ).responses()
+
+    tool_calls = next(chain).tool_calls()
+    assert tool_calls is not None
+    assert len(tool_calls) == 2
+    assert tool_calls[0].name == "multiply"
+    assert tool_calls[0].arguments == {"x": 34234, "y": 213345}
+
+    assert tool_calls[1].name == "multiply"
+    assert tool_calls[1].arguments == {"x": 45345, "y": 324456}
+
+    tool_calls = next(chain).tool_calls()
+    assert len(tool_calls) == 1
+    assert tool_calls[0].name == "add"
+    assert tool_calls[0].arguments == {"x": 7303652730, "y": 14712457320}
+
+    # Sometimes it likes to add commas to the output number
+    response_text = next(chain).text().replace(",", "")
+    assert "22016110050" in response_text
