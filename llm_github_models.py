@@ -449,7 +449,6 @@ class GitHubModels(_Shared, Model):
 
                 response.response_json = None  # TODO
             else:
-                raise ValueError("Tried to use non-streaming")
                 completion = client.complete(
                     messages=messages,
                     stream=False,
