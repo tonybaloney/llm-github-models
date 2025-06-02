@@ -532,7 +532,6 @@ class GitHubAsyncModels(_Shared, AsyncModel):
 
                 response.response_json = None  # TODO
             else:
-                raise "NOOOOO"
                 completion = await client.complete(
                     messages=messages,
                     stream=False,
