@@ -62,66 +62,66 @@ The overall atmosphere of the image exudes tranquility, with the pelicans seemin
 
 ### Chat Models
 
-| Model Name | Streaming | Schemas | Tools | Input Modalities | Output Modalities |
-|------------|-----------|---------|-------|------------------|-------------------|
-| AI21-Jamba-1.5-Large | ✅ | ❌ | ❌ | text | text |
-| AI21-Jamba-1.5-Mini | ✅ | ❌ | ❌ | text | text |
-| Codestral-2501 | ✅ | ❌ | ✅ | text | text |
-| Cohere-command-r | ✅ | ❌ | ✅ | text | text |
-| Cohere-command-r-08-2024 | ✅ | ❌ | ✅ | text | text |
-| Cohere-command-r-plus | ✅ | ❌ | ✅ | text | text |
-| Cohere-command-r-plus-08-2024 | ✅ | ❌ | ✅ | text | text |
-| DeepSeek-R1 | ✅ | ❌ | ❌ | text | text |
-| DeepSeek-V3 | ✅ | ❌ | ❌ | text | text |
-| DeepSeek-V3-0324 | ✅ | ❌ | ❌ | text | text |
-| Llama-3.2-11B-Vision-Instruct | ✅ | ❌ | ❌ | text, image, audio | text |
-| Llama-3.2-90B-Vision-Instruct | ✅ | ❌ | ❌ | text, image, audio | text |
-| Llama-3.3-70B-Instruct | ✅ | ❌ | ❌ | text | text |
-| Llama-4-Maverick-17B-128E-Instruct-FP8 | ✅ | ❌ | ❌ | text, image | text |
-| Llama-4-Scout-17B-16E-Instruct | ✅ | ❌ | ❌ | text, image | text |
-| MAI-DS-R1 | ✅ | ❌ | ❌ | text | text |
-| Meta-Llama-3-70B-Instruct | ✅ | ❌ | ❌ | text | text |
-| Meta-Llama-3-8B-Instruct | ✅ | ❌ | ❌ | text | text |
-| Meta-Llama-3.1-405B-Instruct | ✅ | ❌ | ❌ | text | text |
-| Meta-Llama-3.1-70B-Instruct | ✅ | ❌ | ❌ | text | text |
-| Meta-Llama-3.1-8B-Instruct | ✅ | ❌ | ❌ | text | text |
-| Ministral-3B | ✅ | ❌ | ✅ | text | text |
-| Mistral-Large-2411 | ✅ | ❌ | ✅ | text | text |
-| Mistral-Nemo | ✅ | ❌ | ✅ | text | text |
-| Mistral-large | ✅ | ❌ | ✅ | text | text |
-| Mistral-large-2407 | ✅ | ❌ | ✅ | text | text |
-| Mistral-small | ✅ | ❌ | ✅ | text | text |
-| Phi-3-medium-128k-instruct | ✅ | ❌ | ❌ | text | text |
-| Phi-3-medium-4k-instruct | ✅ | ❌ | ❌ | text | text |
-| Phi-3-mini-128k-instruct | ✅ | ❌ | ❌ | text | text |
-| Phi-3-mini-4k-instruct | ✅ | ❌ | ❌ | text | text |
-| Phi-3-small-128k-instruct | ✅ | ❌ | ❌ | text | text |
-| Phi-3-small-8k-instruct | ✅ | ❌ | ❌ | text | text |
-| Phi-3.5-MoE-instruct | ✅ | ❌ | ❌ | text | text |
-| Phi-3.5-mini-instruct | ✅ | ❌ | ❌ | text | text |
-| Phi-3.5-vision-instruct | ✅ | ❌ | ❌ | text, image | text |
-| Phi-4 | ✅ | ❌ | ❌ | text | text |
-| Phi-4-mini-instruct | ✅ | ❌ | ❌ | text | text |
-| Phi-4-mini-reasoning | ✅ | ❌ | ❌ | text | text |
-| Phi-4-multimodal-instruct | ✅ | ❌ | ❌ | audio, image, text | text |
-| Phi-4-reasoning | ✅ | ❌ | ❌ | text | text |
-| cohere-command-a | ✅ | ❌ | ✅ | text | text |
-| gpt-4.1 | ✅ | ✅ | ✅ | text, image | text |
-| gpt-4.1-mini | ✅ | ✅ | ✅ | text, image | text |
-| gpt-4.1-nano | ✅ | ✅ | ✅ | text, image | text |
-| gpt-4o | ✅ | ✅ | ✅ | text, image, audio | text |
-| gpt-4o-mini | ✅ | ✅ | ✅ | text, image, audio | text |
-| grok-3 | ✅ | ❌ | ✅ | text | text |
-| grok-3-mini | ✅ | ❌ | ✅ | text | text |
-| jais-30b-chat | ✅ | ❌ | ❌ | text | text |
-| mistral-medium-2505 | ✅ | ❌ | ✅ | text, image | text |
-| mistral-small-2503 | ✅ | ❌ | ✅ | text, image | text |
-| o1 | ❌ | ✅ | ✅ | text, image | text |
-| o1-mini | ❌ | ❌ | ❌ | text | text |
-| o1-preview | ❌ | ❌ | ❌ | text | text |
-| o3 | ✅ | ❌ | ✅ | text, image | text |
-| o3-mini | ❌ | ✅ | ✅ | text | text |
-| o4-mini | ✅ | ❌ | ✅ | text, image | text |
+| Model Name | Schemas | Tools | Input Modalities | Output Modalities |
+|------------|---------|-------|------------------|-------------------|
+| AI21-Jamba-1.5-Large | ❌ | ❌ | text | text |
+| AI21-Jamba-1.5-Mini | ❌ | ❌ | text | text |
+| Codestral-2501 | ❌ | ✅ | text | text |
+| Cohere-command-r | ❌ | ✅ | text | text |
+| Cohere-command-r-08-2024 | ❌ | ✅ | text | text |
+| Cohere-command-r-plus | ❌ | ✅ | text | text |
+| Cohere-command-r-plus-08-2024 | ❌ | ✅ | text | text |
+| DeepSeek-R1 | ❌ | ❌ | text | text |
+| DeepSeek-V3 | ❌ | ❌ | text | text |
+| DeepSeek-V3-0324 | ❌ | ❌ | text | text |
+| Llama-3.2-11B-Vision-Instruct | ❌ | ❌ | text, image, audio | text |
+| Llama-3.2-90B-Vision-Instruct | ❌ | ❌ | text, image, audio | text |
+| Llama-3.3-70B-Instruct | ❌ | ❌ | text | text |
+| Llama-4-Maverick-17B-128E-Instruct-FP8 | ❌ | ❌ | text, image | text |
+| Llama-4-Scout-17B-16E-Instruct | ❌ | ❌ | text, image | text |
+| MAI-DS-R1 | ❌ | ❌ | text | text |
+| Meta-Llama-3-70B-Instruct | ❌ | ❌ | text | text |
+| Meta-Llama-3-8B-Instruct | ❌ | ❌ | text | text |
+| Meta-Llama-3.1-405B-Instruct | ❌ | ❌ | text | text |
+| Meta-Llama-3.1-70B-Instruct | ❌ | ❌ | text | text |
+| Meta-Llama-3.1-8B-Instruct | ❌ | ❌ | text | text |
+| Ministral-3B | ❌ | ✅ | text | text |
+| Mistral-Large-2411 | ❌ | ✅ | text | text |
+| Mistral-Nemo | ❌ | ✅ | text | text |
+| Mistral-large | ❌ | ✅ | text | text |
+| Mistral-large-2407 | ❌ | ✅ | text | text |
+| Mistral-small | ❌ | ✅ | text | text |
+| Phi-3-medium-128k-instruct | ❌ | ❌ | text | text |
+| Phi-3-medium-4k-instruct | ❌ | ❌ | text | text |
+| Phi-3-mini-128k-instruct | ❌ | ❌ | text | text |
+| Phi-3-mini-4k-instruct | ❌ | ❌ | text | text |
+| Phi-3-small-128k-instruct | ❌ | ❌ | text | text |
+| Phi-3-small-8k-instruct | ❌ | ❌ | text | text |
+| Phi-3.5-MoE-instruct | ❌ | ❌ | text | text |
+| Phi-3.5-mini-instruct | ❌ | ❌ | text | text |
+| Phi-3.5-vision-instruct | ❌ | ❌ | text, image | text |
+| Phi-4 | ❌ | ❌ | text | text |
+| Phi-4-mini-instruct | ❌ | ❌ | text | text |
+| Phi-4-mini-reasoning | ❌ | ❌ | text | text |
+| Phi-4-multimodal-instruct | ❌ | ❌ | audio, image, text | text |
+| Phi-4-reasoning | ❌ | ❌ | text | text |
+| cohere-command-a | ❌ | ✅ | text | text |
+| gpt-4.1 | ✅ | ✅ | text, image | text |
+| gpt-4.1-mini | ✅ | ✅ | text, image | text |
+| gpt-4.1-nano | ✅ | ✅ | text, image | text |
+| gpt-4o | ✅ | ✅ | text, image, audio | text |
+| gpt-4o-mini | ✅ | ✅ | text, image, audio | text |
+| grok-3 | ❌ | ✅ | text | text |
+| grok-3-mini | ❌ | ✅ | text | text |
+| jais-30b-chat | ❌ | ❌ | text | text |
+| mistral-medium-2505 | ❌ | ✅ | text, image | text |
+| mistral-small-2503 | ❌ | ✅ | text, image | text |
+| o1 | ✅ | ✅ | text, image | text |
+| o1-mini | ❌ | ❌ | text | text |
+| o1-preview | ❌ | ❌ | text | text |
+| o3 | ❌ | ✅ | text, image | text |
+| o3-mini | ✅ | ✅ | text | text |
+| o4-mini | ❌ | ✅ | text, image | text |
 
 ### AI21 Jamba 1.5 Large
 
