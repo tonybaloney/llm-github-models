@@ -12,7 +12,7 @@
 | Cohere-command-r-plus | ❌ | ✅ | text | text |
 | Cohere-command-r-plus-08-2024 | ❌ | ✅ | text | text |
 | DeepSeek-R1 | ❌ | ❌ | text | text |
-| DeepSeek-V3 | ❌ | ❌ | text | text |
+| DeepSeek-R1-0528 | ❌ | ❌ | text | text |
 | DeepSeek-V3-0324 | ❌ | ❌ | text | text |
 | Llama-3.2-11B-Vision-Instruct | ❌ | ❌ | text, image, audio | text |
 | Llama-3.2-90B-Vision-Instruct | ❌ | ❌ | text, image, audio | text |
@@ -28,9 +28,6 @@
 | Ministral-3B | ❌ | ✅ | text | text |
 | Mistral-Large-2411 | ❌ | ✅ | text | text |
 | Mistral-Nemo | ❌ | ✅ | text | text |
-| Mistral-large | ❌ | ✅ | text | text |
-| Mistral-large-2407 | ❌ | ✅ | text | text |
-| Mistral-small | ❌ | ✅ | text | text |
 | Phi-3-medium-128k-instruct | ❌ | ❌ | text | text |
 | Phi-3-medium-4k-instruct | ❌ | ❌ | text | text |
 | Phi-3-mini-128k-instruct | ❌ | ❌ | text | text |
@@ -143,13 +140,13 @@ Usage: `llm -m github/DeepSeek-R1`
 
 **Description:** DeepSeek-R1 excels at reasoning tasks using a step-by-step training process, such as language, scientific reasoning, and coding tasks. 
 
-### DeepSeek-V3
+### DeepSeek-R1-0528
 
-Usage: `llm -m github/DeepSeek-V3`
+Usage: `llm -m github/DeepSeek-R1-0528`
 
 **Publisher:** DeepSeek 
 
-**Description:** A strong Mixture-of-Experts (MoE) language model with 671B total parameters with 37B activated for each token. 
+**Description:** The DeepSeek R1 0528 model has improved reasoning capabilities, this version also offers a reduced hallucination rate, enhanced support for function calling, and better experience for vibe coding. 
 
 ### DeepSeek-V3-0324
 
@@ -271,30 +268,6 @@ Usage: `llm -m github/Mistral-Nemo`
 
 **Description:** Mistral Nemo is a cutting-edge Language Model (LLM) boasting state-of-the-art reasoning, world knowledge, and coding capabilities within its size category. 
 
-### Mistral Large
-
-Usage: `llm -m github/Mistral-large`
-
-**Publisher:** Mistral AI 
-
-**Description:** Mistral's flagship model that's ideal for complex tasks that require large reasoning capabilities or are highly specialized (Synthetic Text Generation, Code Generation, RAG, or Agents). 
-
-### Mistral Large (2407)
-
-Usage: `llm -m github/Mistral-large-2407`
-
-**Publisher:** Mistral AI 
-
-**Description:** Mistral Large (2407) is an advanced Large Language Model (LLM) with state-of-the-art reasoning, knowledge and coding capabilities. 
-
-### Mistral Small
-
-Usage: `llm -m github/Mistral-small`
-
-**Publisher:** Mistral AI 
-
-**Description:** Mistral Small can be used on any language-based task that requires high efficiency and low latency. 
-
 ### Phi-3-medium instruct (128k)
 
 Usage: `llm -m github/Phi-3-medium-128k-instruct`
@@ -414,14 +387,6 @@ Usage: `llm -m github/cohere-command-a`
 **Publisher:** Cohere 
 
 **Description:** Command A is a highly efficient generative model that excels at agentic and multilingual use cases. 
-
-### Cohere Embed 4
-
-Usage: `llm -m github/embed-v-4-0`
-
-**Publisher:** Cohere 
-
-**Description:** Embed 4 transforms texts and images into numerical vectors 
 
 ### OpenAI GPT-4.1
 
