@@ -74,6 +74,8 @@ def extra_embedding_dimensions(name):
         return [1024, 256]
     elif name == "text-embedding-3-small":
         return [512]
+    elif name == "embed-v-4-0":
+        return [256, 512, 1024]
 
     return []
 

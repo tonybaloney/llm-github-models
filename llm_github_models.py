@@ -54,6 +54,7 @@ CHAT_MODELS = [
     ("Cohere-command-r-plus-08-2024", False, False, True, ["text"], ["text"]),
     ("DeepSeek-R1", False, False, False, ["text"], ["text"]),
     ("DeepSeek-R1-0528", False, False, False, ["text"], ["text"]),
+    ("DeepSeek-V3", False, False, False, ["text"], ["text"]),
     ("DeepSeek-V3-0324", False, False, False, ["text"], ["text"]),
     ("Llama-3.2-11B-Vision-Instruct", False, False, False, ["text", "image", "audio"], ["text"]),
     ("Llama-3.2-90B-Vision-Instruct", False, False, False, ["text", "image", "audio"], ["text"]),
@@ -69,6 +70,8 @@ CHAT_MODELS = [
     ("Ministral-3B", False, False, True, ["text"], ["text"]),
     ("Mistral-Large-2411", False, False, True, ["text"], ["text"]),
     ("Mistral-Nemo", False, False, True, ["text"], ["text"]),
+    ("Mistral-large-2407", False, False, True, ["text"], ["text"]),
+    ("Mistral-small", False, False, True, ["text"], ["text"]),
     ("Phi-3-medium-128k-instruct", False, False, False, ["text"], ["text"]),
     ("Phi-3-medium-4k-instruct", False, False, False, ["text"], ["text"]),
     ("Phi-3-mini-128k-instruct", False, False, False, ["text"], ["text"]),
@@ -105,6 +108,7 @@ CHAT_MODELS = [
 EMBEDDING_MODELS = [
     ("Cohere-embed-v3-english", []),
     ("Cohere-embed-v3-multilingual", []),
+    ("embed-v-4-0", [256, 512, 1024]),
     ("text-embedding-3-large", [1024, 256]),
     ("text-embedding-3-small", [512]),
 ]

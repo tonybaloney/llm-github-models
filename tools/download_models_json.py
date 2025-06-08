@@ -33,24 +33,8 @@ while True:
     if not continuation_token:
         break
 
-gtihub_models_url = "https://models.github.ai/catalog/models"
-headers = {
-    "Accept": "application/vnd.github+json",
-    "X-GitHub-Api-Version": "2022-11-28",
-}
-
-print("Fetching GitHub models...")
-response = requests.get(gtihub_models_url, headers=headers)
-response.raise_for_status()
-
-github_models = response.json()
-github_models = set(model["name"] for model in github_models)
-
-models = filter(lambda model: model["displayName"] in github_models, all_models)
-models = sorted(models, key=lambda x: x["name"])
-
 print("Saving models to models.json...")
 with open("models.json", "w") as f:
-    json.dump(models, f, indent=4)
+    json.dump(all_models, f, indent=4)
 
-print(f"Saved {len(models)} models to models.json")
+print(f"Saved {len(all_models)} models to models.json")
