@@ -69,6 +69,17 @@ def supports_tools(name):
     return name in tool_supporting_models
 
 
+def extra_embedding_dimensions(name):
+    if name == "text-embedding-3-large":
+        return [1024, 256]
+    elif name == "text-embedding-3-small":
+        return [512]
+    elif name == "embed-v-4-0":
+        return [256, 512, 1024]
+
+    return []
+
+
 with open("models.json", "r", encoding="utf-8") as f:
     models = json.load(f)
     for model in models:
@@ -84,7 +95,7 @@ with open("models.json", "r", encoding="utf-8") as f:
                 )
             )
         elif "embeddings" in model["inferenceTasks"]:
-            embedding_models.append(model["name"])
+            embedding_models.append((model["name"], extra_embedding_dimensions(model["name"])))
         else:
             print("Not sure what to do with this model: ", model["name"])
 
