@@ -42,7 +42,7 @@ from llm.models import (
 )
 from pydantic import BaseModel
 
-INFERENCE_ENDPOINT = "https://models.inference.ai.azure.com"
+INFERENCE_ENDPOINT = "https://models.github.ai/inference"
 
 CHAT_MODELS = [
     ("AI21-Jamba-1.5-Large", False, False, False, ["text"], ["text"]),
