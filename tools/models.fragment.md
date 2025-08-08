@@ -51,6 +51,10 @@
 | gpt-4.1-nano | ✅ | ✅ | text, image | text |
 | gpt-4o | ✅ | ✅ | text, image, audio | text |
 | gpt-4o-mini | ✅ | ✅ | text, image, audio | text |
+| gpt-5 | ✅ | ✅ | text, image | text |
+| gpt-5-chat | ✅ | ✅ | text, image | text |
+| gpt-5-mini | ✅ | ✅ | text, image | text |
+| gpt-5-nano | ✅ | ✅ | text, image | text |
 | grok-3 | ❌ | ✅ | text | text |
 | grok-3-mini | ❌ | ✅ | text | text |
 | jais-30b-chat | ❌ | ❌ | text | text |
@@ -86,14 +90,6 @@ Usage: `llm -m github/Codestral-2501`
 **Publisher:** Mistral AI 
 
 **Description:** Codestral 25.01 by Mistral AI is designed for code generation, supporting 80+ programming languages, and optimized for tasks like code completion and fill-in-the-middle 
-
-### Cohere Command A
-
-Usage: `llm -m github/cohere-command-a`
-
-**Publisher:** Cohere 
-
-**Description:** Command A is a highly efficient generative model that excels at agentic and multilingual use cases. 
 
 ### Cohere Command R
 
@@ -175,77 +171,21 @@ Usage: `llm -m github/DeepSeek-V3-0324`
 
 **Description:** DeepSeek-V3-0324 demonstrates notable improvements over its predecessor, DeepSeek-V3, in several key aspects, including enhanced reasoning, improved function calling, and superior code generation capabilities. 
 
-### Cohere Embed 4
+### FLUX1.1 [pro]
 
-Usage: `llm -m github/embed-v-4-0`
+Usage: `llm -m github/Flux-1.1-Pro`
 
-**Publisher:** Cohere 
+**Publisher:** Black Forest Labs 
 
-**Description:** Embed 4 transforms texts and images into numerical vectors 
+**Description:** Generate images with amazing image quality, prompt adherence, and diversity at blazing fast speeds. FLUX1.1 [pro] delivers six times faster image generation and achieved the highest Elo score on Artificial Analysis benchmarks when launched, surpassing all  
 
-### OpenAI GPT-4.1
+### FLUX.1 Kontext [pro]
 
-Usage: `llm -m github/gpt-4.1`
+Usage: `llm -m github/Flux.1-Kontext-pro`
 
-**Publisher:** OpenAI 
+**Publisher:** Black Forest Labs 
 
-**Description:** gpt-4.1 outperforms gpt-4o across the board, with major gains in coding, instruction following, and long-context understanding 
-
-### OpenAI GPT-4.1-mini
-
-Usage: `llm -m github/gpt-4.1-mini`
-
-**Publisher:** OpenAI 
-
-**Description:** gpt-4.1-mini outperform gpt-4o-mini across the board, with major gains in coding, instruction following, and long-context handling 
-
-### OpenAI GPT-4.1-nano
-
-Usage: `llm -m github/gpt-4.1-nano`
-
-**Publisher:** OpenAI 
-
-**Description:** gpt-4.1-nano provides gains in coding, instruction following, and long-context handling along with lower latency and cost 
-
-### OpenAI GPT-4o
-
-Usage: `llm -m github/gpt-4o`
-
-**Publisher:** OpenAI 
-
-**Description:** OpenAI's most advanced multimodal model in the gpt-4o family. Can handle both text and image inputs. 
-
-### OpenAI GPT-4o mini
-
-Usage: `llm -m github/gpt-4o-mini`
-
-**Publisher:** OpenAI 
-
-**Description:** An affordable, efficient AI solution for diverse text and image tasks. 
-
-### Grok 3
-
-Usage: `llm -m github/grok-3`
-
-**Publisher:** xAI 
-
-**Description:** Grok 3 is xAI's debut model, pretrained by Colossus at supermassive scale to excel in specialized domains like finance, healthcare, and the law. 
-
-### Grok 3 Mini
-
-Usage: `llm -m github/grok-3-mini`
-
-**Publisher:** xAI 
-
-**Description:** Grok 3 Mini is a lightweight model that thinks before responding. Trained on mathematic and scientific problems, it is great for logic-based tasks. 
-
-### JAIS 30b Chat
-
-Usage: `llm -m github/jais-30b-chat`
-
-**Publisher:** Core42 
-
-**Description:** JAIS 30b Chat is an auto-regressive bilingual LLM for Arabic & English with state-of-the-art capabilities in Arabic. 
+**Description:** Generate and edit images through both text and image prompts. FLUX.1 Kontext is a multimodal flow matching model that enables both text-to-image generation and in-context image editing. Modify images while maintaining character consistency and performing l 
 
 ### Llama-3.2-11B-Vision-Instruct
 
@@ -343,14 +283,6 @@ Usage: `llm -m github/Ministral-3B`
 
 **Description:** Ministral 3B is a state-of-the-art Small Language Model (SLM) optimized for edge computing and on-device applications. As it is designed for low-latency and compute-efficient inference, it it also the perfect model for standard GenAI applications that have 
 
-### Mistral Large (2407)
-
-Usage: `llm -m github/Mistral-large-2407`
-
-**Publisher:** Mistral AI 
-
-**Description:** Mistral Large (2407) is an advanced Large Language Model (LLM) with state-of-the-art reasoning, knowledge and coding capabilities. 
-
 ### Mistral Large 24.11
 
 Usage: `llm -m github/Mistral-Large-2411`
@@ -358,14 +290,6 @@ Usage: `llm -m github/Mistral-Large-2411`
 **Publisher:** Mistral AI 
 
 **Description:** Mistral Large 24.11 offers enhanced system prompts, advanced reasoning and function calling capabilities. 
-
-### Mistral Medium 3 (25.05)
-
-Usage: `llm -m github/mistral-medium-2505`
-
-**Publisher:** Mistral AI 
-
-**Description:** Mistral Medium 3 is an advanced Large Language Model (LLM) with state-of-the-art reasoning, knowledge, coding and vision capabilities. 
 
 ### Mistral Nemo
 
@@ -375,6 +299,14 @@ Usage: `llm -m github/Mistral-Nemo`
 
 **Description:** Mistral Nemo is a cutting-edge Language Model (LLM) boasting state-of-the-art reasoning, world knowledge, and coding capabilities within its size category. 
 
+### Mistral Large (2407)
+
+Usage: `llm -m github/Mistral-large-2407`
+
+**Publisher:** Mistral AI 
+
+**Description:** Mistral Large (2407) is an advanced Large Language Model (LLM) with state-of-the-art reasoning, knowledge and coding capabilities. 
+
 ### Mistral Small
 
 Usage: `llm -m github/Mistral-small`
@@ -382,6 +314,238 @@ Usage: `llm -m github/Mistral-small`
 **Publisher:** Mistral AI 
 
 **Description:** Mistral Small can be used on any language-based task that requires high efficiency and low latency. 
+
+### Phi-3-medium instruct (128k)
+
+Usage: `llm -m github/Phi-3-medium-128k-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** Same Phi-3-medium model, but with a larger context size for RAG or few shot prompting. 
+
+### Phi-3-medium instruct (4k)
+
+Usage: `llm -m github/Phi-3-medium-4k-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** A 14B parameters model, proves better quality than Phi-3-mini, with a focus on high-quality, reasoning-dense data. 
+
+### Phi-3-mini instruct (128k)
+
+Usage: `llm -m github/Phi-3-mini-128k-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** Same Phi-3-mini model, but with a larger context size for RAG or few shot prompting. 
+
+### Phi-3-mini instruct (4k)
+
+Usage: `llm -m github/Phi-3-mini-4k-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** Tiniest member of the Phi-3 family. Optimized for both quality and low latency. 
+
+### Phi-3-small instruct (128k)
+
+Usage: `llm -m github/Phi-3-small-128k-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** Same Phi-3-small model, but with a larger context size for RAG or few shot prompting. 
+
+### Phi-3-small instruct (8k)
+
+Usage: `llm -m github/Phi-3-small-8k-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** A 7B parameters model, proves better quality than Phi-3-mini, with a focus on high-quality, reasoning-dense data. 
+
+### Phi-3.5-MoE instruct (128k)
+
+Usage: `llm -m github/Phi-3.5-MoE-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** A new mixture of experts model 
+
+### Phi-3.5-mini instruct (128k)
+
+Usage: `llm -m github/Phi-3.5-mini-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** Refresh of Phi-3-mini model. 
+
+### Phi-3.5-vision instruct (128k)
+
+Usage: `llm -m github/Phi-3.5-vision-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** Refresh of Phi-3-vision model. 
+
+### Phi-4
+
+Usage: `llm -m github/Phi-4`
+
+**Publisher:** Microsoft 
+
+**Description:** Phi-4 14B, a highly capable model for low latency scenarios. 
+
+### Phi-4-mini-instruct
+
+Usage: `llm -m github/Phi-4-mini-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** 3.8B parameters Small Language Model outperforming larger models in reasoning, math, coding, and function-calling 
+
+### Phi-4-mini-reasoning
+
+Usage: `llm -m github/Phi-4-mini-reasoning`
+
+**Publisher:** Microsoft 
+
+**Description:** Lightweight math reasoning model optimized for multi-step problem solving 
+
+### Phi-4-multimodal-instruct
+
+Usage: `llm -m github/Phi-4-multimodal-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** First small multimodal model to have 3 modality inputs (text, audio, image), excelling in quality and efficiency 
+
+### Phi-4-Reasoning
+
+Usage: `llm -m github/Phi-4-reasoning`
+
+**Publisher:** Microsoft 
+
+**Description:** State-of-the-art open-weight reasoning model. 
+
+### Cohere Command A
+
+Usage: `llm -m github/cohere-command-a`
+
+**Publisher:** Cohere 
+
+**Description:** Command A is a highly efficient generative model that excels at agentic and multilingual use cases. 
+
+### Cohere Embed 4
+
+Usage: `llm -m github/embed-v-4-0`
+
+**Publisher:** Cohere 
+
+**Description:** Embed 4 transforms texts and images into numerical vectors 
+
+### OpenAI GPT-4.1
+
+Usage: `llm -m github/gpt-4.1`
+
+**Publisher:** OpenAI 
+
+**Description:** gpt-4.1 outperforms gpt-4o across the board, with major gains in coding, instruction following, and long-context understanding 
+
+### OpenAI GPT-4.1-mini
+
+Usage: `llm -m github/gpt-4.1-mini`
+
+**Publisher:** OpenAI 
+
+**Description:** gpt-4.1-mini outperform gpt-4o-mini across the board, with major gains in coding, instruction following, and long-context handling 
+
+### OpenAI GPT-4.1-nano
+
+Usage: `llm -m github/gpt-4.1-nano`
+
+**Publisher:** OpenAI 
+
+**Description:** gpt-4.1-nano provides gains in coding, instruction following, and long-context handling along with lower latency and cost 
+
+### OpenAI GPT-4o
+
+Usage: `llm -m github/gpt-4o`
+
+**Publisher:** OpenAI 
+
+**Description:** OpenAI's most advanced multimodal model in the gpt-4o family. Can handle both text and image inputs. 
+
+### OpenAI GPT-4o mini
+
+Usage: `llm -m github/gpt-4o-mini`
+
+**Publisher:** OpenAI 
+
+**Description:** An affordable, efficient AI solution for diverse text and image tasks. 
+
+### OpenAI gpt-5
+
+Usage: `llm -m github/gpt-5`
+
+**Publisher:** OpenAI 
+
+**Description:** gpt-5 is designed for logic-heavy and multi-step tasks.  
+
+### OpenAI gpt-5-chat (preview)
+
+Usage: `llm -m github/gpt-5-chat`
+
+**Publisher:** OpenAI 
+
+**Description:** gpt-5-chat (preview) is an advanced, natural, multimodal, and context-aware conversations for enterprise applications. 
+
+### OpenAI gpt-5-mini
+
+Usage: `llm -m github/gpt-5-mini`
+
+**Publisher:** OpenAI 
+
+**Description:** gpt-5-mini is a lightweight version for cost-sensitive applications. 
+
+### OpenAI gpt-5-nano
+
+Usage: `llm -m github/gpt-5-nano`
+
+**Publisher:** OpenAI 
+
+**Description:** gpt-5-nano is optimized for speed, ideal for applications requiring low latency.  
+
+### Grok 3
+
+Usage: `llm -m github/grok-3`
+
+**Publisher:** xAI 
+
+**Description:** Grok 3 is xAI's debut model, pretrained by Colossus at supermassive scale to excel in specialized domains like finance, healthcare, and the law. 
+
+### Grok 3 Mini
+
+Usage: `llm -m github/grok-3-mini`
+
+**Publisher:** xAI 
+
+**Description:** Grok 3 Mini is a lightweight model that thinks before responding. Trained on mathematic and scientific problems, it is great for logic-based tasks. 
+
+### JAIS 30b Chat
+
+Usage: `llm -m github/jais-30b-chat`
+
+**Publisher:** Core42 
+
+**Description:** JAIS 30b Chat is an auto-regressive bilingual LLM for Arabic & English with state-of-the-art capabilities in Arabic. 
+
+### Mistral Medium 3 (25.05)
+
+Usage: `llm -m github/mistral-medium-2505`
+
+**Publisher:** Mistral AI 
+
+**Description:** Mistral Medium 3 is an advanced Large Language Model (LLM) with state-of-the-art reasoning, knowledge, coding and vision capabilities. 
 
 ### Mistral Small 3.1
 
@@ -438,118 +602,6 @@ Usage: `llm -m github/o4-mini`
 **Publisher:** OpenAI 
 
 **Description:** o4-mini includes significant improvements on quality and safety while supporting the existing features of o3-mini and delivering comparable or better performance. 
-
-### Phi-3-medium instruct (128k)
-
-Usage: `llm -m github/Phi-3-medium-128k-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** Same Phi-3-medium model, but with a larger context size for RAG or few shot prompting. 
-
-### Phi-3-medium instruct (4k)
-
-Usage: `llm -m github/Phi-3-medium-4k-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** A 14B parameters model, proves better quality than Phi-3-mini, with a focus on high-quality, reasoning-dense data. 
-
-### Phi-3-mini instruct (128k)
-
-Usage: `llm -m github/Phi-3-mini-128k-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** Same Phi-3-mini model, but with a larger context size for RAG or few shot prompting. 
-
-### Phi-3-mini instruct (4k)
-
-Usage: `llm -m github/Phi-3-mini-4k-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** Tiniest member of the Phi-3 family. Optimized for both quality and low latency. 
-
-### Phi-3-small instruct (128k)
-
-Usage: `llm -m github/Phi-3-small-128k-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** Same Phi-3-small model, but with a larger context size for RAG or few shot prompting. 
-
-### Phi-3-small instruct (8k)
-
-Usage: `llm -m github/Phi-3-small-8k-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** A 7B parameters model, proves better quality than Phi-3-mini, with a focus on high-quality, reasoning-dense data. 
-
-### Phi-3.5-mini instruct (128k)
-
-Usage: `llm -m github/Phi-3.5-mini-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** Refresh of Phi-3-mini model. 
-
-### Phi-3.5-MoE instruct (128k)
-
-Usage: `llm -m github/Phi-3.5-MoE-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** A new mixture of experts model 
-
-### Phi-3.5-vision instruct (128k)
-
-Usage: `llm -m github/Phi-3.5-vision-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** Refresh of Phi-3-vision model. 
-
-### Phi-4
-
-Usage: `llm -m github/Phi-4`
-
-**Publisher:** Microsoft 
-
-**Description:** Phi-4 14B, a highly capable model for low latency scenarios. 
-
-### Phi-4-mini-instruct
-
-Usage: `llm -m github/Phi-4-mini-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** 3.8B parameters Small Language Model outperforming larger models in reasoning, math, coding, and function-calling 
-
-### Phi-4-mini-reasoning
-
-Usage: `llm -m github/Phi-4-mini-reasoning`
-
-**Publisher:** Microsoft 
-
-**Description:** Lightweight math reasoning model optimized for multi-step problem solving 
-
-### Phi-4-multimodal-instruct
-
-Usage: `llm -m github/Phi-4-multimodal-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** First small multimodal model to have 3 modality inputs (text, audio, image), excelling in quality and efficiency 
-
-### Phi-4-Reasoning
-
-Usage: `llm -m github/Phi-4-reasoning`
-
-**Publisher:** Microsoft 
-
-**Description:** State-of-the-art open-weight reasoning model. 
 
 ### OpenAI Text Embedding 3 (large)
 
