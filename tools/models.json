@@ -7,8 +7,8 @@
         "fineTuningTasks": [],
         "keywords": [
             "RAG",
-            "Multilingual",
-            "Large context"
+            " Multilingual",
+            " Large context"
         ],
         "playgroundLimits": {
             "rateLimitTier": "high"
@@ -51,6 +51,7 @@
         "publisher": "AI21 Labs",
         "labels": [
             "latest",
+            "default",
             "invisibleLatest"
         ],
         "summary": "A 398B parameters (94B active) multilingual model, offering a 256K long context window, function calling, structured output, and grounded generation.",
@@ -66,8 +67,8 @@
         "fineTuningTasks": [],
         "keywords": [
             "RAG",
-            "Multilingual",
-            "Large context"
+            " Multilingual",
+            " Large context"
         ],
         "playgroundLimits": {
             "rateLimitTier": "low"
@@ -110,6 +111,7 @@
         "publisher": "AI21 Labs",
         "labels": [
             "latest",
+            "default",
             "invisibleLatest"
         ],
         "summary": "A 52B parameters (12B active) multilingual model, offering a 256K long context window, function calling, structured output, and grounded generation.",
@@ -125,12 +127,14 @@
         "fineTuningTasks": [],
         "keywords": [
             "Reasoning",
-            "Coding"
+            " Coding"
         ],
         "playgroundLimits": {
             "rateLimitTier": "low"
         },
-        "modelCapabilities": [],
+        "modelCapabilities": [
+            "streaming"
+        ],
         "modelLimits": {
             "textLimits": {
                 "inputContextWindow": 256000,
@@ -159,72 +163,11 @@
         "publisher": "Mistral AI",
         "labels": [
             "latest",
+            "default",
             "invisibleLatest"
         ],
         "summary": "Codestral 25.01 by Mistral AI is designed for code generation, supporting 80+ programming languages, and optimized for tasks like code completion and fill-in-the-middle",
         "createdTime": "2025-01-10T02:38:32.7940736+00:00",
-        "license": "custom",
-        "tradeRestricted": true
-    },
-    {
-        "popularity": 67.53,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [],
-        "keywords": [
-            "RAG",
-            " Multilingual"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [
-            "streaming",
-            "tool-calling"
-        ],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 131072,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en",
-                "fr",
-                "es",
-                "it",
-                "de",
-                "pt-br",
-                "ja",
-                "ko",
-                "zh-cn",
-                "ar"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml-cohere/models/cohere-command-a/versions/1",
-        "name": "cohere-command-a",
-        "displayName": "Cohere Command A",
-        "version": "1",
-        "registryName": "azureml-cohere",
-        "publisher": "Cohere",
-        "labels": [
-            "invisibleLatest",
-            "default",
-            "latest"
-        ],
-        "summary": "Command A is a highly efficient generative model that excels at agentic and multilingual use cases.",
-        "createdTime": "2025-04-14T16:35:27.6410942+00:00",
         "license": "custom",
         "tradeRestricted": true
     },
@@ -283,6 +226,7 @@
         "publisher": "Cohere",
         "labels": [
             "latest",
+            "default",
             "invisibleLatest"
         ],
         "summary": "Command R is a scalable generative model targeting RAG and Tool Use to enable production-scale AI for enterprise.",
@@ -343,6 +287,7 @@
         "publisher": "Cohere",
         "labels": [
             "latest",
+            "default",
             "invisibleLatest"
         ],
         "summary": "Command R is a scalable generative model targeting RAG and Tool Use to enable production-scale AI for enterprise.",
@@ -403,10 +348,11 @@
         "publisher": "Cohere",
         "labels": [
             "latest",
+            "default",
             "invisibleLatest"
         ],
         "summary": "Command R+ is a state-of-the-art RAG-optimized model designed to tackle enterprise-grade workloads.",
-        "createdTime": "2024-04-02T14:18:55.8262985+00:00",
+        "createdTime": "2024-10-03T21:55:16.1402288+00:00",
         "license": "custom",
         "tradeRestricted": true
     },
@@ -461,10 +407,11 @@
         "publisher": "Cohere",
         "labels": [
             "latest",
+            "default",
             "invisibleLatest"
         ],
         "summary": "Command R+ is a state-of-the-art RAG-optimized model designed to tackle enterprise-grade workloads.",
-        "createdTime": "2024-10-03T21:56:27.3615178+00:00",
+        "createdTime": "2024-10-03T21:56:49.9473953+00:00",
         "license": "custom",
         "tradeRestricted": true
     },
@@ -509,10 +456,11 @@
         "publisher": "Cohere",
         "labels": [
             "latest",
+            "default",
             "invisibleLatest"
         ],
         "summary": "Cohere Embed English is the market's leading text representation model used for semantic search, retrieval-augmented generation (RAG), classification, and clustering.",
-        "createdTime": "2024-04-02T14:19:38.4445109+00:00",
+        "createdTime": "2024-10-03T21:58:01.9017779+00:00",
         "license": "custom",
         "tradeRestricted": true
     },
@@ -566,10 +514,11 @@
         "publisher": "Cohere",
         "labels": [
             "latest",
+            "default",
             "invisibleLatest"
         ],
         "summary": "Cohere Embed Multilingual is the market's leading text representation model used for semantic search, retrieval-augmented generation (RAG), classification, and clustering.",
-        "createdTime": "2024-04-02T14:20:20.6772249+00:00",
+        "createdTime": "2024-10-03T21:59:10.6093575+00:00",
         "license": "custom",
         "tradeRestricted": true
     },
@@ -581,13 +530,17 @@
         "fineTuningTasks": [],
         "keywords": [
             "Reasoning",
-            "Coding",
-            "Agents"
+            " Coding",
+            " Agents"
         ],
         "playgroundLimits": {
             "rateLimitTier": "custom"
         },
-        "modelCapabilities": [],
+        "modelCapabilities": [
+            "reasoning",
+            "streaming",
+            "tool-calling"
+        ],
         "modelLimits": {
             "textLimits": {
                 "inputContextWindow": 128000,
@@ -728,7 +681,7 @@
             "latest"
         ],
         "summary": "A strong Mixture-of-Experts (MoE) language model with 671B total parameters with 37B activated for each token.",
-        "createdTime": "2025-03-07T15:28:13.3120308+00:00",
+        "createdTime": "2025-03-07T15:28:43.5606114+00:00",
         "license": "custom",
         "tradeRestricted": true
     },
@@ -740,16 +693,14 @@
         "fineTuningTasks": [],
         "keywords": [
             "Coding",
-            "Agents"
+            " Agents"
         ],
         "playgroundLimits": {
             "rateLimitTier": "high"
         },
         "modelCapabilities": [
-            "agents",
-            "reasoning",
-            "tool-calling",
-            "streaming"
+            "streaming",
+            "tool-calling"
         ],
         "modelLimits": {
             "textLimits": {
@@ -786,6 +737,2034 @@
         "summary": "DeepSeek-V3-0324 demonstrates notable improvements over its predecessor, DeepSeek-V3, in several key aspects, including enhanced reasoning, improved function calling, and superior code generation capabilities.",
         "createdTime": "2025-04-04T21:02:45.2066153+00:00",
         "license": "MIT",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "text-to-image"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "Vision"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "custom"
+        },
+        "modelCapabilities": [],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 131072,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "image"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-blackforestlabs/models/Flux-1.1-Pro/versions/1",
+        "name": "Flux-1.1-Pro",
+        "displayName": "FLUX1.1 [pro]",
+        "version": "1",
+        "registryName": "azureml-blackforestlabs",
+        "publisher": "Black Forest Labs",
+        "labels": [
+            "default",
+            "latest",
+            "invisibleLatest"
+        ],
+        "summary": "Generate images with amazing image quality, prompt adherence, and diversity at blazing fast speeds. FLUX1.1 [pro] delivers six times faster image generation and achieved the highest Elo score on Artificial Analysis benchmarks when launched, surpassing all ",
+        "createdTime": "2025-08-01T16:53:42.9778283+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "text-to-image",
+            "image-to-image"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "Vision",
+            "Multimodal"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "custom"
+        },
+        "modelCapabilities": [],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 131072,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text",
+                "image"
+            ],
+            "supportedOutputModalities": [
+                "image"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-blackforestlabs/models/Flux.1-Kontext-pro/versions/1",
+        "name": "Flux.1-Kontext-pro",
+        "displayName": "FLUX.1 Kontext [pro]",
+        "version": "1",
+        "registryName": "azureml-blackforestlabs",
+        "publisher": "Black Forest Labs",
+        "labels": [
+            "default",
+            "latest",
+            "invisibleLatest"
+        ],
+        "summary": "Generate and edit images through both text and image prompts. FLUX.1 Kontext is a multimodal flow matching model that enables both text-to-image generation and in-context image editing. Modify images while maintaining character consistency and performing l",
+        "createdTime": "2025-08-01T16:53:47.4540833+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "Multimodal",
+            "Reasoning",
+            "Conversation"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [
+            "streaming"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 128000,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en",
+                "de",
+                "fr",
+                "it",
+                "pt",
+                "hi",
+                "es"
+            ],
+            "supportedInputModalities": [
+                "text",
+                "image",
+                "audio"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-meta/models/Llama-3.2-11B-Vision-Instruct/versions/6",
+        "name": "Llama-3.2-11B-Vision-Instruct",
+        "displayName": "Llama-3.2-11B-Vision-Instruct",
+        "version": "6",
+        "registryName": "azureml-meta",
+        "publisher": "Meta",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "Excels in image reasoning capabilities on high-res images for visual understanding apps.",
+        "createdTime": "2025-07-18T16:57:43.3543494+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "Multimodal",
+            " Reasoning",
+            " Conversation"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "high"
+        },
+        "modelCapabilities": [
+            "streaming"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 128000,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en",
+                "de",
+                "fr",
+                "it",
+                "pt",
+                "hi",
+                "es"
+            ],
+            "supportedInputModalities": [
+                "text",
+                "image",
+                "audio"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-meta/models/Llama-3.2-90B-Vision-Instruct/versions/5",
+        "name": "Llama-3.2-90B-Vision-Instruct",
+        "displayName": "Llama-3.2-90B-Vision-Instruct",
+        "version": "5",
+        "registryName": "azureml-meta",
+        "publisher": "Meta",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "Advanced image reasoning capabilities for visual understanding agentic apps.",
+        "createdTime": "2025-05-02T02:32:30.7983338+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 2.05,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Conversation"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "high"
+        },
+        "modelCapabilities": [
+            "streaming"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 128000,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en",
+                "de",
+                "fr",
+                "it",
+                "pt",
+                "hi",
+                "es",
+                "th"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-meta/models/Llama-3.3-70B-Instruct/versions/7",
+        "name": "Llama-3.3-70B-Instruct",
+        "displayName": "Llama-3.3-70B-Instruct",
+        "version": "7",
+        "registryName": "azureml-meta",
+        "publisher": "Meta",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "Llama 3.3 70B Instruct offers enhanced reasoning, math, and instruction following with performance comparable to Llama 3.1 405B.",
+        "createdTime": "2025-06-05T12:41:57.996944+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 67.54,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "Multimodal",
+            " Conversation",
+            " Multilingual"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "high"
+        },
+        "modelCapabilities": [
+            "agents",
+            "assistants",
+            "streaming",
+            "tool-calling"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 1000000,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "ar",
+                "en",
+                "fr",
+                "de",
+                "hi",
+                "id",
+                "it",
+                "pt",
+                "es",
+                "tl",
+                "th",
+                "vi"
+            ],
+            "supportedInputModalities": [
+                "text",
+                "image"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-meta/models/Llama-4-Maverick-17B-128E-Instruct-FP8/versions/1",
+        "name": "Llama-4-Maverick-17B-128E-Instruct-FP8",
+        "displayName": "Llama 4 Maverick 17B 128E Instruct FP8",
+        "version": "1",
+        "registryName": "azureml-meta",
+        "publisher": "Meta",
+        "labels": [
+            "default",
+            "latest",
+            "invisibleLatest"
+        ],
+        "summary": "Llama 4 Maverick 17B 128E Instruct FP8 is great at precise image understanding and creative writing, offering high quality at a lower price compared to Llama 3.3 70B",
+        "createdTime": "2025-04-06T02:06:38.8274352+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 67.55,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Multimodal",
+            " Conversation",
+            " Multilingual"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "high"
+        },
+        "modelCapabilities": [
+            "agents",
+            "assistants",
+            "streaming",
+            "tool-calling"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 10000000,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "ar",
+                "en",
+                "fr",
+                "de",
+                "hi",
+                "id",
+                "it",
+                "pt",
+                "es",
+                "tl",
+                "th",
+                "vi"
+            ],
+            "supportedInputModalities": [
+                "text",
+                "image"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-meta/models/Llama-4-Scout-17B-16E-Instruct/versions/2",
+        "name": "Llama-4-Scout-17B-16E-Instruct",
+        "displayName": "Llama 4 Scout 17B 16E Instruct",
+        "version": "2",
+        "registryName": "azureml-meta",
+        "publisher": "Meta",
+        "labels": [
+            "default",
+            "latest",
+            "invisibleLatest"
+        ],
+        "summary": "Llama 4 Scout 17B 16E Instruct is great at multi-document summarization, parsing extensive user activity for personalized tasks, and reasoning over vast codebases.",
+        "createdTime": "2025-05-14T19:23:16.6345818+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 68.04,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "Reasoning",
+            " Coding",
+            " Agents"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "custom"
+        },
+        "modelCapabilities": [
+            "reasoning",
+            "streaming"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 128000,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en",
+                "zh"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml/models/MAI-DS-R1/versions/1",
+        "name": "MAI-DS-R1",
+        "displayName": "MAI-DS-R1",
+        "version": "1",
+        "registryName": "azureml",
+        "publisher": "Microsoft",
+        "labels": [
+            "invisibleLatest",
+            "default",
+            "latest"
+        ],
+        "summary": "MAI-DS-R1 is a DeepSeek-R1 reasoning model that has been post-trained by the Microsoft AI team to fill in information gaps in the previous version of the model and improve its harm protections while maintaining R1 reasoning capabilities.",
+        "createdTime": "2025-04-15T21:06:49.9152168+00:00",
+        "license": "MIT",
+        "tradeRestricted": false
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Conversation"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "high"
+        },
+        "modelCapabilities": [
+            "streaming"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 8192,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-meta/models/Meta-Llama-3-70B-Instruct/versions/9",
+        "name": "Meta-Llama-3-70B-Instruct",
+        "displayName": "Meta-Llama-3-70B-Instruct",
+        "version": "9",
+        "registryName": "azureml-meta",
+        "publisher": "Meta",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "A powerful 70-billion parameter model excelling in reasoning, coding, and broad language applications.",
+        "createdTime": "2024-11-18T09:43:21.3365218+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Conversation"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [
+            "streaming"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 8192,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-meta/models/Meta-Llama-3-8B-Instruct/versions/9",
+        "name": "Meta-Llama-3-8B-Instruct",
+        "displayName": "Meta-Llama-3-8B-Instruct",
+        "version": "9",
+        "registryName": "azureml-meta",
+        "publisher": "Meta",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "A versatile 8-billion parameter model optimized for dialogue and text generation tasks.",
+        "createdTime": "2024-11-18T13:33:47.20599+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "Conversation"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "high"
+        },
+        "modelCapabilities": [
+            "agents"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 131072,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en",
+                "de",
+                "fr",
+                "it",
+                "pt",
+                "hi",
+                "es",
+                "th"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-meta/models/Meta-Llama-3.1-405B-Instruct/versions/1",
+        "name": "Meta-Llama-3.1-405B-Instruct",
+        "displayName": "Meta-Llama-3.1-405B-Instruct",
+        "version": "1",
+        "registryName": "azureml-meta",
+        "publisher": "Meta",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "The Llama 3.1 instruction tuned text only models are optimized for multilingual dialogue use cases and outperform many of the available open source and closed chat models on common industry benchmarks.",
+        "createdTime": "2024-07-23T15:07:01.0834174+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Conversation"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "high"
+        },
+        "modelCapabilities": [
+            "streaming"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 131072,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en",
+                "de",
+                "fr",
+                "it",
+                "pt",
+                "hi",
+                "es",
+                "th"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-meta/models/Meta-Llama-3.1-70B-Instruct/versions/4",
+        "name": "Meta-Llama-3.1-70B-Instruct",
+        "displayName": "Meta-Llama-3.1-70B-Instruct",
+        "version": "4",
+        "registryName": "azureml-meta",
+        "publisher": "Meta",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "The Llama 3.1 instruction tuned text only models are optimized for multilingual dialogue use cases and outperform many of the available open source and closed chat models on common industry benchmarks.",
+        "createdTime": "2024-11-18T16:38:11.606858+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Conversation"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [
+            "streaming"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 131072,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en",
+                "de",
+                "fr",
+                "it",
+                "pt",
+                "hi",
+                "es",
+                "th"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-meta/models/Meta-Llama-3.1-8B-Instruct/versions/5",
+        "name": "Meta-Llama-3.1-8B-Instruct",
+        "displayName": "Meta-Llama-3.1-8B-Instruct",
+        "version": "5",
+        "registryName": "azureml-meta",
+        "publisher": "Meta",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "The Llama 3.1 instruction tuned text only models are optimized for multilingual dialogue use cases and outperform many of the available open source and closed chat models on common industry benchmarks.",
+        "createdTime": "2025-03-21T11:07:09.0833492+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 2.02,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Low latency",
+            " Agents",
+            " Reasoning"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [
+            "streaming",
+            "tool-calling"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 131072,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "fr",
+                "de",
+                "es",
+                "it",
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-mistral/models/Ministral-3B/versions/1",
+        "name": "Ministral-3B",
+        "displayName": "Ministral 3B",
+        "version": "1",
+        "registryName": "azureml-mistral",
+        "publisher": "Mistral AI",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "Ministral 3B is a state-of-the-art Small Language Model (SLM) optimized for edge computing and on-device applications. As it is designed for low-latency and compute-efficient inference, it it also the perfect model for standard GenAI applications that have",
+        "createdTime": "2024-10-17T22:58:28.8961175+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Reasoning",
+            " RAG",
+            " Agents"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "high"
+        },
+        "modelCapabilities": [
+            "streaming",
+            "tool-calling"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 128000,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en",
+                "fr",
+                "de",
+                "es",
+                "it",
+                "zh",
+                "ja",
+                "ko",
+                "pt",
+                "nl",
+                "pl"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-mistral/models/Mistral-Large-2411/versions/2",
+        "name": "Mistral-Large-2411",
+        "displayName": "Mistral Large 24.11",
+        "version": "2",
+        "registryName": "azureml-mistral",
+        "publisher": "Mistral AI",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "Mistral Large 24.11 offers enhanced system prompts, advanced reasoning and function calling capabilities.",
+        "createdTime": "2024-12-13T21:50:18.5439658+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Reasoning",
+            " RAG",
+            " Agents"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [
+            "streaming",
+            "tool-calling"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 131072,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en",
+                "fr",
+                "de",
+                "es",
+                "it",
+                "zh",
+                "ja",
+                "ko",
+                "pt",
+                "nl",
+                "pl"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-mistral/models/Mistral-Nemo/versions/1",
+        "name": "Mistral-Nemo",
+        "displayName": "Mistral Nemo",
+        "version": "1",
+        "registryName": "azureml-mistral",
+        "publisher": "Mistral AI",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "Mistral Nemo is a cutting-edge Language Model (LLM) boasting state-of-the-art reasoning, world knowledge, and coding capabilities within its size category.",
+        "createdTime": "2024-07-24T17:39:53.4666548+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Reasoning",
+            " RAG",
+            " Agents"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "high"
+        },
+        "modelCapabilities": [
+            "agents"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 131072,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en",
+                "fr",
+                "de",
+                "es",
+                "it",
+                "zh",
+                "ja",
+                "ko",
+                "pt",
+                "nl",
+                "pl"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-mistral/models/Mistral-large-2407/versions/1",
+        "name": "Mistral-large-2407",
+        "displayName": "Mistral Large (2407)",
+        "version": "1",
+        "registryName": "azureml-mistral",
+        "publisher": "Mistral AI",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "Mistral Large (2407) is an advanced Large Language Model (LLM) with state-of-the-art reasoning, knowledge and coding capabilities.",
+        "createdTime": "2024-07-24T17:41:34.9643161+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "Low latency",
+            " Multilingual"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [
+            "streaming"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 32768,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "fr",
+                "de",
+                "es",
+                "it",
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-mistral/models/Mistral-small/versions/1",
+        "name": "Mistral-small",
+        "displayName": "Mistral Small",
+        "version": "1",
+        "registryName": "azureml-mistral",
+        "publisher": "Mistral AI",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "Mistral Small can be used on any language-based task that requires high efficiency and low latency.",
+        "createdTime": "2024-05-03T18:45:01.4637035+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Reasoning",
+            "Understanding",
+            "Large context"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 131072,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml/models/Phi-3-medium-128k-instruct/versions/7",
+        "name": "Phi-3-medium-128k-instruct",
+        "displayName": "Phi-3-medium instruct (128k)",
+        "version": "7",
+        "registryName": "azureml",
+        "publisher": "Microsoft",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "Same Phi-3-medium model, but with a larger context size for RAG or few shot prompting.",
+        "createdTime": "2025-01-22T09:38:24.6534776+00:00",
+        "license": "mit",
+        "tradeRestricted": false
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Reasoning",
+            "Understanding"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 4096,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml/models/Phi-3-medium-4k-instruct/versions/6",
+        "name": "Phi-3-medium-4k-instruct",
+        "displayName": "Phi-3-medium instruct (4k)",
+        "version": "6",
+        "registryName": "azureml",
+        "publisher": "Microsoft",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "A 14B parameters model, proves better quality than Phi-3-mini, with a focus on high-quality, reasoning-dense data.",
+        "createdTime": "2025-01-22T09:59:48.5884637+00:00",
+        "license": "mit",
+        "tradeRestricted": false
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Reasoning",
+            "Understanding",
+            "Low latency"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 131072,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml/models/Phi-3-mini-128k-instruct/versions/13",
+        "name": "Phi-3-mini-128k-instruct",
+        "displayName": "Phi-3-mini instruct (128k)",
+        "version": "13",
+        "registryName": "azureml",
+        "publisher": "Microsoft",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "Same Phi-3-mini model, but with a larger context size for RAG or few shot prompting.",
+        "createdTime": "2025-01-22T10:19:48.1447372+00:00",
+        "license": "mit",
+        "tradeRestricted": false
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Reasoning",
+            "Understanding",
+            "Low latency"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 4096,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml/models/Phi-3-mini-4k-instruct/versions/15",
+        "name": "Phi-3-mini-4k-instruct",
+        "displayName": "Phi-3-mini instruct (4k)",
+        "version": "15",
+        "registryName": "azureml",
+        "publisher": "Microsoft",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "Tiniest member of the Phi-3 family. Optimized for both quality and low latency.",
+        "createdTime": "2025-01-22T10:39:16.4682652+00:00",
+        "license": "mit",
+        "tradeRestricted": false
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Reasoning",
+            "Understanding",
+            "Large context"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 131072,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml/models/Phi-3-small-128k-instruct/versions/5",
+        "name": "Phi-3-small-128k-instruct",
+        "displayName": "Phi-3-small instruct (128k)",
+        "version": "5",
+        "registryName": "azureml",
+        "publisher": "Microsoft",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "Same Phi-3-small model, but with a larger context size for RAG or few shot prompting.",
+        "createdTime": "2025-01-22T10:58:54.0520255+00:00",
+        "license": "mit",
+        "tradeRestricted": false
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Reasoning",
+            "Understanding"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 131072,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml/models/Phi-3-small-8k-instruct/versions/6",
+        "name": "Phi-3-small-8k-instruct",
+        "displayName": "Phi-3-small instruct (8k)",
+        "version": "6",
+        "registryName": "azureml",
+        "publisher": "Microsoft",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "A 7B parameters model, proves better quality than Phi-3-mini, with a focus on high-quality, reasoning-dense data.",
+        "createdTime": "2025-06-11T14:19:06.3252+00:00",
+        "license": "mit",
+        "tradeRestricted": false
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Reasoning",
+            "Understanding",
+            "Low latency"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 131072,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en",
+                "ar",
+                "zh",
+                "cs",
+                "da",
+                "nl",
+                "fi",
+                "fr",
+                "de",
+                "he",
+                "hu",
+                "it",
+                "ja",
+                "ko",
+                "no",
+                "pl",
+                "pt",
+                "ru",
+                "es",
+                "sv",
+                "th",
+                "tr",
+                "uk"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml/models/Phi-3.5-MoE-instruct/versions/5",
+        "name": "Phi-3.5-MoE-instruct",
+        "displayName": "Phi-3.5-MoE instruct (128k)",
+        "version": "5",
+        "registryName": "azureml",
+        "publisher": "Microsoft",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "A new mixture of experts model",
+        "createdTime": "2024-12-24T17:26:15.8452288+00:00",
+        "license": "mit",
+        "tradeRestricted": false
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Reasoning",
+            "Understanding",
+            "Low latency"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 131072,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en",
+                "ar",
+                "zh",
+                "cs",
+                "da",
+                "nl",
+                "fi",
+                "fr",
+                "de",
+                "he",
+                "hu",
+                "it",
+                "ja",
+                "ko",
+                "no",
+                "pl",
+                "pt",
+                "ru",
+                "es",
+                "sv",
+                "th",
+                "tr",
+                "uk"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml/models/Phi-3.5-mini-instruct/versions/6",
+        "name": "Phi-3.5-mini-instruct",
+        "displayName": "Phi-3.5-mini instruct (128k)",
+        "version": "6",
+        "registryName": "azureml",
+        "publisher": "Microsoft",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "Refresh of Phi-3-mini model.",
+        "createdTime": "2024-11-15T14:23:52.7964386+00:00",
+        "license": "mit",
+        "tradeRestricted": false
+    },
+    {
+        "popularity": 1.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "Multimodal",
+            "Reasoning",
+            "Low latency"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 131072,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text",
+                "image"
+            ],
+            "supportedOutputModalities": null
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml/models/Phi-3.5-vision-instruct/versions/2",
+        "name": "Phi-3.5-vision-instruct",
+        "displayName": "Phi-3.5-vision instruct (128k)",
+        "version": "2",
+        "registryName": "azureml",
+        "publisher": "Microsoft",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "Refresh of Phi-3-vision model.",
+        "createdTime": "2024-08-20T21:19:03.2226543+00:00",
+        "license": "mit",
+        "tradeRestricted": false
+    },
+    {
+        "popularity": 67.0,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Reasoning",
+            "Understanding",
+            "Low latency"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 16384,
+                "maxOutputTokens": 16384
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en",
+                "ar",
+                "bn",
+                "cs",
+                "da",
+                "de",
+                "el",
+                "es",
+                "fa",
+                "fi",
+                "fr",
+                "gu",
+                "ha",
+                "he",
+                "hi",
+                "hu",
+                "id",
+                "it",
+                "ja",
+                "jv",
+                "kn",
+                "ko",
+                "ml",
+                "mr",
+                "nl",
+                "no",
+                "or",
+                "pa",
+                "pl",
+                "ps",
+                "pt",
+                "ro",
+                "ru",
+                "sv",
+                "sw",
+                "ta",
+                "te",
+                "th",
+                "tl",
+                "tr",
+                "uk",
+                "ur",
+                "vi",
+                "yo",
+                "zh"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml/models/Phi-4/versions/8",
+        "name": "Phi-4",
+        "displayName": "Phi-4",
+        "version": "8",
+        "registryName": "azureml",
+        "publisher": "Microsoft",
+        "labels": [
+            "latest",
+            "default",
+            "invisibleLatest"
+        ],
+        "summary": "Phi-4 14B, a highly capable model for low latency scenarios.",
+        "createdTime": "2025-06-04T13:58:13.3241466+00:00",
+        "license": "MIT",
+        "tradeRestricted": false
+    },
+    {
+        "popularity": 67.03,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [
+            "chat-completion"
+        ],
+        "keywords": [
+            "Reasoning",
+            "Agents",
+            "Multilingual"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 128000,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "ar",
+                "zh",
+                "cs",
+                "da",
+                "nl",
+                "en",
+                "fi",
+                "fr",
+                "de",
+                "he",
+                "hu",
+                "it",
+                "ja",
+                "ko",
+                "no",
+                "pl",
+                "pt",
+                "ru",
+                "es",
+                "sv",
+                "th",
+                "tr",
+                "uk"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml/models/Phi-4-mini-instruct/versions/1",
+        "name": "Phi-4-mini-instruct",
+        "displayName": "Phi-4-mini-instruct",
+        "version": "1",
+        "registryName": "azureml",
+        "publisher": "Microsoft",
+        "labels": [
+            "invisibleLatest",
+            "default",
+            "latest"
+        ],
+        "summary": "3.8B parameters Small Language Model outperforming larger models in reasoning, math, coding, and function-calling",
+        "createdTime": "2025-02-20T20:13:26.4177103+00:00",
+        "license": "MIT",
+        "tradeRestricted": false
+    },
+    {
+        "popularity": 67.56,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "Reasoning",
+            " Large context",
+            " Low latency"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [
+            "reasoning"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 128000,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml/models/Phi-4-mini-reasoning/versions/1",
+        "name": "Phi-4-mini-reasoning",
+        "displayName": "Phi-4-mini-reasoning",
+        "version": "1",
+        "registryName": "azureml",
+        "publisher": "Microsoft",
+        "labels": [
+            "invisibleLatest",
+            "default",
+            "latest"
+        ],
+        "summary": "Lightweight math reasoning model optimized for multi-step problem solving",
+        "createdTime": "2025-04-29T20:11:50.6157203+00:00",
+        "license": "MIT",
+        "tradeRestricted": false
+    },
+    {
+        "popularity": 67.02,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "Vision",
+            "Audio",
+            "Summarization"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [
+            "streaming"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 128000,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "ar",
+                "zh",
+                "cs",
+                "da",
+                "nl",
+                "en",
+                "fi",
+                "fr",
+                "de",
+                "he",
+                "hu",
+                "it",
+                "ja",
+                "ko",
+                "pl",
+                "pt",
+                "ru",
+                "es",
+                "sv",
+                "th",
+                "tr",
+                "uk"
+            ],
+            "supportedInputModalities": [
+                "audio",
+                "image",
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml/models/Phi-4-multimodal-instruct/versions/2",
+        "name": "Phi-4-multimodal-instruct",
+        "displayName": "Phi-4-multimodal-instruct",
+        "version": "2",
+        "registryName": "azureml",
+        "publisher": "Microsoft",
+        "labels": [
+            "invisibleLatest",
+            "default",
+            "latest"
+        ],
+        "summary": "First small multimodal model to have 3 modality inputs (text, audio, image), excelling in quality and efficiency",
+        "createdTime": "2025-06-04T22:19:21.8323986+00:00",
+        "license": "MIT",
+        "tradeRestricted": false
+    },
+    {
+        "popularity": 67.57,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "Reasoning",
+            " Large context",
+            " Low latency"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [
+            "reasoning",
+            "streaming"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 32768,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml/models/Phi-4-reasoning/versions/1",
+        "name": "Phi-4-reasoning",
+        "displayName": "Phi-4-Reasoning",
+        "version": "1",
+        "registryName": "azureml",
+        "publisher": "Microsoft",
+        "labels": [
+            "invisibleLatest",
+            "default",
+            "latest"
+        ],
+        "summary": "State-of-the-art open-weight reasoning model.",
+        "createdTime": "2025-04-29T20:08:13.5723326+00:00",
+        "license": "MIT",
+        "tradeRestricted": false
+    },
+    {
+        "popularity": 67.53,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "RAG",
+            "Multilingual"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "low"
+        },
+        "modelCapabilities": [],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 131072,
+                "maxOutputTokens": 4096
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en",
+                "fr",
+                "es",
+                "it",
+                "de",
+                "pt-br",
+                "ja",
+                "ko",
+                "zh-cn",
+                "ar"
+            ],
+            "supportedInputModalities": [
+                "text"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "standard-paygo",
+            "VM-withSurcharge",
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azureml-cohere/models/cohere-command-a/versions/3",
+        "name": "cohere-command-a",
+        "displayName": "Cohere Command A",
+        "version": "3",
+        "registryName": "azureml-cohere",
+        "publisher": "Cohere",
+        "labels": [
+            "invisibleLatest",
+            "default",
+            "latest"
+        ],
+        "summary": "Command A is a highly efficient generative model that excels at agentic and multilingual use cases.",
+        "createdTime": "2025-06-10T17:51:54.2224315+00:00",
+        "license": "custom",
         "tradeRestricted": true
     },
     {
@@ -836,10 +2815,10 @@
             "VM"
         ],
         "variantInformation": null,
-        "assetId": "azureml://registries/azureml-cohere/models/embed-v-4-0/versions/4",
+        "assetId": "azureml://registries/azureml-cohere/models/embed-v-4-0/versions/5",
         "name": "embed-v-4-0",
         "displayName": "Cohere Embed 4",
-        "version": "4",
+        "version": "5",
         "registryName": "azureml-cohere",
         "publisher": "Cohere",
         "labels": [
@@ -848,7 +2827,7 @@
             "invisibleLatest"
         ],
         "summary": "Embed 4 transforms texts and images into numerical vectors",
-        "createdTime": "2025-05-30T22:57:28.2694381+00:00",
+        "createdTime": "2025-07-10T19:17:59.2355108+00:00",
         "license": "custom",
         "tradeRestricted": true
     },
@@ -1185,6 +3164,7 @@
         "publisher": "OpenAI",
         "labels": [
             "latest",
+            "default",
             "invisibleLatest"
         ],
         "summary": "OpenAI's most advanced multimodal model in the gpt-4o family. Can handle both text and image inputs.",
@@ -1273,10 +3253,235 @@
         "publisher": "OpenAI",
         "labels": [
             "latest",
+            "default",
             "invisibleLatest"
         ],
         "summary": "An affordable, efficient AI solution for diverse text and image tasks.",
         "createdTime": "2024-09-12T21:31:56.1683493+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 70.26,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "Multipurpose",
+            " Multilingual",
+            " Multimodal"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "custom"
+        },
+        "modelCapabilities": [
+            "reasoning",
+            "tool-calling",
+            "streaming"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 200000,
+                "maxOutputTokens": 100000
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text",
+                "image"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azure-openai/models/gpt-5/versions/2025-08-07",
+        "name": "gpt-5",
+        "displayName": "OpenAI gpt-5",
+        "version": "2025-08-07",
+        "registryName": "azure-openai",
+        "publisher": "OpenAI",
+        "labels": [
+            "invisibleLatest",
+            "default",
+            "latest"
+        ],
+        "summary": "gpt-5 is designed for logic-heavy and multi-step tasks. ",
+        "createdTime": "2025-08-07T16:41:37.7893935+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 70.23,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "Multipurpose",
+            "Multilingual",
+            "Multimodal"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "custom"
+        },
+        "modelCapabilities": [
+            "reasoning",
+            "tool-calling",
+            "streaming"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 200000,
+                "maxOutputTokens": 100000
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text",
+                "image"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azure-openai/models/gpt-5-chat/versions/2025-08-07",
+        "name": "gpt-5-chat",
+        "displayName": "OpenAI gpt-5-chat (preview)",
+        "version": "2025-08-07",
+        "registryName": "azure-openai",
+        "publisher": "OpenAI",
+        "labels": [
+            "invisibleLatest",
+            "default",
+            "latest"
+        ],
+        "summary": "gpt-5-chat (preview) is an advanced, natural, multimodal, and context-aware conversations for enterprise applications.",
+        "createdTime": "2025-08-07T16:44:05.8480263+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 70.25,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "Multipurpose",
+            "Multilingual",
+            "Multimodal"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "custom"
+        },
+        "modelCapabilities": [
+            "reasoning",
+            "tool-calling",
+            "streaming"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 200000,
+                "maxOutputTokens": 100000
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text",
+                "image"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azure-openai/models/gpt-5-mini/versions/2025-08-07",
+        "name": "gpt-5-mini",
+        "displayName": "OpenAI gpt-5-mini",
+        "version": "2025-08-07",
+        "registryName": "azure-openai",
+        "publisher": "OpenAI",
+        "labels": [
+            "invisibleLatest",
+            "default",
+            "latest"
+        ],
+        "summary": "gpt-5-mini is a lightweight version for cost-sensitive applications.",
+        "createdTime": "2025-08-07T16:45:47.0879879+00:00",
+        "license": "custom",
+        "tradeRestricted": true
+    },
+    {
+        "popularity": 70.24,
+        "inferenceTasks": [
+            "chat-completion"
+        ],
+        "fineTuningTasks": [],
+        "keywords": [
+            "Multipurpose",
+            "Multilingual",
+            "Multimodal"
+        ],
+        "playgroundLimits": {
+            "rateLimitTier": "custom"
+        },
+        "modelCapabilities": [
+            "reasoning",
+            "tool-calling",
+            "streaming"
+        ],
+        "modelLimits": {
+            "textLimits": {
+                "inputContextWindow": 200000,
+                "maxOutputTokens": 100000
+            },
+            "otherLimits": {},
+            "supportedLanguages": [
+                "en"
+            ],
+            "supportedInputModalities": [
+                "text",
+                "image"
+            ],
+            "supportedOutputModalities": [
+                "text"
+            ]
+        },
+        "azureOffers": [
+            "VM"
+        ],
+        "variantInformation": null,
+        "assetId": "azureml://registries/azure-openai/models/gpt-5-nano/versions/2025-08-07",
+        "name": "gpt-5-nano",
+        "displayName": "OpenAI gpt-5-nano",
+        "version": "2025-08-07",
+        "registryName": "azure-openai",
+        "publisher": "OpenAI",
+        "labels": [
+            "invisibleLatest",
+            "default",
+            "latest"
+        ],
+        "summary": "gpt-5-nano is optimized for speed, ideal for applications requiring low latency. ",
+        "createdTime": "2025-08-07T16:47:34.8697408+00:00",
         "license": "custom",
         "tradeRestricted": true
     },
@@ -1483,850 +3688,7 @@
             "invisibleLatest"
         ],
         "summary": "JAIS 30b Chat is an auto-regressive bilingual LLM for Arabic & English with state-of-the-art capabilities in Arabic.",
-        "createdTime": "2025-02-05T18:42:26.878294+00:00",
-        "license": "custom",
-        "tradeRestricted": true
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [],
-        "keywords": [
-            "Multimodal",
-            "Reasoning",
-            "Conversation"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [
-            "streaming"
-        ],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 128000,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en",
-                "de",
-                "fr",
-                "it",
-                "pt",
-                "hi",
-                "es"
-            ],
-            "supportedInputModalities": [
-                "text",
-                "image",
-                "audio"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml-meta/models/Llama-3.2-11B-Vision-Instruct/versions/5",
-        "name": "Llama-3.2-11B-Vision-Instruct",
-        "displayName": "Llama-3.2-11B-Vision-Instruct",
-        "version": "5",
-        "registryName": "azureml-meta",
-        "publisher": "Meta",
-        "labels": [
-            "latest",
-            "default",
-            "invisibleLatest"
-        ],
-        "summary": "Excels in image reasoning capabilities on high-res images for visual understanding apps.",
-        "createdTime": "2025-06-04T14:01:02.0077486+00:00",
-        "license": "custom",
-        "tradeRestricted": true
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [],
-        "keywords": [
-            "Multimodal",
-            "Reasoning",
-            "Conversation"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "high"
-        },
-        "modelCapabilities": [
-            "streaming"
-        ],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 128000,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en",
-                "de",
-                "fr",
-                "it",
-                "pt",
-                "hi",
-                "es"
-            ],
-            "supportedInputModalities": [
-                "text",
-                "image",
-                "audio"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml-meta/models/Llama-3.2-90B-Vision-Instruct/versions/5",
-        "name": "Llama-3.2-90B-Vision-Instruct",
-        "displayName": "Llama-3.2-90B-Vision-Instruct",
-        "version": "5",
-        "registryName": "azureml-meta",
-        "publisher": "Meta",
-        "labels": [
-            "latest",
-            "default",
-            "invisibleLatest"
-        ],
-        "summary": "Advanced image reasoning capabilities for visual understanding agentic apps.",
-        "createdTime": "2025-05-02T02:32:30.7983338+00:00",
-        "license": "custom",
-        "tradeRestricted": true
-    },
-    {
-        "popularity": 2.05,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Conversation"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "high"
-        },
-        "modelCapabilities": [
-            "streaming"
-        ],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 128000,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en",
-                "de",
-                "fr",
-                "it",
-                "pt",
-                "hi",
-                "es",
-                "th"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml-meta/models/Llama-3.3-70B-Instruct/versions/7",
-        "name": "Llama-3.3-70B-Instruct",
-        "displayName": "Llama-3.3-70B-Instruct",
-        "version": "7",
-        "registryName": "azureml-meta",
-        "publisher": "Meta",
-        "labels": [
-            "latest",
-            "default",
-            "invisibleLatest"
-        ],
-        "summary": "Llama 3.3 70B Instruct offers enhanced reasoning, math, and instruction following with performance comparable to Llama 3.1 405B.",
-        "createdTime": "2025-06-05T12:41:57.996944+00:00",
-        "license": "custom",
-        "tradeRestricted": true
-    },
-    {
-        "popularity": 67.54,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [],
-        "keywords": [
-            "Multimodal",
-            "Conversation",
-            "Multilingual"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "high"
-        },
-        "modelCapabilities": [
-            "agent",
-            "assistant",
-            "streaming",
-            "tool-calling"
-        ],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 1000000,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "ar",
-                "en",
-                "fr",
-                "de",
-                "hi",
-                "id",
-                "it",
-                "pt",
-                "es",
-                "tl",
-                "th",
-                "vi"
-            ],
-            "supportedInputModalities": [
-                "text",
-                "image"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml-meta/models/Llama-4-Maverick-17B-128E-Instruct-FP8/versions/1",
-        "name": "Llama-4-Maverick-17B-128E-Instruct-FP8",
-        "displayName": "Llama 4 Maverick 17B 128E Instruct FP8",
-        "version": "1",
-        "registryName": "azureml-meta",
-        "publisher": "Meta",
-        "labels": [
-            "default",
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "Llama 4 Maverick 17B 128E Instruct FP8 is great at precise image understanding and creative writing, offering high quality at a lower price compared to Llama 3.3 70B",
-        "createdTime": "2025-04-06T02:06:38.8274352+00:00",
-        "license": "custom",
-        "tradeRestricted": true
-    },
-    {
-        "popularity": 67.55,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Multimodal",
-            "Conversation",
-            "Multilingual"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "high"
-        },
-        "modelCapabilities": [
-            "agent",
-            "assistant",
-            "streaming",
-            "tool-calling"
-        ],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 10000000,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "ar",
-                "en",
-                "fr",
-                "de",
-                "hi",
-                "id",
-                "it",
-                "pt",
-                "es",
-                "tl",
-                "th",
-                "vi"
-            ],
-            "supportedInputModalities": [
-                "text",
-                "image"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml-meta/models/Llama-4-Scout-17B-16E-Instruct/versions/2",
-        "name": "Llama-4-Scout-17B-16E-Instruct",
-        "displayName": "Llama 4 Scout 17B 16E Instruct",
-        "version": "2",
-        "registryName": "azureml-meta",
-        "publisher": "Meta",
-        "labels": [
-            "default",
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "Llama 4 Scout 17B 16E Instruct is great at multi-document summarization, parsing extensive user activity for personalized tasks, and reasoning over vast codebases.",
-        "createdTime": "2025-05-14T19:23:16.6345818+00:00",
-        "license": "custom",
-        "tradeRestricted": true
-    },
-    {
-        "popularity": 68.04,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [],
-        "keywords": [
-            "Reasoning",
-            "Coding",
-            "Agents"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "custom"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 128000,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en",
-                "zh"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml/models/MAI-DS-R1/versions/1",
-        "name": "MAI-DS-R1",
-        "displayName": "MAI-DS-R1",
-        "version": "1",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "invisibleLatest",
-            "default",
-            "latest"
-        ],
-        "summary": "MAI-DS-R1 is a DeepSeek-R1 reasoning model that has been post-trained by the Microsoft AI team to fill in information gaps in the previous version of the model and improve its harm protections while maintaining R1 reasoning capabilities.",
-        "createdTime": "2025-04-15T21:06:49.9152168+00:00",
-        "license": "MIT",
-        "tradeRestricted": false
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Conversation"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "high"
-        },
-        "modelCapabilities": [
-            "streaming"
-        ],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 8192,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml-meta/models/Meta-Llama-3-70B-Instruct/versions/9",
-        "name": "Meta-Llama-3-70B-Instruct",
-        "displayName": "Meta-Llama-3-70B-Instruct",
-        "version": "9",
-        "registryName": "azureml-meta",
-        "publisher": "Meta",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "A powerful 70-billion parameter model excelling in reasoning, coding, and broad language applications.",
-        "createdTime": "2024-11-18T09:43:21.3365218+00:00",
-        "license": "custom",
-        "tradeRestricted": true
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Conversation"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [
-            "streaming"
-        ],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 8192,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml-meta/models/Meta-Llama-3-8B-Instruct/versions/9",
-        "name": "Meta-Llama-3-8B-Instruct",
-        "displayName": "Meta-Llama-3-8B-Instruct",
-        "version": "9",
-        "registryName": "azureml-meta",
-        "publisher": "Meta",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "A versatile 8-billion parameter model optimized for dialogue and text generation tasks.",
-        "createdTime": "2024-11-18T13:33:47.20599+00:00",
-        "license": "custom",
-        "tradeRestricted": true
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [],
-        "keywords": [
-            "Conversation"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "high"
-        },
-        "modelCapabilities": [
-            "agents"
-        ],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 131072,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en",
-                "de",
-                "fr",
-                "it",
-                "pt",
-                "hi",
-                "es",
-                "th"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml-meta/models/Meta-Llama-3.1-405B-Instruct/versions/1",
-        "name": "Meta-Llama-3.1-405B-Instruct",
-        "displayName": "Meta-Llama-3.1-405B-Instruct",
-        "version": "1",
-        "registryName": "azureml-meta",
-        "publisher": "Meta",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "The Llama 3.1 instruction tuned text only models are optimized for multilingual dialogue use cases and outperform many of the available open source and closed chat models on common industry benchmarks.",
-        "createdTime": "2024-07-23T15:06:41.9591851+00:00",
-        "license": "custom",
-        "tradeRestricted": true
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Conversation"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "high"
-        },
-        "modelCapabilities": [
-            "streaming"
-        ],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 131072,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en",
-                "de",
-                "fr",
-                "it",
-                "pt",
-                "hi",
-                "es",
-                "th"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml-meta/models/Meta-Llama-3.1-70B-Instruct/versions/4",
-        "name": "Meta-Llama-3.1-70B-Instruct",
-        "displayName": "Meta-Llama-3.1-70B-Instruct",
-        "version": "4",
-        "registryName": "azureml-meta",
-        "publisher": "Meta",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "The Llama 3.1 instruction tuned text only models are optimized for multilingual dialogue use cases and outperform many of the available open source and closed chat models on common industry benchmarks.",
-        "createdTime": "2024-11-18T16:38:11.606858+00:00",
-        "license": "custom",
-        "tradeRestricted": true
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Conversation"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [
-            "streaming"
-        ],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 131072,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en",
-                "de",
-                "fr",
-                "it",
-                "pt",
-                "hi",
-                "es",
-                "th"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml-meta/models/Meta-Llama-3.1-8B-Instruct/versions/5",
-        "name": "Meta-Llama-3.1-8B-Instruct",
-        "displayName": "Meta-Llama-3.1-8B-Instruct",
-        "version": "5",
-        "registryName": "azureml-meta",
-        "publisher": "Meta",
-        "labels": [
-            "latest",
-            "default",
-            "invisibleLatest"
-        ],
-        "summary": "The Llama 3.1 instruction tuned text only models are optimized for multilingual dialogue use cases and outperform many of the available open source and closed chat models on common industry benchmarks.",
-        "createdTime": "2025-03-21T11:07:09.0833492+00:00",
-        "license": "custom",
-        "tradeRestricted": true
-    },
-    {
-        "popularity": 2.02,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Low latency",
-            "Agents",
-            "Reasoning"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 131072,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "fr",
-                "de",
-                "es",
-                "it",
-                "en"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml-mistral/models/Ministral-3B/versions/1",
-        "name": "Ministral-3B",
-        "displayName": "Ministral 3B",
-        "version": "1",
-        "registryName": "azureml-mistral",
-        "publisher": "Mistral AI",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "Ministral 3B is a state-of-the-art Small Language Model (SLM) optimized for edge computing and on-device applications. As it is designed for low-latency and compute-efficient inference, it it also the perfect model for standard GenAI applications that have",
-        "createdTime": "2024-10-17T22:58:28.8961175+00:00",
-        "license": "custom",
-        "tradeRestricted": true
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Reasoning",
-            "RAG",
-            "Agents"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "high"
-        },
-        "modelCapabilities": [
-            "agents"
-        ],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 131072,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en",
-                "fr",
-                "de",
-                "es",
-                "it",
-                "zh",
-                "ja",
-                "ko",
-                "pt",
-                "nl",
-                "pl"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml-mistral/models/Mistral-large-2407/versions/1",
-        "name": "Mistral-large-2407",
-        "displayName": "Mistral Large (2407)",
-        "version": "1",
-        "registryName": "azureml-mistral",
-        "publisher": "Mistral AI",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "Mistral Large (2407) is an advanced Large Language Model (LLM) with state-of-the-art reasoning, knowledge and coding capabilities.",
-        "createdTime": "2024-07-24T17:41:34.9643161+00:00",
-        "license": "custom",
-        "tradeRestricted": true
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Reasoning",
-            "RAG",
-            "Agents"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "high"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 128000,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en",
-                "fr",
-                "de",
-                "es",
-                "it",
-                "zh",
-                "ja",
-                "ko",
-                "pt",
-                "nl",
-                "pl"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml-mistral/models/Mistral-Large-2411/versions/2",
-        "name": "Mistral-Large-2411",
-        "displayName": "Mistral Large 24.11",
-        "version": "2",
-        "registryName": "azureml-mistral",
-        "publisher": "Mistral AI",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "Mistral Large 24.11 offers enhanced system prompts, advanced reasoning and function calling capabilities.",
-        "createdTime": "2024-12-13T21:50:18.5439658+00:00",
+        "createdTime": "2025-02-05T19:08:35.5322061+00:00",
         "license": "custom",
         "tradeRestricted": true
     },
@@ -2334,14 +3696,12 @@
         "popularity": 67.59,
         "inferenceTasks": [
             "chat-completion",
-            "conversational",
             "image-classification"
         ],
         "fineTuningTasks": [],
         "keywords": [
             "Multipurpose",
-            "Vision",
-            "Multimodal"
+            " Vision"
         ],
         "playgroundLimits": {
             "rateLimitTier": "low"
@@ -2414,150 +3774,29 @@
         "tradeRestricted": true
     },
     {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Reasoning",
-            "RAG",
-            "Agents"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 131072,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en",
-                "fr",
-                "de",
-                "es",
-                "it",
-                "zh",
-                "ja",
-                "ko",
-                "pt",
-                "nl",
-                "pl"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml-mistral/models/Mistral-Nemo/versions/1",
-        "name": "Mistral-Nemo",
-        "displayName": "Mistral Nemo",
-        "version": "1",
-        "registryName": "azureml-mistral",
-        "publisher": "Mistral AI",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "Mistral Nemo is a cutting-edge Language Model (LLM) boasting state-of-the-art reasoning, world knowledge, and coding capabilities within its size category.",
-        "createdTime": "2024-07-24T17:39:53.4666548+00:00",
-        "license": "custom",
-        "tradeRestricted": true
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [],
-        "keywords": [
-            "Low latency",
-            "Multilingual"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 32768,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "fr",
-                "de",
-                "es",
-                "it",
-                "en"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml-mistral/models/Mistral-small/versions/1",
-        "name": "Mistral-small",
-        "displayName": "Mistral Small",
-        "version": "1",
-        "registryName": "azureml-mistral",
-        "publisher": "Mistral AI",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "Mistral Small can be used on any language-based task that requires high efficiency and low latency.",
-        "createdTime": "2024-05-03T18:45:01.4637035+00:00",
-        "license": "custom",
-        "tradeRestricted": true
-    },
-    {
         "popularity": 66.0,
         "inferenceTasks": [
             "chat-completion",
-            "Completions",
-            "Conversational",
-            "Image classification",
-            "Question answering",
-            "Summarization",
-            "Table question answering",
-            "Text classification",
-            "Text generation",
-            "Text summarization",
-            "Text to text generation",
-            "Text translation",
-            "Translation",
-            "Visual question answering"
+            "image-classification",
+            "summarization",
+            "text-classification",
+            "text-generation",
+            "translation"
         ],
         "fineTuningTasks": [],
         "keywords": [
             "Multipurpose",
-            "Vision",
-            "Multimodal"
+            " Vision",
+            " Multimodal"
         ],
         "playgroundLimits": {
             "rateLimitTier": "low"
         },
         "modelCapabilities": [
             "agents",
-            "assistants"
+            "assistants",
+            "streaming",
+            "tool-calling"
         ],
         "modelLimits": {
             "textLimits": {
@@ -2697,6 +3936,7 @@
         "publisher": "OpenAI",
         "labels": [
             "latest",
+            "default",
             "invisibleLatest"
         ],
         "summary": "Focused on advanced reasoning and solving complex problems, including math and science tasks. Ideal for applications that require deep contextual understanding and agentic workflows.",
@@ -2859,6 +4099,7 @@
         "publisher": "OpenAI",
         "labels": [
             "latest",
+            "default",
             "invisibleLatest"
         ],
         "summary": "Focused on advanced reasoning and solving complex problems, including math and science tasks. Ideal for applications that require deep contextual understanding and agentic workflows.",
@@ -3070,882 +4311,6 @@
     {
         "popularity": 1.0,
         "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Reasoning",
-            "Understanding",
-            "Large context"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 131072,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml/models/Phi-3-medium-128k-instruct/versions/7",
-        "name": "Phi-3-medium-128k-instruct",
-        "displayName": "Phi-3-medium instruct (128k)",
-        "version": "7",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "Same Phi-3-medium model, but with a larger context size for RAG or few shot prompting.",
-        "createdTime": "2025-01-22T09:38:24.6534776+00:00",
-        "license": "mit",
-        "tradeRestricted": false
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Reasoning",
-            "Understanding"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 4096,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml/models/Phi-3-medium-4k-instruct/versions/6",
-        "name": "Phi-3-medium-4k-instruct",
-        "displayName": "Phi-3-medium instruct (4k)",
-        "version": "6",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "A 14B parameters model, proves better quality than Phi-3-mini, with a focus on high-quality, reasoning-dense data.",
-        "createdTime": "2025-01-22T09:59:48.5884637+00:00",
-        "license": "mit",
-        "tradeRestricted": false
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Reasoning",
-            "Understanding",
-            "Low latency"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 131072,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml/models/Phi-3-mini-128k-instruct/versions/13",
-        "name": "Phi-3-mini-128k-instruct",
-        "displayName": "Phi-3-mini instruct (128k)",
-        "version": "13",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "Same Phi-3-mini model, but with a larger context size for RAG or few shot prompting.",
-        "createdTime": "2025-01-22T10:19:48.1447372+00:00",
-        "license": "mit",
-        "tradeRestricted": false
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Reasoning",
-            "Understanding",
-            "Low latency"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 4096,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml/models/Phi-3-mini-4k-instruct/versions/15",
-        "name": "Phi-3-mini-4k-instruct",
-        "displayName": "Phi-3-mini instruct (4k)",
-        "version": "15",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "Tiniest member of the Phi-3 family. Optimized for both quality and low latency.",
-        "createdTime": "2025-01-22T10:39:16.4682652+00:00",
-        "license": "mit",
-        "tradeRestricted": false
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Reasoning",
-            "Understanding",
-            "Large context"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 131072,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml/models/Phi-3-small-128k-instruct/versions/5",
-        "name": "Phi-3-small-128k-instruct",
-        "displayName": "Phi-3-small instruct (128k)",
-        "version": "5",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "Same Phi-3-small model, but with a larger context size for RAG or few shot prompting.",
-        "createdTime": "2025-01-22T10:58:54.0520255+00:00",
-        "license": "mit",
-        "tradeRestricted": false
-    },
-    {
-        "popularity": 1.76,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Reasoning",
-            "Understanding"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 131072,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml/models/Phi-3-small-8k-instruct/versions/5",
-        "name": "Phi-3-small-8k-instruct",
-        "displayName": "Phi-3-small instruct (8k)",
-        "version": "5",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "A 7B parameters model, proves better quality than Phi-3-mini, with a focus on high-quality, reasoning-dense data.",
-        "createdTime": "2024-11-11T16:59:20.0030735+00:00",
-        "license": "mit",
-        "tradeRestricted": false
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Reasoning",
-            "Understanding",
-            "Low latency"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 131072,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en",
-                "ar",
-                "zh",
-                "cs",
-                "da",
-                "nl",
-                "fi",
-                "fr",
-                "de",
-                "he",
-                "hu",
-                "it",
-                "ja",
-                "ko",
-                "no",
-                "pl",
-                "pt",
-                "ru",
-                "es",
-                "sv",
-                "th",
-                "tr",
-                "uk"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml/models/Phi-3.5-mini-instruct/versions/6",
-        "name": "Phi-3.5-mini-instruct",
-        "displayName": "Phi-3.5-mini instruct (128k)",
-        "version": "6",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "Refresh of Phi-3-mini model.",
-        "createdTime": "2024-11-15T14:23:52.7964386+00:00",
-        "license": "mit",
-        "tradeRestricted": false
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Reasoning",
-            "Understanding",
-            "Low latency"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 131072,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en",
-                "ar",
-                "zh",
-                "cs",
-                "da",
-                "nl",
-                "fi",
-                "fr",
-                "de",
-                "he",
-                "hu",
-                "it",
-                "ja",
-                "ko",
-                "no",
-                "pl",
-                "pt",
-                "ru",
-                "es",
-                "sv",
-                "th",
-                "tr",
-                "uk"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml/models/Phi-3.5-MoE-instruct/versions/5",
-        "name": "Phi-3.5-MoE-instruct",
-        "displayName": "Phi-3.5-MoE instruct (128k)",
-        "version": "5",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "A new mixture of experts model",
-        "createdTime": "2024-12-24T17:26:15.8452288+00:00",
-        "license": "mit",
-        "tradeRestricted": false
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [],
-        "keywords": [
-            "Multimodal",
-            "Reasoning",
-            "Low latency"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 131072,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en"
-            ],
-            "supportedInputModalities": [
-                "text",
-                "image"
-            ],
-            "supportedOutputModalities": null
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml/models/Phi-3.5-vision-instruct/versions/2",
-        "name": "Phi-3.5-vision-instruct",
-        "displayName": "Phi-3.5-vision instruct (128k)",
-        "version": "2",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "latest",
-            "invisibleLatest"
-        ],
-        "summary": "Refresh of Phi-3-vision model.",
-        "createdTime": "2024-08-20T21:19:03.2226543+00:00",
-        "license": "mit",
-        "tradeRestricted": false
-    },
-    {
-        "popularity": 67.0,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Reasoning",
-            "Understanding",
-            "Low latency"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 16384,
-                "maxOutputTokens": 16384
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en",
-                "ar",
-                "bn",
-                "cs",
-                "da",
-                "de",
-                "el",
-                "es",
-                "fa",
-                "fi",
-                "fr",
-                "gu",
-                "ha",
-                "he",
-                "hi",
-                "hu",
-                "id",
-                "it",
-                "ja",
-                "jv",
-                "kn",
-                "ko",
-                "ml",
-                "mr",
-                "nl",
-                "no",
-                "or",
-                "pa",
-                "pl",
-                "ps",
-                "pt",
-                "ro",
-                "ru",
-                "sv",
-                "sw",
-                "ta",
-                "te",
-                "th",
-                "tl",
-                "tr",
-                "uk",
-                "ur",
-                "vi",
-                "yo",
-                "zh"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml/models/Phi-4/versions/8",
-        "name": "Phi-4",
-        "displayName": "Phi-4",
-        "version": "8",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "latest",
-            "default",
-            "invisibleLatest"
-        ],
-        "summary": "Phi-4 14B, a highly capable model for low latency scenarios.",
-        "createdTime": "2025-06-04T13:58:13.3241466+00:00",
-        "license": "MIT",
-        "tradeRestricted": false
-    },
-    {
-        "popularity": 67.03,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [
-            "chat-completion"
-        ],
-        "keywords": [
-            "Reasoning",
-            "Agents",
-            "Multilingual"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 128000,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "ar",
-                "zh",
-                "cs",
-                "da",
-                "nl",
-                "en",
-                "fi",
-                "fr",
-                "de",
-                "he",
-                "hu",
-                "it",
-                "ja",
-                "ko",
-                "no",
-                "pl",
-                "pt",
-                "ru",
-                "es",
-                "sv",
-                "th",
-                "tr",
-                "uk"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml/models/Phi-4-mini-instruct/versions/1",
-        "name": "Phi-4-mini-instruct",
-        "displayName": "Phi-4-mini-instruct",
-        "version": "1",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "invisibleLatest",
-            "default",
-            "latest"
-        ],
-        "summary": "3.8B parameters Small Language Model outperforming larger models in reasoning, math, coding, and function-calling",
-        "createdTime": "2025-02-20T20:05:20.8624716+00:00",
-        "license": "MIT",
-        "tradeRestricted": false
-    },
-    {
-        "popularity": 67.56,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [],
-        "keywords": [
-            "Reasoning",
-            " Large context",
-            " Low latency"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [
-            "reasoning"
-        ],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 128000,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml/models/Phi-4-mini-reasoning/versions/1",
-        "name": "Phi-4-mini-reasoning",
-        "displayName": "Phi-4-mini-reasoning",
-        "version": "1",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "invisibleLatest",
-            "default",
-            "latest"
-        ],
-        "summary": "Lightweight math reasoning model optimized for multi-step problem solving",
-        "createdTime": "2025-04-29T20:06:06.2698408+00:00",
-        "license": "MIT",
-        "tradeRestricted": false
-    },
-    {
-        "popularity": 67.02,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [],
-        "keywords": [
-            "Vision",
-            "Audio",
-            "Summarization"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [
-            "streaming"
-        ],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 128000,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "ar",
-                "zh",
-                "cs",
-                "da",
-                "nl",
-                "en",
-                "fi",
-                "fr",
-                "de",
-                "he",
-                "hu",
-                "it",
-                "ja",
-                "ko",
-                "pl",
-                "pt",
-                "ru",
-                "es",
-                "sv",
-                "th",
-                "tr",
-                "uk"
-            ],
-            "supportedInputModalities": [
-                "audio",
-                "image",
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml/models/Phi-4-multimodal-instruct/versions/2",
-        "name": "Phi-4-multimodal-instruct",
-        "displayName": "Phi-4-multimodal-instruct",
-        "version": "2",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "invisibleLatest",
-            "default",
-            "latest"
-        ],
-        "summary": "First small multimodal model to have 3 modality inputs (text, audio, image), excelling in quality and efficiency",
-        "createdTime": "2025-06-04T22:19:21.8323986+00:00",
-        "license": "MIT",
-        "tradeRestricted": false
-    },
-    {
-        "popularity": 67.57,
-        "inferenceTasks": [
-            "chat-completion"
-        ],
-        "fineTuningTasks": [],
-        "keywords": [
-            "Reasoning",
-            " Large context",
-            " Low latency"
-        ],
-        "playgroundLimits": {
-            "rateLimitTier": "low"
-        },
-        "modelCapabilities": [
-            "reasoning",
-            "streaming"
-        ],
-        "modelLimits": {
-            "textLimits": {
-                "inputContextWindow": 32768,
-                "maxOutputTokens": 4096
-            },
-            "otherLimits": {},
-            "supportedLanguages": [
-                "en"
-            ],
-            "supportedInputModalities": [
-                "text"
-            ],
-            "supportedOutputModalities": [
-                "text"
-            ]
-        },
-        "azureOffers": [
-            "standard-paygo",
-            "VM"
-        ],
-        "variantInformation": null,
-        "assetId": "azureml://registries/azureml/models/Phi-4-reasoning/versions/1",
-        "name": "Phi-4-reasoning",
-        "displayName": "Phi-4-Reasoning",
-        "version": "1",
-        "registryName": "azureml",
-        "publisher": "Microsoft",
-        "labels": [
-            "invisibleLatest",
-            "default",
-            "latest"
-        ],
-        "summary": "State-of-the-art open-weight reasoning model.",
-        "createdTime": "2025-04-29T20:08:13.5723326+00:00",
-        "license": "MIT",
-        "tradeRestricted": false
-    },
-    {
-        "popularity": 1.0,
-        "inferenceTasks": [
             "embeddings"
         ],
         "fineTuningTasks": [],
@@ -3985,6 +4350,7 @@
         "publisher": "OpenAI",
         "labels": [
             "latest",
+            "default",
             "invisibleLatest"
         ],
         "summary": "Text-embedding-3 series models are the latest and most capable embedding model from OpenAI.",
@@ -4034,6 +4400,7 @@
         "publisher": "OpenAI",
         "labels": [
             "latest",
+            "default",
             "invisibleLatest"
         ],
         "summary": "Text-embedding-3 series models are the latest and most capable embedding model from OpenAI.",
