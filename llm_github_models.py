@@ -1,4 +1,5 @@
 import json
+import os
 from typing import AsyncGenerator, Dict, Iterable, Iterator, List, Optional, Union
 
 import llm
@@ -335,6 +336,7 @@ def add_tool_calls(
 class _Shared:
     needs_key = "github"
     key_env_var = "GITHUB_MODELS_KEY"
+    secondary_key_env_var = "GITHUB_TOKEN"
     can_stream = True
 
     def __init__(
@@ -389,6 +391,27 @@ class _Shared:
             for t in prompt.tools
         ]
 
+    def get_github_key(self, configured_key: Optional[str] = None) -> str:
+        if configured_key is not None:
+            # Someone already set model.key='...'
+            return configured_key
+
+        # Attempt to load a key using llm.get_key()
+        key_value = llm.get_key(
+            key_alias=self.needs_key,
+            env_var=self.key_env_var,
+        )
+        if key_value:
+            return key_value
+        # Try secondary key
+        if os.environ.get(self.secondary_key_env_var):
+            return os.environ[self.secondary_key_env_var]
+
+        # Show a useful error message
+        message = f"""No key found - add one using 'llm keys set {self.needs_key}' \
+or set the {self.key_env_var} or {self.secondary_key_env_var} environment variables"""
+        raise llm.NeedsKeyException(message)
+
 
 class GitHubModels(_Shared, Model):
     def execute(
@@ -399,7 +422,7 @@ class GitHubModels(_Shared, Model):
         conversation: Optional[Conversation],
     ) -> Iterator[str]:
         # unset keys are handled by llm.Model.get_key()
-        key: str = self.get_key()  # type: ignore
+        key: str = self.get_github_key(self.key)  # type: ignore
 
         with ChatCompletionsClient(
             endpoint=INFERENCE_ENDPOINT,

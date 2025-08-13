@@ -25,6 +25,7 @@ or `pip install llm-github-models`
 ## Usage
 
 To set the API key, use the `llm keys set github` command or use the `GITHUB_MODELS_KEY` environment variable.
+If neither are present, `GITHUB_TOKEN` will be used. This environment variable is set in both GitHub Actions and the GitHub CLI.
 
 To get an API key, create a personal access token (PAT) inside [GitHub Settings](https://github.com/settings/tokens).
 
@@ -41,6 +42,38 @@ Sure! Here are some top facts about cheese:
 1. **Ancient Origins**: Cheese is one of the oldest man-made foods, with evidence of cheese-making dating back over 7,000 years.
 
 2. **Variety**: There are over 1,800 distinct types of cheese worldwide, varying by texture, flavor, milk source, and production methods.
+```
+
+## Usage in GitHub Actions
+
+By default, GitHub Actions runners have limited permissions, to generate a `GITHUB_TOKEN` with models access, configure a workflow with these settings:
+
+```yaml
+name: Python package
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      models: read
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.12
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install "llm-github-models"
+    - name: Run llm commands
+      run: |
+        llm prompt -m github/gpt-5-mini "Test prompt"
 ```
 
 ### Image attachments
