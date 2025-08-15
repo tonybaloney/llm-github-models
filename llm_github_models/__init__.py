@@ -517,9 +517,6 @@ class GitHubEmbeddingModel(EmbeddingModel):
         self.model_id = f"github/{model_id}"
         self.github_id = github_id
         self.model_name = model_name
-        if dimensions is not None:
-            self.model_id += f"-{dimensions}"
-
         self.dimensions = dimensions
 
     def embed_batch(self, items: Iterable[Union[str, bytes]]) -> Iterator[List[float]]:

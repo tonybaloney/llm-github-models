@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -18,4 +18,4 @@ class EmbeddingModelSpec(BaseModel):
     llm_id: str  # The model ID used in llm commands, e.g. `llm -m github/ai21-jamba-1.5-large`
     github_id: str  # The model ID used by GitHub API
     name: str  # The name of the model
-    dimensions: List[int]
+    dimensions: Optional[int]

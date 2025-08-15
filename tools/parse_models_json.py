@@ -65,14 +65,17 @@ print("Embedding models:")
 embedding_models = sorted(embedding_models)
 
 print("[")
-print(
-    ",\n".join(
-        [
-            f"EmbeddingModelSpec(llm_id='{model[0]}', github_id='{model[1]}', name='{model[2]}', dimensions={model[3]})"  # noqa: E501
-            for model in embedding_models
-        ]
-    )
-)
+
+for model in embedding_models:
+    if not model[3]:
+        print(
+            f"EmbeddingModelSpec(llm_id='{model[0]}', github_id='{model[1]}', name='{model[2]}', dimensions=None),"
+        )
+    else:
+        for dim in model[3]:
+            print(
+                f"EmbeddingModelSpec(llm_id='{model[0]}-{dim}', github_id='{model[1]}', name='{model[2]} ({dim})', dimensions={dim}),"
+            )
 print("]\n\n")
 
 with open("models.fragment.md", "w", encoding="utf-8") as f:
