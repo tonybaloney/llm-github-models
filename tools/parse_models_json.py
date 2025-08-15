@@ -3,82 +3,9 @@ A script to parse the models.json from the github API until there is a live API 
 """
 
 import json
-from pprint import pprint
 
 chat_models = []
 embedding_models = []
-
-
-def supports_schemas(name):
-    if name in [
-        "gpt-4o",
-        "gpt-4o-mini",
-        "gpt-4.1",
-        "gpt-4.1-mini",
-        "gpt-4.1-nano",
-        "gpt-5",
-        "gpt-5-mini",
-        "gpt-5-nano",
-        "gpt-5-chat",
-        "o1",
-        "o3-mini",
-    ]:
-        return True
-    return False
-
-
-def requires_usage_stream_option(name):
-    return name in [
-        "gpt-4o",
-        "gpt-4o-mini",
-        "gpt-4.1",
-        "gpt-4.1-mini",
-        "gpt-4.1-nano",
-        "gpt-5",
-        "gpt-5-mini",
-        "gpt-5-nano",
-        "gpt-5-chat",
-        "o3",
-        "o4-mini",
-    ]
-
-
-def supports_tools(name):
-    # Note: this list does not line up with the official docs at
-    # https://learn.microsoft.com/en-us/azure/machine-learning/concept-models-featured?view=azureml-api-2
-    # But in practice these are the models that work.
-    tool_supporting_models = [
-        "o3",
-        "o3-mini",
-        "o4-mini",
-        "o1",
-        "gpt-4o",
-        "gpt-4o-mini",
-        "gpt-4.1",
-        "gpt-4.1-mini",
-        "gpt-4.1-nano",
-        "gpt-5",
-        "gpt-5-mini",
-        "gpt-5-nano",
-        "gpt-5-chat",
-        "grok-3",
-        "grok-3-mini",
-        "cohere-command-a",
-        "Cohere-command-r-plus-08-2024",
-        "Cohere-command-r-08-2024",
-        "Cohere-command-r-plus",
-        "Cohere-command-r",
-        "Codestral-2501",
-        "Ministral-3B",
-        "Mistral-Nemo",
-        "Mistral-Large-2411",
-        "Mistral-large-2407",
-        "Mistral-large",
-        "mistral-medium-2505",
-        "mistral-small-2503",
-        "Mistral-small",
-    ]
-    return name in tool_supporting_models
 
 
 def extra_embedding_dimensions(name):
@@ -95,32 +22,58 @@ def extra_embedding_dimensions(name):
 with open("models.json", "r", encoding="utf-8") as f:
     models = json.load(f)
     for model in models:
-        if "chat-completion" in model["inferenceTasks"]:
+        id = model["id"].split("/")[-1]
+        if "text" in model["supported_output_modalities"]:
             chat_models.append(
                 (
+                    id,
+                    model["id"],
                     model["name"],
-                    supports_schemas(model["name"]),
-                    requires_usage_stream_option(model["name"]),
-                    supports_tools(model["name"]),
-                    model["modelLimits"]["supportedInputModalities"],
-                    model["modelLimits"]["supportedOutputModalities"],
+                    "agents" in model["capabilities"],
+                    "streaming" in model["capabilities"],
+                    "tool-calling" in model["capabilities"],
+                    model["supported_input_modalities"],
+                    model["supported_output_modalities"],
                 )
             )
-        elif "embeddings" in model["inferenceTasks"]:
-            embedding_models.append((model["name"], extra_embedding_dimensions(model["name"])))
+        elif "embeddings" in model["supported_output_modalities"]:
+            embedding_models.append(
+                (id, model["id"], model["name"], extra_embedding_dimensions(id))
+            )
         else:
-            print("Not sure what to do with this model: ", model["name"])
+            print(
+                "Not sure what to do with this model: ",
+                model["name"],
+                model["supported_output_modalities"],
+            )
 
 print("Chat models:")
 # sort by name
 chat_models = sorted(chat_models, key=lambda x: x[0])
-pprint(chat_models, indent=4, width=999)
+print("[")
+print(
+    ",\n".join(
+        [
+            f"ChatModelSpec(llm_id='{model[0]}', github_id='{model[1]}', name='{model[2]}', supports_schemas={model[3]}, supports_streaming={model[4]}, supports_tools={model[5]}, supported_input_modalities={model[6]}, supported_output_modalities={model[7]})"  # noqa: E501
+            for model in chat_models
+        ]
+    )
+)
+print("]\n\n")
 print("Embedding models:")
 # sort by name
 embedding_models = sorted(embedding_models)
-pprint(embedding_models, indent=4)
 
-# Make a Markdown series for the models
+print("[")
+print(
+    ",\n".join(
+        [
+            f"EmbeddingModelSpec(llm_id='{model[0]}', github_id='{model[1]}', name='{model[2]}', dimensions={model[3]})"  # noqa: E501
+            for model in embedding_models
+        ]
+    )
+)
+print("]\n\n")
 
 with open("models.fragment.md", "w", encoding="utf-8") as f:
     f.write("## Supported Models\n\n")
@@ -131,6 +84,8 @@ with open("models.fragment.md", "w", encoding="utf-8") as f:
     f.write("|------------|---------|-------|------------------|-------------------|\n")
 
     for (
+        _,
+        _,
         model_name,
         schemas,
         usage_stream,
@@ -148,7 +103,7 @@ with open("models.fragment.md", "w", encoding="utf-8") as f:
     f.write("\n")
 
     for model in models:
-        f.write(f"### {model['displayName']}\n\n")
-        f.write(f"Usage: `llm -m github/{model['name']}`\n\n")
+        f.write(f"### {model['name']}\n\n")
+        f.write(f"Usage: `llm -m github/{model['id'].split('/')[-1]}`\n\n")
         f.write(f"**Publisher:** {model['publisher']} \n\n")
         f.write(f"**Description:** {model['summary'].replace('\n## ', '\n#### ')} \n\n")

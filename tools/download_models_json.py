@@ -2,36 +2,18 @@ import json
 
 import requests
 
-url = "https://api.catalog.azureml.ms/asset-gallery/v1.0/models"
-headers = {"Content-Type": "application/json"}
-filters = {
-    "filters": [
-        {"field": "freePlayground", "operator": "eq", "values": ["true"]},
-        {"field": "labels", "operator": "eq", "values": ["latest"]},
-    ],
-    "order": [{"field": "name", "direction": "asc"}],
+url = "https://models.github.ai/catalog/models"
+headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28",
 }
 
-all_models = []
-continuation_token = None
+print("Fetching models...")
+response = requests.get(url, headers=headers, timeout=300)
+response.raise_for_status()
 
-while True:
-    payload = filters.copy()
-    if continuation_token:
-        payload["continuationToken"] = continuation_token
-
-    print("Fetching models...")
-    response = requests.post(url, headers=headers, json=payload)
-    response.raise_for_status()
-
-    data = response.json()
-    all_models.extend(data.get("summaries", []))
-
-    continuation_token = data.get("continuationToken")
-    if continuation_token:
-        print(f"Continuation token: {continuation_token}")
-    if not continuation_token:
-        break
+all_models = response.json()
 
 print("Saving models to models.json...")
 with open("models.json", "w") as f:

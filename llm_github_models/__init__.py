@@ -43,110 +43,37 @@ from llm.models import (
 )
 from pydantic import BaseModel
 
+from llm_github_models.chat_models import CHAT_MODELS
+from llm_github_models.embedding_models import EMBEDDING_MODELS
+
 INFERENCE_ENDPOINT = "https://models.github.ai/inference"
-
-CHAT_MODELS = [
-    ("AI21-Jamba-1.5-Large", False, False, False, ["text"], ["text"]),
-    ("AI21-Jamba-1.5-Mini", False, False, False, ["text"], ["text"]),
-    ("Codestral-2501", False, False, True, ["text"], ["text"]),
-    ("Cohere-command-r", False, False, True, ["text"], ["text"]),
-    ("Cohere-command-r-08-2024", False, False, True, ["text"], ["text"]),
-    ("Cohere-command-r-plus", False, False, True, ["text"], ["text"]),
-    ("Cohere-command-r-plus-08-2024", False, False, True, ["text"], ["text"]),
-    ("DeepSeek-R1", False, False, False, ["text"], ["text"]),
-    ("DeepSeek-R1-0528", False, False, False, ["text"], ["text"]),
-    ("DeepSeek-V3", False, False, False, ["text"], ["text"]),
-    ("DeepSeek-V3-0324", False, False, False, ["text"], ["text"]),
-    ("Llama-3.2-11B-Vision-Instruct", False, False, False, ["text", "image", "audio"], ["text"]),
-    ("Llama-3.2-90B-Vision-Instruct", False, False, False, ["text", "image", "audio"], ["text"]),
-    ("Llama-3.3-70B-Instruct", False, False, False, ["text"], ["text"]),
-    ("Llama-4-Maverick-17B-128E-Instruct-FP8", False, False, False, ["text", "image"], ["text"]),
-    ("Llama-4-Scout-17B-16E-Instruct", False, False, False, ["text", "image"], ["text"]),
-    ("MAI-DS-R1", False, False, False, ["text"], ["text"]),
-    ("Meta-Llama-3-70B-Instruct", False, False, False, ["text"], ["text"]),
-    ("Meta-Llama-3-8B-Instruct", False, False, False, ["text"], ["text"]),
-    ("Meta-Llama-3.1-405B-Instruct", False, False, False, ["text"], ["text"]),
-    ("Meta-Llama-3.1-70B-Instruct", False, False, False, ["text"], ["text"]),
-    ("Meta-Llama-3.1-8B-Instruct", False, False, False, ["text"], ["text"]),
-    ("Ministral-3B", False, False, True, ["text"], ["text"]),
-    ("Mistral-Large-2411", False, False, True, ["text"], ["text"]),
-    ("Mistral-Nemo", False, False, True, ["text"], ["text"]),
-    ("Mistral-large-2407", False, False, True, ["text"], ["text"]),
-    ("Mistral-small", False, False, True, ["text"], ["text"]),
-    ("Phi-3-medium-128k-instruct", False, False, False, ["text"], ["text"]),
-    ("Phi-3-medium-4k-instruct", False, False, False, ["text"], ["text"]),
-    ("Phi-3-mini-128k-instruct", False, False, False, ["text"], ["text"]),
-    ("Phi-3-mini-4k-instruct", False, False, False, ["text"], ["text"]),
-    ("Phi-3-small-128k-instruct", False, False, False, ["text"], ["text"]),
-    ("Phi-3-small-8k-instruct", False, False, False, ["text"], ["text"]),
-    ("Phi-3.5-MoE-instruct", False, False, False, ["text"], ["text"]),
-    ("Phi-3.5-mini-instruct", False, False, False, ["text"], ["text"]),
-    ("Phi-3.5-vision-instruct", False, False, False, ["text", "image"], None),
-    ("Phi-4", False, False, False, ["text"], ["text"]),
-    ("Phi-4-mini-instruct", False, False, False, ["text"], ["text"]),
-    ("Phi-4-mini-reasoning", False, False, False, ["text"], ["text"]),
-    ("Phi-4-multimodal-instruct", False, False, False, ["audio", "image", "text"], ["text"]),
-    ("Phi-4-reasoning", False, False, False, ["text"], ["text"]),
-    ("cohere-command-a", False, False, True, ["text"], ["text"]),
-    ("gpt-4.1", True, True, True, ["text", "image"], ["text"]),
-    ("gpt-4.1-mini", True, True, True, ["text", "image"], ["text"]),
-    ("gpt-4.1-nano", True, True, True, ["text", "image"], ["text"]),
-    ("gpt-4o", True, True, True, ["text", "image", "audio"], ["text"]),
-    ("gpt-4o-mini", True, True, True, ["text", "image", "audio"], ["text"]),
-    ("gpt-5", True, True, True, ["text", "image"], ["text"]),
-    ("gpt-5-chat", True, True, True, ["text", "image"], ["text"]),
-    ("gpt-5-mini", True, True, True, ["text", "image"], ["text"]),
-    ("gpt-5-nano", True, True, True, ["text", "image"], ["text"]),
-    ("grok-3", False, False, True, ["text"], ["text"]),
-    ("grok-3-mini", False, False, True, ["text"], ["text"]),
-    ("jais-30b-chat", False, False, False, ["text"], ["text"]),
-    ("mistral-medium-2505", False, False, True, ["text", "image"], ["text"]),
-    ("mistral-small-2503", False, False, True, ["text", "image"], ["text"]),
-    ("o1", True, False, True, ["text", "image"], ["text"]),
-    ("o1-mini", False, False, False, ["text"], ["text"]),
-    ("o1-preview", False, False, False, ["text"], ["text"]),
-    ("o3", False, True, True, ["text", "image"], ["text"]),
-    ("o3-mini", True, False, True, ["text"], ["text"]),
-    ("o4-mini", False, True, True, ["text", "image"], ["text"]),
-]
-
-EMBEDDING_MODELS = [
-    ("Cohere-embed-v3-english", []),
-    ("Cohere-embed-v3-multilingual", []),
-    ("embed-v-4-0", [256, 512, 1024]),
-    ("text-embedding-3-large", [1024, 256]),
-    ("text-embedding-3-small", [512]),
-]
 
 
 @llm.hookimpl
 def register_models(register):
     # Register both sync and async versions of each model
     # TODO: Dynamically fetch this list
-    for (
-        model_id,
-        supports_schema,
-        requires_usage_stream_option,
-        supports_tools,
-        input_modalities,
-        output_modalities,
-    ) in CHAT_MODELS:
+    for spec in CHAT_MODELS:
         register(
             GitHubModels(
-                model_id,
-                supports_schema=supports_schema,
-                requires_usage_stream_option=requires_usage_stream_option,
-                supports_tools=supports_tools,
-                input_modalities=input_modalities,
-                output_modalities=output_modalities,
+                model_id=spec.llm_id,
+                github_id=spec.github_id,
+                model_name=spec.name,
+                supports_schema=spec.supports_schemas,
+                requires_usage_stream_option=spec.supports_streaming,
+                supports_tools=spec.supports_tools,
+                input_modalities=spec.supported_input_modalities,
+                output_modalities=spec.supported_output_modalities,
             ),
             GitHubAsyncModels(
-                model_id,
-                supports_schema=supports_schema,
-                requires_usage_stream_option=requires_usage_stream_option,
-                supports_tools=supports_tools,
-                input_modalities=input_modalities,
-                output_modalities=output_modalities,
+                model_id=spec.llm_id,
+                github_id=spec.github_id,
+                model_name=spec.name,
+                supports_schema=spec.supports_schemas,
+                requires_usage_stream_option=spec.supports_streaming,
+                supports_tools=spec.supports_tools,
+                input_modalities=spec.supported_input_modalities,
+                output_modalities=spec.supported_output_modalities,
             ),
         )
 
@@ -154,10 +81,8 @@ def register_models(register):
 @llm.hookimpl
 def register_embedding_models(register):
     # Register embedding models
-    for model_id, supported_dimensions in EMBEDDING_MODELS:
-        register(GitHubEmbeddingModel(model_id))
-        for dimensions in supported_dimensions:
-            register(GitHubEmbeddingModel(model_id, dimensions=dimensions))
+    for model in EMBEDDING_MODELS:
+        register(GitHubEmbeddingModel(model.llm_id, model.github_id, model.name, model.dimensions))
 
 
 IMAGE_ATTACHMENTS = {
@@ -342,6 +267,8 @@ class _Shared:
     def __init__(
         self,
         model_id: str,
+        github_id: str,
+        model_name: str,
         supports_schema: bool = False,
         requires_usage_stream_option: bool = True,
         supports_tools: bool = False,
@@ -349,7 +276,8 @@ class _Shared:
         output_modalities: Optional[List[str]] = None,
     ):
         self.model_id = f"github/{model_id}"
-        self.model_name = model_id
+        self.github_id = github_id
+        self.model_name = model_name
         self.supports_schema = supports_schema
         self.supports_tools = supports_tools
         self.attachment_types = set()
@@ -427,7 +355,7 @@ class GitHubModels(_Shared, Model):
         with ChatCompletionsClient(
             endpoint=INFERENCE_ENDPOINT,
             credential=AzureKeyCredential(key),
-            model=self.model_name,
+            model=self.github_id,
             **self.client_kwargs,
         ) as client:
             response_format = "text"
@@ -509,7 +437,7 @@ class GitHubAsyncModels(_Shared, AsyncModel):
         async with AsyncChatCompletionsClient(
             endpoint=INFERENCE_ENDPOINT,
             credential=AzureKeyCredential(key),  # type: ignore[variable]
-            model=self.model_name,
+            model=self.github_id,
             **self.client_kwargs,
         ) as client:
             response_format = "text"
@@ -583,12 +511,15 @@ class GitHubEmbeddingModel(EmbeddingModel):
     key_env_var = "GITHUB_MODELS_KEY"
     batch_size = 100
 
-    def __init__(self, model_id: str, dimensions: Optional[int] = None):
+    def __init__(
+        self, model_id: str, github_id: str, model_name: str, dimensions: Optional[int] = None
+    ):
         self.model_id = f"github/{model_id}"
+        self.github_id = github_id
+        self.model_name = model_name
         if dimensions is not None:
             self.model_id += f"-{dimensions}"
 
-        self.model_name = model_id
         self.dimensions = dimensions
 
     def embed_batch(self, items: Iterable[Union[str, bytes]]) -> Iterator[List[float]]:
@@ -605,7 +536,7 @@ class GitHubEmbeddingModel(EmbeddingModel):
 
         kwargs = {
             "input": items,
-            "model": self.model_name,
+            "model": self.github_id,
         }
         if self.dimensions:
             kwargs["dimensions"] = self.dimensions
