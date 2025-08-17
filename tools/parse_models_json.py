@@ -8,6 +8,82 @@ chat_models = []
 embedding_models = []
 
 
+def supports_schemas(name):
+    if name in [
+        "gpt-4o",
+        "gpt-4o-mini",
+        "gpt-4.1",
+        "gpt-4.1-mini",
+        "gpt-4.1-nano",
+        "gpt-5",
+        "gpt-5-mini",
+        "gpt-5-nano",
+        # "gpt-5-chat", Leaving this here as a note to future self. It does not work.
+        "o1",
+        "o1-mini",  # does not work
+        "o3-mini",
+        "o4-mini",
+        "grok-3",
+        "grok-3-mini",
+    ]:
+        return True
+    return False
+
+
+def requires_usage_stream_option(name):
+    return name in [
+        "gpt-4o",
+        "gpt-4o-mini",
+        "gpt-4.1",
+        "gpt-4.1-mini",
+        "gpt-4.1-nano",
+        "gpt-5",
+        "gpt-5-mini",
+        "gpt-5-nano",
+        "gpt-5-chat",
+        "o3",
+        "o4-mini",
+    ]
+
+
+def supports_tools(name):
+    # Note: this list does not line up with the official docs at
+    # https://learn.microsoft.com/en-us/azure/machine-learning/concept-models-featured?view=azureml-api-2
+    # But in practice these are the models that work.
+    tool_supporting_models = [
+        "o3",
+        "o3-mini",
+        "o4-mini",
+        "o1",
+        "gpt-4o",
+        "gpt-4o-mini",
+        "gpt-4.1",
+        "gpt-4.1-mini",
+        "gpt-4.1-nano",
+        "gpt-5",
+        "gpt-5-mini",
+        "gpt-5-nano",
+        "gpt-5-chat",
+        "grok-3",
+        "grok-3-mini",
+        "cohere-command-a",
+        "Cohere-command-r-plus-08-2024",
+        "Cohere-command-r-08-2024",
+        "Cohere-command-r-plus",
+        "Cohere-command-r",
+        "Codestral-2501",
+        "Ministral-3B",
+        "Mistral-Nemo",
+        "Mistral-Large-2411",
+        "Mistral-large-2407",
+        "Mistral-large",
+        "mistral-medium-2505",
+        "mistral-small-2503",
+        "Mistral-small",
+    ]
+    return name in tool_supporting_models
+
+
 def extra_embedding_dimensions(name):
     if name == "text-embedding-3-large":
         return [1024, 256]
@@ -29,9 +105,9 @@ with open("models.json", "r", encoding="utf-8") as f:
                     id,
                     model["id"],
                     model["name"],
-                    "agents" in model["capabilities"],
-                    "streaming" in model["capabilities"],
-                    "tool-calling" in model["capabilities"],
+                    supports_schemas(id),
+                    requires_usage_stream_option(id),
+                    "tool-calling" in model["capabilities"] or supports_tools(id),
                     model["supported_input_modalities"],
                     model["supported_output_modalities"],
                 )
@@ -49,7 +125,7 @@ with open("models.json", "r", encoding="utf-8") as f:
 
 print("Chat models:")
 # sort by name
-chat_models = sorted(chat_models, key=lambda x: x[0])
+chat_models = sorted(chat_models, key=lambda x: x[1])
 print("[")
 print(
     ",\n".join(

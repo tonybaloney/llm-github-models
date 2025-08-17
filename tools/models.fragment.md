@@ -6,44 +6,21 @@
 |------------|---------|-------|------------------|-------------------|
 | AI21 Jamba 1.5 Large | ❌ | ✅ | text | text |
 | AI21 Jamba 1.5 Mini | ❌ | ✅ | text | text |
-| Codestral 25.01 | ❌ | ❌ | text | text |
-| Cohere Command A | ❌ | ❌ | text | text |
+| Cohere Command A | ❌ | ✅ | text | text |
 | Cohere Command R 08-2024 | ❌ | ❌ | text | text |
 | Cohere Command R+ 08-2024 | ❌ | ✅ | text | text |
+| JAIS 30b Chat | ❌ | ✅ | text | text |
 | DeepSeek-R1 | ❌ | ✅ | text | text |
 | DeepSeek-R1-0528 | ❌ | ✅ | text | text |
 | DeepSeek-V3-0324 | ❌ | ✅ | text | text |
-| OpenAI GPT-4.1 | ❌ | ✅ | text, image | text |
-| OpenAI GPT-4.1-mini | ❌ | ✅ | text, image | text |
-| OpenAI GPT-4.1-nano | ❌ | ✅ | text, image | text |
-| OpenAI GPT-4o | ✅ | ✅ | text, image, audio | text |
-| OpenAI GPT-4o mini | ✅ | ✅ | text, image, audio | text |
-| OpenAI gpt-5 | ❌ | ✅ | text, image | text |
-| OpenAI gpt-5-chat (preview) | ❌ | ✅ | text, image | text |
-| OpenAI gpt-5-mini | ❌ | ✅ | text, image | text |
-| OpenAI gpt-5-nano | ❌ | ✅ | text, image | text |
-| Grok 3 | ❌ | ❌ | text | text |
-| Grok 3 Mini | ❌ | ❌ | text | text |
-| JAIS 30b Chat | ❌ | ✅ | text | text |
 | Llama-3.2-11B-Vision-Instruct | ❌ | ❌ | text, image, audio | text |
 | Llama-3.2-90B-Vision-Instruct | ❌ | ❌ | text, image, audio | text |
 | Llama-3.3-70B-Instruct | ❌ | ❌ | text | text |
-| Llama 4 Maverick 17B 128E Instruct FP8 | ✅ | ✅ | text, image | text |
-| Llama 4 Scout 17B 16E Instruct | ✅ | ✅ | text, image | text |
-| MAI-DS-R1 | ❌ | ❌ | text | text |
-| Meta-Llama-3.1-405B-Instruct | ✅ | ❌ | text | text |
+| Llama 4 Maverick 17B 128E Instruct FP8 | ❌ | ✅ | text, image | text |
+| Llama 4 Scout 17B 16E Instruct | ❌ | ✅ | text, image | text |
+| Meta-Llama-3.1-405B-Instruct | ❌ | ❌ | text | text |
 | Meta-Llama-3.1-8B-Instruct | ❌ | ❌ | text | text |
-| Ministral 3B | ❌ | ✅ | text | text |
-| Mistral Large 24.11 | ❌ | ✅ | text | text |
-| Mistral Medium 3 (25.05) | ❌ | ✅ | text, image | text |
-| Mistral Nemo | ❌ | ✅ | text | text |
-| Mistral Small 3.1 | ✅ | ✅ | text, image | text |
-| OpenAI o1 | ❌ | ✅ | text, image | text |
-| OpenAI o1-mini | ❌ | ❌ | text | text |
-| OpenAI o1-preview | ❌ | ❌ | text | text |
-| OpenAI o3 | ❌ | ✅ | text, image | text |
-| OpenAI o3-mini | ❌ | ✅ | text | text |
-| OpenAI o4-mini | ❌ | ✅ | text, image | text |
+| MAI-DS-R1 | ❌ | ❌ | text | text |
 | Phi-3-medium instruct (128k) | ❌ | ❌ | text | text |
 | Phi-3-medium instruct (4k) | ❌ | ❌ | text | text |
 | Phi-3-mini instruct (128k) | ❌ | ❌ | text | text |
@@ -57,6 +34,29 @@
 | Phi-4-mini-reasoning | ❌ | ❌ | text | text |
 | Phi-4-multimodal-instruct | ❌ | ❌ | audio, image, text | text |
 | Phi-4-reasoning | ❌ | ❌ | text | text |
+| Codestral 25.01 | ❌ | ❌ | text | text |
+| Ministral 3B | ❌ | ✅ | text | text |
+| Mistral Large 24.11 | ❌ | ✅ | text | text |
+| Mistral Medium 3 (25.05) | ❌ | ✅ | text, image | text |
+| Mistral Nemo | ❌ | ✅ | text | text |
+| Mistral Small 3.1 | ❌ | ✅ | text, image | text |
+| OpenAI GPT-4.1 | ✅ | ✅ | text, image | text |
+| OpenAI GPT-4.1-mini | ✅ | ✅ | text, image | text |
+| OpenAI GPT-4.1-nano | ✅ | ✅ | text, image | text |
+| OpenAI GPT-4o | ✅ | ✅ | text, image, audio | text |
+| OpenAI GPT-4o mini | ✅ | ✅ | text, image, audio | text |
+| OpenAI gpt-5 | ✅ | ✅ | text, image | text |
+| OpenAI gpt-5-chat (preview) | ❌ | ✅ | text, image | text |
+| OpenAI gpt-5-mini | ✅ | ✅ | text, image | text |
+| OpenAI gpt-5-nano | ✅ | ✅ | text, image | text |
+| OpenAI o1 | ✅ | ✅ | text, image | text |
+| OpenAI o1-mini | ✅ | ❌ | text | text |
+| OpenAI o1-preview | ❌ | ❌ | text | text |
+| OpenAI o3 | ❌ | ✅ | text, image | text |
+| OpenAI o3-mini | ✅ | ✅ | text | text |
+| OpenAI o4-mini | ✅ | ✅ | text, image | text |
+| Grok 3 | ✅ | ✅ | text | text |
+| Grok 3 Mini | ✅ | ✅ | text | text |
 
 ### OpenAI GPT-4.1
 
