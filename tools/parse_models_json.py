@@ -67,21 +67,21 @@ def supports_tools(name):
         "grok-3",
         "grok-3-mini",
         "cohere-command-a",
-        "Cohere-command-r-plus-08-2024",
-        "Cohere-command-r-08-2024",
-        "Cohere-command-r-plus",
-        "Cohere-command-r",
-        "Codestral-2501",
-        "Ministral-3B",
-        "Mistral-Nemo",
-        "Mistral-Large-2411",
-        "Mistral-large-2407",
-        "Mistral-large",
+        "cohere-command-r-plus-08-2024",
+        "cohere-command-r-08-2024",
+        "cohere-command-r-plus",
+        "cohere-command-r",
+        "codestral-2501",
+        "ministral-3b",
+        "mistral-nemo",
+        "mistral-large-2411",
+        "mistral-large-2407",
+        "mistral-large",
         "mistral-medium-2505",
         "mistral-small-2503",
-        "Mistral-small",
+        "mistral-small",
     ]
-    return name in tool_supporting_models
+    return name.lower() in tool_supporting_models
 
 
 def extra_embedding_dimensions(name):
@@ -167,7 +167,7 @@ with open("models.fragment.md", "w", encoding="utf-8") as f:
     f.write("|------------|---------|-------|------------------|-------------------|\n")
 
     for (
-        _,
+        model_id,
         _,
         model_name,
         schemas,
@@ -182,7 +182,9 @@ with open("models.fragment.md", "w", encoding="utf-8") as f:
         input_str = ", ".join(input_modalities) if input_modalities else "text"
         output_str = ", ".join(output_modalities) if output_modalities else "text"
 
-        f.write(f"| {model_name} | {schemas_str} | {tools_str} | {input_str} | {output_str} |\n")
+        f.write(
+            f"| {model_name} (`{model_id}`) | {schemas_str} | {tools_str} | {input_str} | {output_str} |\n"
+        )
 
     f.write("\n")
 
