@@ -149,12 +149,12 @@ print("[")
 for model in embedding_models:
     if not model[3]:
         print(
-            f"EmbeddingModelSpec(llm_id='{model[0]}', github_id='{model[1]}', name='{model[2]}', dimensions=None),"
+            f"EmbeddingModelSpec(llm_id='{model[0]}', github_id='{model[1]}', name='{model[2]}', dimensions=None),"  # noqa: E501
         )
     else:
         for dim in model[3]:
             print(
-                f"EmbeddingModelSpec(llm_id='{model[0]}-{dim}', github_id='{model[1]}', name='{model[2]} ({dim})', dimensions={dim}),"
+                f"EmbeddingModelSpec(llm_id='{model[0]}-{dim}', github_id='{model[1]}', name='{model[2]} ({dim})', dimensions={dim}),"  # noqa: E501
             )
 print("]\n\n")
 
@@ -183,7 +183,7 @@ with open("models.fragment.md", "w", encoding="utf-8") as f:
         output_str = ", ".join(output_modalities) if output_modalities else "text"
 
         f.write(
-            f"| {model_name} (`{model_id}`) | {schemas_str} | {tools_str} | {input_str} | {output_str} |\n"
+            f"| {model_name} (`{model_id}`) | {schemas_str} | {tools_str} | {input_str} | {output_str} |\n"  # noqa: E501
         )
 
     f.write("\n")
