@@ -133,7 +133,7 @@ def test_embed_empty_list(MockEmbeddingsClient):
 def test_register_embedding_models():
     registered = []
 
-    def fake_register(instance):
+    def fake_register(instance, aliases=None):
         registered.append(instance)
 
     from llm_github_models import register_embedding_models
