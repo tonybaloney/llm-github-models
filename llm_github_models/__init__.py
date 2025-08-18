@@ -75,6 +75,7 @@ def register_models(register):
                 input_modalities=spec.supported_input_modalities,
                 output_modalities=spec.supported_output_modalities,
             ),
+            aliases=spec.aliases,
         )
 
 
@@ -82,7 +83,10 @@ def register_models(register):
 def register_embedding_models(register):
     # Register embedding models
     for model in EMBEDDING_MODELS:
-        register(GitHubEmbeddingModel(model.llm_id, model.github_id, model.name, model.dimensions))
+        register(
+            GitHubEmbeddingModel(model.llm_id, model.github_id, model.name, model.dimensions),
+            aliases=model.aliases,
+        )
 
 
 IMAGE_ATTACHMENTS = {

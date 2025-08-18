@@ -12,6 +12,7 @@ class ChatModelSpec(BaseModel):
     supports_tools: bool
     supported_input_modalities: List[str]
     supported_output_modalities: List[str]
+    aliases: Optional[List[str]] = None
 
 
 class EmbeddingModelSpec(BaseModel):
@@ -19,3 +20,4 @@ class EmbeddingModelSpec(BaseModel):
     github_id: str  # The model ID used by GitHub API
     name: str  # The name of the model
     dimensions: Optional[int]
+    aliases: Optional[List[str]] = None

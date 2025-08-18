@@ -99,6 +99,9 @@ with open("models.json", "r", encoding="utf-8") as f:
     models = json.load(f)
     for model in models:
         id = model["id"].split("/")[-1]
+        # This alias logic is because some models used to have weird mixed-case names, e.g.
+        # "Llama-3.2-11B-Vision-Instruct"
+        alias = model["name"].replace(" ", "-")
         if "text" in model["supported_output_modalities"]:
             chat_models.append(
                 (
@@ -110,11 +113,12 @@ with open("models.json", "r", encoding="utf-8") as f:
                     "tool-calling" in model["capabilities"] or supports_tools(id),
                     model["supported_input_modalities"],
                     model["supported_output_modalities"],
+                    [f"github/{alias}"],
                 )
             )
         elif "embeddings" in model["supported_output_modalities"]:
             embedding_models.append(
-                (id, model["id"], model["name"], extra_embedding_dimensions(id))
+                (id, model["id"], model["name"], extra_embedding_dimensions(id), None)
             )
         else:
             print(
@@ -130,7 +134,7 @@ print("[")
 print(
     ",\n".join(
         [
-            f"ChatModelSpec(llm_id='{model[0]}', github_id='{model[1]}', name='{model[2]}', supports_schemas={model[3]}, supports_streaming={model[4]}, supports_tools={model[5]}, supported_input_modalities={model[6]}, supported_output_modalities={model[7]})"  # noqa: E501
+            f"ChatModelSpec(llm_id='{model[0]}', github_id='{model[1]}', name='{model[2]}', supports_schemas={model[3]}, supports_streaming={model[4]}, supports_tools={model[5]}, supported_input_modalities={model[6]}, supported_output_modalities={model[7]}, aliases={model[8]})"  # noqa: E501
             for model in chat_models
         ]
     )
@@ -171,6 +175,7 @@ with open("models.fragment.md", "w", encoding="utf-8") as f:
         tools,
         input_modalities,
         output_modalities,
+        _,
     ) in chat_models:
         schemas_str = "✅" if schemas else "❌"
         tools_str = "✅" if tools else "❌"

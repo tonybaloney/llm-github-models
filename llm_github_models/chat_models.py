@@ -12,6 +12,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/AI21-Jamba-1.5-Large"],
     ),
     ChatModelSpec(
         llm_id="ai21-jamba-1.5-mini",
@@ -22,6 +23,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/AI21-Jamba-1.5-Mini"],
     ),
     ChatModelSpec(
         llm_id="cohere-command-a",
@@ -32,6 +34,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Cohere-Command-A"],
     ),
     ChatModelSpec(
         llm_id="cohere-command-r-08-2024",
@@ -42,6 +45,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Cohere-Command-R-08-2024"],
     ),
     ChatModelSpec(
         llm_id="cohere-command-r-plus-08-2024",
@@ -52,6 +56,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Cohere-Command-R+-08-2024"],
     ),
     ChatModelSpec(
         llm_id="jais-30b-chat",
@@ -62,6 +67,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/JAIS-30b-Chat"],
     ),
     ChatModelSpec(
         llm_id="deepseek-r1",
@@ -72,6 +78,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/DeepSeek-R1"],
     ),
     ChatModelSpec(
         llm_id="deepseek-r1-0528",
@@ -82,6 +89,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/DeepSeek-R1-0528"],
     ),
     ChatModelSpec(
         llm_id="deepseek-v3-0324",
@@ -92,6 +100,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/DeepSeek-V3-0324"],
     ),
     ChatModelSpec(
         llm_id="llama-3.2-11b-vision-instruct",
@@ -102,6 +111,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text", "image", "audio"],
         supported_output_modalities=["text"],
+        aliases=["github/Llama-3.2-11B-Vision-Instruct"],
     ),
     ChatModelSpec(
         llm_id="llama-3.2-90b-vision-instruct",
@@ -112,6 +122,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text", "image", "audio"],
         supported_output_modalities=["text"],
+        aliases=["github/Llama-3.2-90B-Vision-Instruct"],
     ),
     ChatModelSpec(
         llm_id="llama-3.3-70b-instruct",
@@ -122,6 +133,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Llama-3.3-70B-Instruct"],
     ),
     ChatModelSpec(
         llm_id="llama-4-maverick-17b-128e-instruct-fp8",
@@ -132,6 +144,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text", "image"],
         supported_output_modalities=["text"],
+        aliases=["github/Llama-4-Maverick-17B-128E-Instruct-FP8"],
     ),
     ChatModelSpec(
         llm_id="llama-4-scout-17b-16e-instruct",
@@ -142,6 +155,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text", "image"],
         supported_output_modalities=["text"],
+        aliases=["github/Llama-4-Scout-17B-16E-Instruct"],
     ),
     ChatModelSpec(
         llm_id="meta-llama-3.1-405b-instruct",
@@ -152,6 +166,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Meta-Llama-3.1-405B-Instruct"],
     ),
     ChatModelSpec(
         llm_id="meta-llama-3.1-8b-instruct",
@@ -162,6 +177,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Meta-Llama-3.1-8B-Instruct"],
     ),
     ChatModelSpec(
         llm_id="mai-ds-r1",
@@ -172,6 +188,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/MAI-DS-R1"],
     ),
     ChatModelSpec(
         llm_id="phi-3-medium-128k-instruct",
@@ -182,6 +199,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Phi-3-medium-instruct-(128k)"],
     ),
     ChatModelSpec(
         llm_id="phi-3-medium-4k-instruct",
@@ -192,6 +210,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Phi-3-medium-instruct-(4k)"],
     ),
     ChatModelSpec(
         llm_id="phi-3-mini-128k-instruct",
@@ -202,6 +221,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Phi-3-mini-instruct-(128k)"],
     ),
     ChatModelSpec(
         llm_id="phi-3-mini-4k-instruct",
@@ -212,6 +232,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Phi-3-mini-instruct-(4k)"],
     ),
     ChatModelSpec(
         llm_id="phi-3-small-128k-instruct",
@@ -222,6 +243,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Phi-3-small-instruct-(128k)"],
     ),
     ChatModelSpec(
         llm_id="phi-3-small-8k-instruct",
@@ -232,6 +254,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Phi-3-small-instruct-(8k)"],
     ),
     ChatModelSpec(
         llm_id="phi-3.5-mini-instruct",
@@ -242,6 +265,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Phi-3.5-mini-instruct-(128k)"],
     ),
     ChatModelSpec(
         llm_id="phi-3.5-moe-instruct",
@@ -252,6 +276,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Phi-3.5-MoE-instruct-(128k)"],
     ),
     ChatModelSpec(
         llm_id="phi-4",
@@ -262,6 +287,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Phi-4"],
     ),
     ChatModelSpec(
         llm_id="phi-4-mini-instruct",
@@ -272,6 +298,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Phi-4-mini-instruct"],
     ),
     ChatModelSpec(
         llm_id="phi-4-mini-reasoning",
@@ -282,6 +309,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Phi-4-mini-reasoning"],
     ),
     ChatModelSpec(
         llm_id="phi-4-multimodal-instruct",
@@ -292,6 +320,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["audio", "image", "text"],
         supported_output_modalities=["text"],
+        aliases=["github/Phi-4-multimodal-instruct"],
     ),
     ChatModelSpec(
         llm_id="phi-4-reasoning",
@@ -302,6 +331,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Phi-4-reasoning"],
     ),
     ChatModelSpec(
         llm_id="codestral-2501",
@@ -312,6 +342,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Codestral-25.01"],
     ),
     ChatModelSpec(
         llm_id="ministral-3b",
@@ -322,6 +353,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Ministral-3B"],
     ),
     ChatModelSpec(
         llm_id="mistral-large-2411",
@@ -332,6 +364,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Mistral-Large-24.11"],
     ),
     ChatModelSpec(
         llm_id="mistral-medium-2505",
@@ -342,6 +375,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text", "image"],
         supported_output_modalities=["text"],
+        aliases=["github/Mistral-Medium-3-(25.05)"],
     ),
     ChatModelSpec(
         llm_id="mistral-nemo",
@@ -352,6 +386,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Mistral-Nemo"],
     ),
     ChatModelSpec(
         llm_id="mistral-small-2503",
@@ -362,6 +397,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text", "image"],
         supported_output_modalities=["text"],
+        aliases=["github/Mistral-Small-3.1"],
     ),
     ChatModelSpec(
         llm_id="gpt-4.1",
@@ -372,6 +408,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text", "image"],
         supported_output_modalities=["text"],
+        aliases=["github/OpenAI-GPT-4.1"],
     ),
     ChatModelSpec(
         llm_id="gpt-4.1-mini",
@@ -382,6 +419,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text", "image"],
         supported_output_modalities=["text"],
+        aliases=["github/OpenAI-GPT-4.1-mini"],
     ),
     ChatModelSpec(
         llm_id="gpt-4.1-nano",
@@ -392,6 +430,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text", "image"],
         supported_output_modalities=["text"],
+        aliases=["github/OpenAI-GPT-4.1-nano"],
     ),
     ChatModelSpec(
         llm_id="gpt-4o",
@@ -402,6 +441,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text", "image", "audio"],
         supported_output_modalities=["text"],
+        aliases=["github/OpenAI-GPT-4o"],
     ),
     ChatModelSpec(
         llm_id="gpt-4o-mini",
@@ -412,6 +452,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text", "image", "audio"],
         supported_output_modalities=["text"],
+        aliases=["github/OpenAI-GPT-4o-mini"],
     ),
     ChatModelSpec(
         llm_id="gpt-5",
@@ -422,6 +463,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text", "image"],
         supported_output_modalities=["text"],
+        aliases=["github/OpenAI-gpt-5"],
     ),
     ChatModelSpec(
         llm_id="gpt-5-chat",
@@ -432,6 +474,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text", "image"],
         supported_output_modalities=["text"],
+        aliases=["github/OpenAI-gpt-5-chat-(preview)"],
     ),
     ChatModelSpec(
         llm_id="gpt-5-mini",
@@ -442,6 +485,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text", "image"],
         supported_output_modalities=["text"],
+        aliases=["github/OpenAI-gpt-5-mini"],
     ),
     ChatModelSpec(
         llm_id="gpt-5-nano",
@@ -452,6 +496,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text", "image"],
         supported_output_modalities=["text"],
+        aliases=["github/OpenAI-gpt-5-nano"],
     ),
     ChatModelSpec(
         llm_id="o1",
@@ -462,6 +507,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text", "image"],
         supported_output_modalities=["text"],
+        aliases=["github/OpenAI-o1"],
     ),
     ChatModelSpec(
         llm_id="o1-mini",
@@ -472,6 +518,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/OpenAI-o1-mini"],
     ),
     ChatModelSpec(
         llm_id="o1-preview",
@@ -482,6 +529,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=False,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/OpenAI-o1-preview"],
     ),
     ChatModelSpec(
         llm_id="o3",
@@ -492,6 +540,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text", "image"],
         supported_output_modalities=["text"],
+        aliases=["github/OpenAI-o3"],
     ),
     ChatModelSpec(
         llm_id="o3-mini",
@@ -502,6 +551,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/OpenAI-o3-mini"],
     ),
     ChatModelSpec(
         llm_id="o4-mini",
@@ -512,6 +562,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text", "image"],
         supported_output_modalities=["text"],
+        aliases=["github/OpenAI-o4-mini"],
     ),
     ChatModelSpec(
         llm_id="grok-3",
@@ -522,6 +573,7 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Grok-3"],
     ),
     ChatModelSpec(
         llm_id="grok-3-mini",
@@ -532,5 +584,6 @@ CHAT_MODELS: List[ChatModelSpec] = [
         supports_tools=True,
         supported_input_modalities=["text"],
         supported_output_modalities=["text"],
+        aliases=["github/Grok-3-Mini"],
     ),
 ]
