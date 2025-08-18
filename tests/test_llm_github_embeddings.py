@@ -4,16 +4,22 @@ import pytest
 from azure.ai.inference.models import EmbeddingItem, EmbeddingsResult
 
 from llm_github_models import EMBEDDING_MODELS, GitHubEmbeddingModel
+from llm_github_models._types import EmbeddingModelSpec
 
 EMBEDDING_MODEL_IDS = [f"github/{model}" for model in EMBEDDING_MODELS]
 
+DUMMY_MODEL = GitHubEmbeddingModel("test-model", "test-co/test-model", "Test Model", dimensions=3)
 
-@pytest.mark.parametrize("model_id", EMBEDDING_MODELS)
-def test_embedding_model_initialization(model_id: str):
+
+@pytest.mark.parametrize("model", EMBEDDING_MODELS)
+def test_embedding_model_initialization(model: EmbeddingModelSpec):
     """Test that embedding models are initialized correctly."""
-    embedding_model = GitHubEmbeddingModel(model_id)
-    assert embedding_model.model_id == f"github/{model_id}"
-    assert embedding_model.model_name == model_id
+    embedding_model = GitHubEmbeddingModel(
+        model.llm_id, model.github_id, model.name, model.dimensions
+    )
+
+    assert embedding_model.model_id == f"github/{model.llm_id}"
+    assert embedding_model.model_name == model.name
 
 
 @patch("llm_github_models.EmbeddingsClient", autospec=True)
@@ -25,11 +31,11 @@ def test_embed_single_text(MockEmbeddingsClient):
     # Mock the response
     mock_embedding = [0.1, 0.2, 0.3, 0.4, 0.5]
     mock_embedding_item = EmbeddingItem(embedding=mock_embedding, index=0)
-    mock_result = EmbeddingsResult(data=[mock_embedding_item])
+    mock_result = EmbeddingsResult(id="test-id", data=[mock_embedding_item])
     mock_instance.embed.return_value = mock_result
 
     # Create model and call embed
-    model = GitHubEmbeddingModel("test-model")
+    model = GitHubEmbeddingModel("test-model", "test-model", "Test Model")
     # Patch the get_key method to avoid actual key retrieval
     with patch.object(model, "get_key", return_value="test-key"):
         result = model.embed_batch(["This is a test text"])
@@ -59,7 +65,7 @@ def test_embed_with_dimensions(MockEmbeddingsClient):
     mock_instance.embed.return_value = mock_result
 
     # Create model and call embed
-    model = GitHubEmbeddingModel("test-model", 1234)
+    model = GitHubEmbeddingModel("test-model", "test-model", "Test Model", 1234)
     # Patch the get_key method to avoid actual key retrieval
     with patch.object(model, "get_key", return_value="test-key"):
         result = model.embed_batch(["This is a test text"])
@@ -95,7 +101,7 @@ def test_embed_multiple_texts(MockEmbeddingsClient):
     mock_instance.embed.return_value = mock_result
 
     # Create model and call embed
-    model = GitHubEmbeddingModel("test-model")
+    model = DUMMY_MODEL
     # Patch the get_key method to avoid actual key retrieval
     with patch.object(model, "get_key", return_value="test-key"):
         texts = ["First text", "Second text"]
@@ -104,8 +110,9 @@ def test_embed_multiple_texts(MockEmbeddingsClient):
     # Assertions
     MockEmbeddingsClient.assert_called_once()
     mock_instance.embed.assert_called_once_with(
-        model="test-model",
+        model="test-co/test-model",
         input=texts,
+        dimensions=3,
     )
     result = list(result)
     assert len(result) == 2
@@ -115,7 +122,7 @@ def test_embed_multiple_texts(MockEmbeddingsClient):
 
 @patch("llm_github_models.EmbeddingsClient", autospec=True)
 def test_embed_empty_list(MockEmbeddingsClient):
-    model = GitHubEmbeddingModel("text-embedding-3-small")
+    model = DUMMY_MODEL
     with patch.object(model, "get_key", return_value="key"):
         result = model.embed_batch([])
     assert list(result) == []
@@ -126,27 +133,23 @@ def test_embed_empty_list(MockEmbeddingsClient):
 def test_register_embedding_models():
     registered = []
 
-    def fake_register(instance):
+    def fake_register(instance, aliases=None):
         registered.append(instance)
 
     from llm_github_models import register_embedding_models
 
     register_embedding_models(fake_register)
 
-    def check_model(model_id, dimensions=None):
-        suffix = f"-{dimensions}" if dimensions else ""
-        m = next(m for m in registered if m.model_id == f"github/{model_id}{suffix}")
+    def check_model(model: EmbeddingModelSpec):
+        m = next(m for m in registered if m.model_id == f"github/{model.llm_id}")
 
         assert isinstance(m, GitHubEmbeddingModel)
-        assert m.model_name == model_id
-        assert m.dimensions == dimensions
+        assert m.model_name == model.name
+        assert m.dimensions == model.dimensions
 
         registered.remove(m)
 
-    for model_id, supported_dimensions in EMBEDDING_MODELS:
-        check_model(model_id)
-
-        for dims in supported_dimensions:
-            check_model(model_id, dims)
+    for model in EMBEDDING_MODELS:
+        check_model(model)
 
     assert not registered, "More models registered than expected"

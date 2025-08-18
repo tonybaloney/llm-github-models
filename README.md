@@ -44,7 +44,35 @@ Sure! Here are some top facts about cheese:
 2. **Variety**: There are over 1,800 distinct types of cheese worldwide, varying by texture, flavor, milk source, and production methods.
 ```
 
-## Usage in GitHub Actions
+### Image attachments
+
+Multi-modal vision models can accept image attachments using the [LLM attachments](https://llm.datasette.io/en/stable/usage.html#attachments) options:
+
+```bash
+llm -m github/Llama-3.2-11B-Vision-Instruct "Describe this image" -a https://static.simonwillison.net/static/2024/pelicans.jpg
+```
+
+Produces
+```bash
+This image depicts a dense gathering of pelicans, with the largest birds situated in the center, showcasing their light brown plumage and long, pointed beaks. The pelicans are standing on a rocky shoreline, with a serene body of water behind them, characterized by its pale blue hue and gentle ripples. In the background, a dark, rocky cliff rises, adding depth to the scene.
+
+The overall atmosphere of the image exudes tranquility, with the pelicans seemingly engaging in a social gathering or feeding activity. The photograph's clarity and focus on the pelicans' behavior evoke a sense of observation and appreciation for the natural world.
+```
+
+### Schemas
+
+Many of the models [see Supported Models](#supported-models) support schemas, which can be used to structure the output. For example, using the `github/gpt-4.1-mini` model:
+
+```bash
+$ llm -m github/gpt-4.1-mini --schema 'name, age int, one_sentence_bio' 'invent a cool dog'
+{"name":"Zephyr","age":3,"one_sentence_bio":"Zephyr is a sleek, silver-coated dog with electric blue eyes and the ability to sprint at lightning speed, known for his boundless energy and playful spirit."}
+```
+
+### Tools
+
+
+
+### Usage in GitHub Actions
 
 By default, GitHub Actions runners have limited permissions, to generate a `GITHUB_TOKEN` with models access, configure a workflow with these settings:
 
@@ -76,465 +104,65 @@ jobs:
         llm prompt -m github/gpt-5-mini "Test prompt"
 ```
 
-### Image attachments
-
-Multi-modal vision models can accept image attachments using the [LLM attachments](https://llm.datasette.io/en/stable/usage.html#attachments) options:
-
-```bash
-llm -m github/Llama-3.2-11B-Vision-Instruct "Describe this image" -a https://static.simonwillison.net/static/2024/pelicans.jpg
-```
-
-Produces
-```bash
-This image depicts a dense gathering of pelicans, with the largest birds situated in the center, showcasing their light brown plumage and long, pointed beaks. The pelicans are standing on a rocky shoreline, with a serene body of water behind them, characterized by its pale blue hue and gentle ripples. In the background, a dark, rocky cliff rises, adding depth to the scene.
-
-The overall atmosphere of the image exudes tranquility, with the pelicans seemingly engaging in a social gathering or feeding activity. The photograph's clarity and focus on the pelicans' behavior evoke a sense of observation and appreciation for the natural world.
-```
-
 ## Supported Models
 
 ### Chat Models
 
 | Model Name | Schemas | Tools | Input Modalities | Output Modalities |
 |------------|---------|-------|------------------|-------------------|
-| AI21-Jamba-1.5-Large | ❌ | ❌ | text | text |
-| AI21-Jamba-1.5-Mini | ❌ | ❌ | text | text |
-| Codestral-2501 | ❌ | ✅ | text | text |
-| Cohere-command-r | ❌ | ✅ | text | text |
-| Cohere-command-r-08-2024 | ❌ | ✅ | text | text |
-| Cohere-command-r-plus | ❌ | ✅ | text | text |
-| Cohere-command-r-plus-08-2024 | ❌ | ✅ | text | text |
-| DeepSeek-R1 | ❌ | ❌ | text | text |
-| DeepSeek-R1-0528 | ❌ | ❌ | text | text |
-| DeepSeek-V3 | ❌ | ❌ | text | text |
-| DeepSeek-V3-0324 | ❌ | ❌ | text | text |
-| Llama-3.2-11B-Vision-Instruct | ❌ | ❌ | text, image, audio | text |
-| Llama-3.2-90B-Vision-Instruct | ❌ | ❌ | text, image, audio | text |
-| Llama-3.3-70B-Instruct | ❌ | ❌ | text | text |
-| Llama-4-Maverick-17B-128E-Instruct-FP8 | ❌ | ❌ | text, image | text |
-| Llama-4-Scout-17B-16E-Instruct | ❌ | ❌ | text, image | text |
-| MAI-DS-R1 | ❌ | ❌ | text | text |
-| Meta-Llama-3-70B-Instruct | ❌ | ❌ | text | text |
-| Meta-Llama-3-8B-Instruct | ❌ | ❌ | text | text |
-| Meta-Llama-3.1-405B-Instruct | ❌ | ❌ | text | text |
-| Meta-Llama-3.1-70B-Instruct | ❌ | ❌ | text | text |
-| Meta-Llama-3.1-8B-Instruct | ❌ | ❌ | text | text |
-| Ministral-3B | ❌ | ✅ | text | text |
-| Mistral-Large-2411 | ❌ | ✅ | text | text |
-| Mistral-Nemo | ❌ | ✅ | text | text |
-| Mistral-large-2407 | ❌ | ✅ | text | text |
-| Mistral-small | ❌ | ✅ | text | text |
-| Phi-3-medium-128k-instruct | ❌ | ❌ | text | text |
-| Phi-3-medium-4k-instruct | ❌ | ❌ | text | text |
-| Phi-3-mini-128k-instruct | ❌ | ❌ | text | text |
-| Phi-3-mini-4k-instruct | ❌ | ❌ | text | text |
-| Phi-3-small-128k-instruct | ❌ | ❌ | text | text |
-| Phi-3-small-8k-instruct | ❌ | ❌ | text | text |
-| Phi-3.5-MoE-instruct | ❌ | ❌ | text | text |
-| Phi-3.5-mini-instruct | ❌ | ❌ | text | text |
-| Phi-3.5-vision-instruct | ❌ | ❌ | text, image | text |
-| Phi-4 | ❌ | ❌ | text | text |
-| Phi-4-mini-instruct | ❌ | ❌ | text | text |
-| Phi-4-mini-reasoning | ❌ | ❌ | text | text |
-| Phi-4-multimodal-instruct | ❌ | ❌ | audio, image, text | text |
-| Phi-4-reasoning | ❌ | ❌ | text | text |
-| cohere-command-a | ❌ | ✅ | text | text |
-| gpt-4.1 | ✅ | ✅ | text, image | text |
-| gpt-4.1-mini | ✅ | ✅ | text, image | text |
-| gpt-4.1-nano | ✅ | ✅ | text, image | text |
-| gpt-4o | ✅ | ✅ | text, image, audio | text |
-| gpt-4o-mini | ✅ | ✅ | text, image, audio | text |
-| gpt-5 | ✅ | ✅ | text, image | text |
-| gpt-5-chat | ✅ | ✅ | text, image | text |
-| gpt-5-mini | ✅ | ✅ | text, image | text |
-| gpt-5-nano | ✅ | ✅ | text, image | text |
-| grok-3 | ❌ | ✅ | text | text |
-| grok-3-mini | ❌ | ✅ | text | text |
-| jais-30b-chat | ❌ | ❌ | text | text |
-| mistral-medium-2505 | ❌ | ✅ | text, image | text |
-| mistral-small-2503 | ❌ | ✅ | text, image | text |
-| o1 | ✅ | ✅ | text, image | text |
-| o1-mini | ❌ | ❌ | text | text |
-| o1-preview | ❌ | ❌ | text | text |
-| o3 | ❌ | ✅ | text, image | text |
-| o3-mini | ✅ | ✅ | text | text |
-| o4-mini | ❌ | ✅ | text, image | text |
-
-### AI21 Jamba 1.5 Large
-
-Usage: `llm -m github/AI21-Jamba-1.5-Large`
-
-**Publisher:** AI21 Labs 
-
-**Description:** A 398B parameters (94B active) multilingual model, offering a 256K long context window, function calling, structured output, and grounded generation. 
-
-### AI21 Jamba 1.5 Mini
-
-Usage: `llm -m github/AI21-Jamba-1.5-Mini`
-
-**Publisher:** AI21 Labs 
-
-**Description:** A 52B parameters (12B active) multilingual model, offering a 256K long context window, function calling, structured output, and grounded generation. 
-
-### Codestral 25.01
-
-Usage: `llm -m github/Codestral-2501`
-
-**Publisher:** Mistral AI 
-
-**Description:** Codestral 25.01 by Mistral AI is designed for code generation, supporting 80+ programming languages, and optimized for tasks like code completion and fill-in-the-middle 
-
-### Cohere Command R
-
-Usage: `llm -m github/Cohere-command-r`
-
-**Publisher:** Cohere 
-
-**Description:** Command R is a scalable generative model targeting RAG and Tool Use to enable production-scale AI for enterprise. 
-
-### Cohere Command R 08-2024
-
-Usage: `llm -m github/Cohere-command-r-08-2024`
-
-**Publisher:** Cohere 
-
-**Description:** Command R is a scalable generative model targeting RAG and Tool Use to enable production-scale AI for enterprise. 
-
-### Cohere Command R+
-
-Usage: `llm -m github/Cohere-command-r-plus`
-
-**Publisher:** Cohere 
-
-**Description:** Command R+ is a state-of-the-art RAG-optimized model designed to tackle enterprise-grade workloads. 
-
-### Cohere Command R+ 08-2024
-
-Usage: `llm -m github/Cohere-command-r-plus-08-2024`
-
-**Publisher:** Cohere 
-
-**Description:** Command R+ is a state-of-the-art RAG-optimized model designed to tackle enterprise-grade workloads. 
-
-### Cohere Embed v3 English
-
-Usage: `llm -m github/Cohere-embed-v3-english`
-
-**Publisher:** Cohere 
-
-**Description:** Cohere Embed English is the market's leading text representation model used for semantic search, retrieval-augmented generation (RAG), classification, and clustering. 
-
-### Cohere Embed v3 Multilingual
-
-Usage: `llm -m github/Cohere-embed-v3-multilingual`
-
-**Publisher:** Cohere 
-
-**Description:** Cohere Embed Multilingual is the market's leading text representation model used for semantic search, retrieval-augmented generation (RAG), classification, and clustering. 
-
-### DeepSeek-R1
-
-Usage: `llm -m github/DeepSeek-R1`
-
-**Publisher:** DeepSeek 
-
-**Description:** DeepSeek-R1 excels at reasoning tasks using a step-by-step training process, such as language, scientific reasoning, and coding tasks. 
-
-### DeepSeek-R1-0528
-
-Usage: `llm -m github/DeepSeek-R1-0528`
-
-**Publisher:** DeepSeek 
-
-**Description:** The DeepSeek R1 0528 model has improved reasoning capabilities, this version also offers a reduced hallucination rate, enhanced support for function calling, and better experience for vibe coding. 
-
-### DeepSeek-V3
-
-Usage: `llm -m github/DeepSeek-V3`
-
-**Publisher:** DeepSeek 
-
-**Description:** A strong Mixture-of-Experts (MoE) language model with 671B total parameters with 37B activated for each token. 
-
-### DeepSeek-V3-0324
-
-Usage: `llm -m github/DeepSeek-V3-0324`
-
-**Publisher:** DeepSeek 
-
-**Description:** DeepSeek-V3-0324 demonstrates notable improvements over its predecessor, DeepSeek-V3, in several key aspects, including enhanced reasoning, improved function calling, and superior code generation capabilities. 
-
-### FLUX1.1 [pro]
-
-Usage: `llm -m github/Flux-1.1-Pro`
-
-**Publisher:** Black Forest Labs 
-
-**Description:** Generate images with amazing image quality, prompt adherence, and diversity at blazing fast speeds. FLUX1.1 [pro] delivers six times faster image generation and achieved the highest Elo score on Artificial Analysis benchmarks when launched, surpassing all  
-
-### FLUX.1 Kontext [pro]
-
-Usage: `llm -m github/Flux.1-Kontext-pro`
-
-**Publisher:** Black Forest Labs 
-
-**Description:** Generate and edit images through both text and image prompts. FLUX.1 Kontext is a multimodal flow matching model that enables both text-to-image generation and in-context image editing. Modify images while maintaining character consistency and performing l 
-
-### Llama-3.2-11B-Vision-Instruct
-
-Usage: `llm -m github/Llama-3.2-11B-Vision-Instruct`
-
-**Publisher:** Meta 
-
-**Description:** Excels in image reasoning capabilities on high-res images for visual understanding apps. 
-
-### Llama-3.2-90B-Vision-Instruct
-
-Usage: `llm -m github/Llama-3.2-90B-Vision-Instruct`
-
-**Publisher:** Meta 
-
-**Description:** Advanced image reasoning capabilities for visual understanding agentic apps. 
-
-### Llama-3.3-70B-Instruct
-
-Usage: `llm -m github/Llama-3.3-70B-Instruct`
-
-**Publisher:** Meta 
-
-**Description:** Llama 3.3 70B Instruct offers enhanced reasoning, math, and instruction following with performance comparable to Llama 3.1 405B. 
-
-### Llama 4 Maverick 17B 128E Instruct FP8
-
-Usage: `llm -m github/Llama-4-Maverick-17B-128E-Instruct-FP8`
-
-**Publisher:** Meta 
-
-**Description:** Llama 4 Maverick 17B 128E Instruct FP8 is great at precise image understanding and creative writing, offering high quality at a lower price compared to Llama 3.3 70B 
-
-### Llama 4 Scout 17B 16E Instruct
-
-Usage: `llm -m github/Llama-4-Scout-17B-16E-Instruct`
-
-**Publisher:** Meta 
-
-**Description:** Llama 4 Scout 17B 16E Instruct is great at multi-document summarization, parsing extensive user activity for personalized tasks, and reasoning over vast codebases. 
-
-### MAI-DS-R1
-
-Usage: `llm -m github/MAI-DS-R1`
-
-**Publisher:** Microsoft 
-
-**Description:** MAI-DS-R1 is a DeepSeek-R1 reasoning model that has been post-trained by the Microsoft AI team to fill in information gaps in the previous version of the model and improve its harm protections while maintaining R1 reasoning capabilities. 
-
-### Meta-Llama-3-70B-Instruct
-
-Usage: `llm -m github/Meta-Llama-3-70B-Instruct`
-
-**Publisher:** Meta 
-
-**Description:** A powerful 70-billion parameter model excelling in reasoning, coding, and broad language applications. 
-
-### Meta-Llama-3-8B-Instruct
-
-Usage: `llm -m github/Meta-Llama-3-8B-Instruct`
-
-**Publisher:** Meta 
-
-**Description:** A versatile 8-billion parameter model optimized for dialogue and text generation tasks. 
-
-### Meta-Llama-3.1-405B-Instruct
-
-Usage: `llm -m github/Meta-Llama-3.1-405B-Instruct`
-
-**Publisher:** Meta 
-
-**Description:** The Llama 3.1 instruction tuned text only models are optimized for multilingual dialogue use cases and outperform many of the available open source and closed chat models on common industry benchmarks. 
-
-### Meta-Llama-3.1-70B-Instruct
-
-Usage: `llm -m github/Meta-Llama-3.1-70B-Instruct`
-
-**Publisher:** Meta 
-
-**Description:** The Llama 3.1 instruction tuned text only models are optimized for multilingual dialogue use cases and outperform many of the available open source and closed chat models on common industry benchmarks. 
-
-### Meta-Llama-3.1-8B-Instruct
-
-Usage: `llm -m github/Meta-Llama-3.1-8B-Instruct`
-
-**Publisher:** Meta 
-
-**Description:** The Llama 3.1 instruction tuned text only models are optimized for multilingual dialogue use cases and outperform many of the available open source and closed chat models on common industry benchmarks. 
-
-### Ministral 3B
-
-Usage: `llm -m github/Ministral-3B`
-
-**Publisher:** Mistral AI 
-
-**Description:** Ministral 3B is a state-of-the-art Small Language Model (SLM) optimized for edge computing and on-device applications. As it is designed for low-latency and compute-efficient inference, it it also the perfect model for standard GenAI applications that have 
-
-### Mistral Large 24.11
-
-Usage: `llm -m github/Mistral-Large-2411`
-
-**Publisher:** Mistral AI 
-
-**Description:** Mistral Large 24.11 offers enhanced system prompts, advanced reasoning and function calling capabilities. 
-
-### Mistral Nemo
-
-Usage: `llm -m github/Mistral-Nemo`
-
-**Publisher:** Mistral AI 
-
-**Description:** Mistral Nemo is a cutting-edge Language Model (LLM) boasting state-of-the-art reasoning, world knowledge, and coding capabilities within its size category. 
-
-### Mistral Large (2407)
-
-Usage: `llm -m github/Mistral-large-2407`
-
-**Publisher:** Mistral AI 
-
-**Description:** Mistral Large (2407) is an advanced Large Language Model (LLM) with state-of-the-art reasoning, knowledge and coding capabilities. 
-
-### Mistral Small
-
-Usage: `llm -m github/Mistral-small`
-
-**Publisher:** Mistral AI 
-
-**Description:** Mistral Small can be used on any language-based task that requires high efficiency and low latency. 
-
-### Phi-3-medium instruct (128k)
-
-Usage: `llm -m github/Phi-3-medium-128k-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** Same Phi-3-medium model, but with a larger context size for RAG or few shot prompting. 
-
-### Phi-3-medium instruct (4k)
-
-Usage: `llm -m github/Phi-3-medium-4k-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** A 14B parameters model, proves better quality than Phi-3-mini, with a focus on high-quality, reasoning-dense data. 
-
-### Phi-3-mini instruct (128k)
-
-Usage: `llm -m github/Phi-3-mini-128k-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** Same Phi-3-mini model, but with a larger context size for RAG or few shot prompting. 
-
-### Phi-3-mini instruct (4k)
-
-Usage: `llm -m github/Phi-3-mini-4k-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** Tiniest member of the Phi-3 family. Optimized for both quality and low latency. 
-
-### Phi-3-small instruct (128k)
-
-Usage: `llm -m github/Phi-3-small-128k-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** Same Phi-3-small model, but with a larger context size for RAG or few shot prompting. 
-
-### Phi-3-small instruct (8k)
-
-Usage: `llm -m github/Phi-3-small-8k-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** A 7B parameters model, proves better quality than Phi-3-mini, with a focus on high-quality, reasoning-dense data. 
-
-### Phi-3.5-MoE instruct (128k)
-
-Usage: `llm -m github/Phi-3.5-MoE-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** A new mixture of experts model 
-
-### Phi-3.5-mini instruct (128k)
-
-Usage: `llm -m github/Phi-3.5-mini-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** Refresh of Phi-3-mini model. 
-
-### Phi-3.5-vision instruct (128k)
-
-Usage: `llm -m github/Phi-3.5-vision-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** Refresh of Phi-3-vision model. 
-
-### Phi-4
-
-Usage: `llm -m github/Phi-4`
-
-**Publisher:** Microsoft 
-
-**Description:** Phi-4 14B, a highly capable model for low latency scenarios. 
-
-### Phi-4-mini-instruct
-
-Usage: `llm -m github/Phi-4-mini-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** 3.8B parameters Small Language Model outperforming larger models in reasoning, math, coding, and function-calling 
-
-### Phi-4-mini-reasoning
-
-Usage: `llm -m github/Phi-4-mini-reasoning`
-
-**Publisher:** Microsoft 
-
-**Description:** Lightweight math reasoning model optimized for multi-step problem solving 
-
-### Phi-4-multimodal-instruct
-
-Usage: `llm -m github/Phi-4-multimodal-instruct`
-
-**Publisher:** Microsoft 
-
-**Description:** First small multimodal model to have 3 modality inputs (text, audio, image), excelling in quality and efficiency 
-
-### Phi-4-Reasoning
-
-Usage: `llm -m github/Phi-4-reasoning`
-
-**Publisher:** Microsoft 
-
-**Description:** State-of-the-art open-weight reasoning model. 
-
-### Cohere Command A
-
-Usage: `llm -m github/cohere-command-a`
-
-**Publisher:** Cohere 
-
-**Description:** Command A is a highly efficient generative model that excels at agentic and multilingual use cases. 
-
-### Cohere Embed 4
-
-Usage: `llm -m github/embed-v-4-0`
-
-**Publisher:** Cohere 
-
-**Description:** Embed 4 transforms texts and images into numerical vectors 
+| AI21 Jamba 1.5 Large (`ai21-jamba-1.5-large`) | ❌ | ✅ | text | text |
+| AI21 Jamba 1.5 Mini (`ai21-jamba-1.5-mini`) | ❌ | ✅ | text | text |
+| Cohere Command A (`cohere-command-a`) | ❌ | ✅ | text | text |
+| Cohere Command R 08-2024 (`cohere-command-r-08-2024`) | ❌ | ✅ | text | text |
+| Cohere Command R+ 08-2024 (`cohere-command-r-plus-08-2024`) | ❌ | ✅ | text | text |
+| JAIS 30b Chat (`jais-30b-chat`) | ❌ | ✅ | text | text |
+| DeepSeek-R1 (`deepseek-r1`) | ❌ | ✅ | text | text |
+| DeepSeek-R1-0528 (`deepseek-r1-0528`) | ❌ | ✅ | text | text |
+| DeepSeek-V3-0324 (`deepseek-v3-0324`) | ❌ | ✅ | text | text |
+| Llama-3.2-11B-Vision-Instruct (`llama-3.2-11b-vision-instruct`) | ❌ | ❌ | text, image, audio | text |
+| Llama-3.2-90B-Vision-Instruct (`llama-3.2-90b-vision-instruct`) | ❌ | ❌ | text, image, audio | text |
+| Llama-3.3-70B-Instruct (`llama-3.3-70b-instruct`) | ❌ | ❌ | text | text |
+| Llama 4 Maverick 17B 128E Instruct FP8 (`llama-4-maverick-17b-128e-instruct-fp8`) | ❌ | ✅ | text, image | text |
+| Llama 4 Scout 17B 16E Instruct (`llama-4-scout-17b-16e-instruct`) | ❌ | ✅ | text, image | text |
+| Meta-Llama-3.1-405B-Instruct (`meta-llama-3.1-405b-instruct`) | ❌ | ❌ | text | text |
+| Meta-Llama-3.1-8B-Instruct (`meta-llama-3.1-8b-instruct`) | ❌ | ❌ | text | text |
+| MAI-DS-R1 (`mai-ds-r1`) | ❌ | ❌ | text | text |
+| Phi-3-medium instruct (128k) (`phi-3-medium-128k-instruct`) | ❌ | ❌ | text | text |
+| Phi-3-medium instruct (4k) (`phi-3-medium-4k-instruct`) | ❌ | ❌ | text | text |
+| Phi-3-mini instruct (128k) (`phi-3-mini-128k-instruct`) | ❌ | ❌ | text | text |
+| Phi-3-mini instruct (4k) (`phi-3-mini-4k-instruct`) | ❌ | ❌ | text | text |
+| Phi-3-small instruct (128k) (`phi-3-small-128k-instruct`) | ❌ | ❌ | text | text |
+| Phi-3-small instruct (8k) (`phi-3-small-8k-instruct`) | ❌ | ❌ | text | text |
+| Phi-3.5-mini instruct (128k) (`phi-3.5-mini-instruct`) | ❌ | ❌ | text | text |
+| Phi-3.5-MoE instruct (128k) (`phi-3.5-moe-instruct`) | ❌ | ❌ | text | text |
+| Phi-4 (`phi-4`) | ❌ | ❌ | text | text |
+| Phi-4-mini-instruct (`phi-4-mini-instruct`) | ❌ | ❌ | text | text |
+| Phi-4-mini-reasoning (`phi-4-mini-reasoning`) | ❌ | ❌ | text | text |
+| Phi-4-multimodal-instruct (`phi-4-multimodal-instruct`) | ❌ | ❌ | audio, image, text | text |
+| Phi-4-reasoning (`phi-4-reasoning`) | ❌ | ❌ | text | text |
+| Codestral 25.01 (`codestral-2501`) | ❌ | ✅ | text | text |
+| Ministral 3B (`ministral-3b`) | ❌ | ✅ | text | text |
+| Mistral Large 24.11 (`mistral-large-2411`) | ❌ | ✅ | text | text |
+| Mistral Medium 3 (25.05) (`mistral-medium-2505`) | ❌ | ✅ | text, image | text |
+| Mistral Nemo (`mistral-nemo`) | ❌ | ✅ | text | text |
+| Mistral Small 3.1 (`mistral-small-2503`) | ❌ | ✅ | text, image | text |
+| OpenAI GPT-4.1 (`gpt-4.1`) | ✅ | ✅ | text, image | text |
+| OpenAI GPT-4.1-mini (`gpt-4.1-mini`) | ✅ | ✅ | text, image | text |
+| OpenAI GPT-4.1-nano (`gpt-4.1-nano`) | ✅ | ✅ | text, image | text |
+| OpenAI GPT-4o (`gpt-4o`) | ✅ | ✅ | text, image, audio | text |
+| OpenAI GPT-4o mini (`gpt-4o-mini`) | ✅ | ✅ | text, image, audio | text |
+| OpenAI gpt-5 (`gpt-5`) | ✅ | ✅ | text, image | text |
+| OpenAI gpt-5-chat (preview) (`gpt-5-chat`) | ❌ | ✅ | text, image | text |
+| OpenAI gpt-5-mini (`gpt-5-mini`) | ✅ | ✅ | text, image | text |
+| OpenAI gpt-5-nano (`gpt-5-nano`) | ✅ | ✅ | text, image | text |
+| OpenAI o1 (`o1`) | ✅ | ✅ | text, image | text |
+| OpenAI o1-mini (`o1-mini`) | ✅ | ❌ | text | text |
+| OpenAI o1-preview (`o1-preview`) | ❌ | ❌ | text | text |
+| OpenAI o3 (`o3`) | ❌ | ✅ | text, image | text |
+| OpenAI o3-mini (`o3-mini`) | ✅ | ✅ | text | text |
+| OpenAI o4-mini (`o4-mini`) | ✅ | ✅ | text, image | text |
+| Grok 3 (`grok-3`) | ✅ | ✅ | text | text |
+| Grok 3 Mini (`grok-3-mini`) | ✅ | ✅ | text | text |
 
 ### OpenAI GPT-4.1
 
@@ -608,46 +236,6 @@ Usage: `llm -m github/gpt-5-nano`
 
 **Description:** gpt-5-nano is optimized for speed, ideal for applications requiring low latency.  
 
-### Grok 3
-
-Usage: `llm -m github/grok-3`
-
-**Publisher:** xAI 
-
-**Description:** Grok 3 is xAI's debut model, pretrained by Colossus at supermassive scale to excel in specialized domains like finance, healthcare, and the law. 
-
-### Grok 3 Mini
-
-Usage: `llm -m github/grok-3-mini`
-
-**Publisher:** xAI 
-
-**Description:** Grok 3 Mini is a lightweight model that thinks before responding. Trained on mathematic and scientific problems, it is great for logic-based tasks. 
-
-### JAIS 30b Chat
-
-Usage: `llm -m github/jais-30b-chat`
-
-**Publisher:** Core42 
-
-**Description:** JAIS 30b Chat is an auto-regressive bilingual LLM for Arabic & English with state-of-the-art capabilities in Arabic. 
-
-### Mistral Medium 3 (25.05)
-
-Usage: `llm -m github/mistral-medium-2505`
-
-**Publisher:** Mistral AI 
-
-**Description:** Mistral Medium 3 is an advanced Large Language Model (LLM) with state-of-the-art reasoning, knowledge, coding and vision capabilities. 
-
-### Mistral Small 3.1
-
-Usage: `llm -m github/mistral-small-2503`
-
-**Publisher:** Mistral AI 
-
-**Description:** Enhanced Mistral Small 3 with multimodal capabilities and a 128k context length. 
-
 ### OpenAI o1
 
 Usage: `llm -m github/o1`
@@ -711,4 +299,332 @@ Usage: `llm -m github/text-embedding-3-small`
 **Publisher:** OpenAI 
 
 **Description:** Text-embedding-3 series models are the latest and most capable embedding model from OpenAI. 
+
+### AI21 Jamba 1.5 Large
+
+Usage: `llm -m github/ai21-jamba-1.5-large`
+
+**Publisher:** AI21 Labs 
+
+**Description:** A 398B parameters (94B active) multilingual model, offering a 256K long context window, function calling, structured output, and grounded generation. 
+
+### AI21 Jamba 1.5 Mini
+
+Usage: `llm -m github/ai21-jamba-1.5-mini`
+
+**Publisher:** AI21 Labs 
+
+**Description:** A 52B parameters (12B active) multilingual model, offering a 256K long context window, function calling, structured output, and grounded generation. 
+
+### Cohere Command A
+
+Usage: `llm -m github/cohere-command-a`
+
+**Publisher:** Cohere 
+
+**Description:** Command A is a highly efficient generative model that excels at agentic and multilingual use cases. 
+
+### Cohere Command R 08-2024
+
+Usage: `llm -m github/cohere-command-r-08-2024`
+
+**Publisher:** Cohere 
+
+**Description:** Command R is a scalable generative model targeting RAG and Tool Use to enable production-scale AI for enterprise. 
+
+### Cohere Command R+ 08-2024
+
+Usage: `llm -m github/cohere-command-r-plus-08-2024`
+
+**Publisher:** Cohere 
+
+**Description:** Command R+ is a state-of-the-art RAG-optimized model designed to tackle enterprise-grade workloads. 
+
+### Cohere Embed v3 English
+
+Usage: `llm -m github/cohere-embed-v3-english`
+
+**Publisher:** Cohere 
+
+**Description:** Cohere Embed English is the market's leading text representation model used for semantic search, retrieval-augmented generation (RAG), classification, and clustering. 
+
+### Cohere Embed v3 Multilingual
+
+Usage: `llm -m github/cohere-embed-v3-multilingual`
+
+**Publisher:** Cohere 
+
+**Description:** Cohere Embed Multilingual is the market's leading text representation model used for semantic search, retrieval-augmented generation (RAG), classification, and clustering. 
+
+### JAIS 30b Chat
+
+Usage: `llm -m github/jais-30b-chat`
+
+**Publisher:** Core42 
+
+**Description:** JAIS 30b Chat is an auto-regressive bilingual LLM for Arabic & English with state-of-the-art capabilities in Arabic. 
+
+### DeepSeek-R1
+
+Usage: `llm -m github/deepseek-r1`
+
+**Publisher:** DeepSeek 
+
+**Description:** DeepSeek-R1 excels at reasoning tasks using a step-by-step training process, such as language, scientific reasoning, and coding tasks. 
+
+### DeepSeek-R1-0528
+
+Usage: `llm -m github/deepseek-r1-0528`
+
+**Publisher:** DeepSeek 
+
+**Description:** The DeepSeek R1 0528 model has improved reasoning capabilities, this version also offers a reduced hallucination rate, enhanced support for function calling, and better experience for vibe coding. 
+
+### DeepSeek-V3-0324
+
+Usage: `llm -m github/deepseek-v3-0324`
+
+**Publisher:** DeepSeek 
+
+**Description:** DeepSeek-V3-0324 demonstrates notable improvements over its predecessor, DeepSeek-V3, in several key aspects, including enhanced reasoning, improved function calling, and superior code generation capabilities. 
+
+### Llama-3.2-11B-Vision-Instruct
+
+Usage: `llm -m github/llama-3.2-11b-vision-instruct`
+
+**Publisher:** Meta 
+
+**Description:** Excels in image reasoning capabilities on high-res images for visual understanding apps. 
+
+### Llama-3.2-90B-Vision-Instruct
+
+Usage: `llm -m github/llama-3.2-90b-vision-instruct`
+
+**Publisher:** Meta 
+
+**Description:** Advanced image reasoning capabilities for visual understanding agentic apps. 
+
+### Llama-3.3-70B-Instruct
+
+Usage: `llm -m github/llama-3.3-70b-instruct`
+
+**Publisher:** Meta 
+
+**Description:** Llama 3.3 70B Instruct offers enhanced reasoning, math, and instruction following with performance comparable to Llama 3.1 405B. 
+
+### Llama 4 Maverick 17B 128E Instruct FP8
+
+Usage: `llm -m github/llama-4-maverick-17b-128e-instruct-fp8`
+
+**Publisher:** Meta 
+
+**Description:** Llama 4 Maverick 17B 128E Instruct FP8 is great at precise image understanding and creative writing, offering high quality at a lower price compared to Llama 3.3 70B 
+
+### Llama 4 Scout 17B 16E Instruct
+
+Usage: `llm -m github/llama-4-scout-17b-16e-instruct`
+
+**Publisher:** Meta 
+
+**Description:** Llama 4 Scout 17B 16E Instruct is great at multi-document summarization, parsing extensive user activity for personalized tasks, and reasoning over vast codebases. 
+
+### Meta-Llama-3.1-405B-Instruct
+
+Usage: `llm -m github/meta-llama-3.1-405b-instruct`
+
+**Publisher:** Meta 
+
+**Description:** The Llama 3.1 instruction tuned text only models are optimized for multilingual dialogue use cases and outperform many of the available open source and closed chat models on common industry benchmarks. 
+
+### Meta-Llama-3.1-8B-Instruct
+
+Usage: `llm -m github/meta-llama-3.1-8b-instruct`
+
+**Publisher:** Meta 
+
+**Description:** The Llama 3.1 instruction tuned text only models are optimized for multilingual dialogue use cases and outperform many of the available open source and closed chat models on common industry benchmarks. 
+
+### Codestral 25.01
+
+Usage: `llm -m github/codestral-2501`
+
+**Publisher:** Mistral AI 
+
+**Description:** Codestral 25.01 by Mistral AI is designed for code generation, supporting 80+ programming languages, and optimized for tasks like code completion and fill-in-the-middle 
+
+### Ministral 3B
+
+Usage: `llm -m github/ministral-3b`
+
+**Publisher:** Mistral AI 
+
+**Description:** Ministral 3B is a state-of-the-art Small Language Model (SLM) optimized for edge computing and on-device applications. As it is designed for low-latency and compute-efficient inference, it it also the perfect model for standard GenAI applications that have 
+
+### Mistral Large 24.11
+
+Usage: `llm -m github/mistral-large-2411`
+
+**Publisher:** Mistral AI 
+
+**Description:** Mistral Large 24.11 offers enhanced system prompts, advanced reasoning and function calling capabilities. 
+
+### Mistral Medium 3 (25.05)
+
+Usage: `llm -m github/mistral-medium-2505`
+
+**Publisher:** Mistral AI 
+
+**Description:** Mistral Medium 3 is an advanced Large Language Model (LLM) with state-of-the-art reasoning, knowledge, coding and vision capabilities. 
+
+### Mistral Nemo
+
+Usage: `llm -m github/mistral-nemo`
+
+**Publisher:** Mistral AI 
+
+**Description:** Mistral Nemo is a cutting-edge Language Model (LLM) boasting state-of-the-art reasoning, world knowledge, and coding capabilities within its size category. 
+
+### Mistral Small 3.1
+
+Usage: `llm -m github/mistral-small-2503`
+
+**Publisher:** Mistral AI 
+
+**Description:** Enhanced Mistral Small 3 with multimodal capabilities and a 128k context length. 
+
+### Grok 3
+
+Usage: `llm -m github/grok-3`
+
+**Publisher:** xAI 
+
+**Description:** Grok 3 is xAI's debut model, pretrained by Colossus at supermassive scale to excel in specialized domains like finance, healthcare, and the law. 
+
+### Grok 3 Mini
+
+Usage: `llm -m github/grok-3-mini`
+
+**Publisher:** xAI 
+
+**Description:** Grok 3 Mini is a lightweight model that thinks before responding. Trained on mathematic and scientific problems, it is great for logic-based tasks. 
+
+### MAI-DS-R1
+
+Usage: `llm -m github/mai-ds-r1`
+
+**Publisher:** Microsoft 
+
+**Description:** MAI-DS-R1 is a DeepSeek-R1 reasoning model that has been post-trained by the Microsoft AI team to fill in information gaps in the previous version of the model and improve its harm protections while maintaining R1 reasoning capabilities. 
+
+### Phi-3.5-mini instruct (128k)
+
+Usage: `llm -m github/phi-3.5-mini-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** Refresh of Phi-3-mini model. 
+
+### Phi-3.5-MoE instruct (128k)
+
+Usage: `llm -m github/phi-3.5-moe-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** A new mixture of experts model 
+
+### Phi-3.5-vision instruct (128k)
+
+Usage: `llm -m github/phi-3.5-vision-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** Refresh of Phi-3-vision model. 
+
+### Phi-3-medium instruct (128k)
+
+Usage: `llm -m github/phi-3-medium-128k-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** Same Phi-3-medium model, but with a larger context size for RAG or few shot prompting. 
+
+### Phi-3-medium instruct (4k)
+
+Usage: `llm -m github/phi-3-medium-4k-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** A 14B parameters model, proves better quality than Phi-3-mini, with a focus on high-quality, reasoning-dense data. 
+
+### Phi-3-mini instruct (128k)
+
+Usage: `llm -m github/phi-3-mini-128k-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** Same Phi-3-mini model, but with a larger context size for RAG or few shot prompting. 
+
+### Phi-3-mini instruct (4k)
+
+Usage: `llm -m github/phi-3-mini-4k-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** Tiniest member of the Phi-3 family. Optimized for both quality and low latency. 
+
+### Phi-3-small instruct (128k)
+
+Usage: `llm -m github/phi-3-small-128k-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** Same Phi-3-small model, but with a larger context size for RAG or few shot prompting. 
+
+### Phi-3-small instruct (8k)
+
+Usage: `llm -m github/phi-3-small-8k-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** A 7B parameters model, proves better quality than Phi-3-mini, with a focus on high-quality, reasoning-dense data. 
+
+### Phi-4
+
+Usage: `llm -m github/phi-4`
+
+**Publisher:** Microsoft 
+
+**Description:** Phi-4 14B, a highly capable model for low latency scenarios. 
+
+### Phi-4-mini-instruct
+
+Usage: `llm -m github/phi-4-mini-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** 3.8B parameters Small Language Model outperforming larger models in reasoning, math, coding, and function-calling 
+
+### Phi-4-mini-reasoning
+
+Usage: `llm -m github/phi-4-mini-reasoning`
+
+**Publisher:** Microsoft 
+
+**Description:** Lightweight math reasoning model optimized for multi-step problem solving 
+
+### Phi-4-multimodal-instruct
+
+Usage: `llm -m github/phi-4-multimodal-instruct`
+
+**Publisher:** Microsoft 
+
+**Description:** First small multimodal model to have 3 modality inputs (text, audio, image), excelling in quality and efficiency 
+
+### Phi-4-reasoning
+
+Usage: `llm -m github/phi-4-reasoning`
+
+**Publisher:** Microsoft 
+
+**Description:** State-of-the-art open-weight reasoning model. 
 

@@ -29,7 +29,7 @@ jobs:
         ruff check
     - name: Run pyright
       run: |
-        pyright llm_github_models.py
+        pyright llm_github_models
     - name: Run tests
       run: |
         pytest

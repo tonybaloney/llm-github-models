@@ -3,7 +3,6 @@ A script to parse the models.json from the github API until there is a live API 
 """
 
 import json
-from pprint import pprint
 
 chat_models = []
 embedding_models = []
@@ -19,9 +18,13 @@ def supports_schemas(name):
         "gpt-5",
         "gpt-5-mini",
         "gpt-5-nano",
-        "gpt-5-chat",
+        # "gpt-5-chat", Leaving this here as a note to future self. It does not work.
         "o1",
+        "o1-mini",  # does not work
         "o3-mini",
+        "o4-mini",
+        "grok-3",
+        "grok-3-mini",
     ]:
         return True
     return False
@@ -64,21 +67,21 @@ def supports_tools(name):
         "grok-3",
         "grok-3-mini",
         "cohere-command-a",
-        "Cohere-command-r-plus-08-2024",
-        "Cohere-command-r-08-2024",
-        "Cohere-command-r-plus",
-        "Cohere-command-r",
-        "Codestral-2501",
-        "Ministral-3B",
-        "Mistral-Nemo",
-        "Mistral-Large-2411",
-        "Mistral-large-2407",
-        "Mistral-large",
+        "cohere-command-r-plus-08-2024",
+        "cohere-command-r-08-2024",
+        "cohere-command-r-plus",
+        "cohere-command-r",
+        "codestral-2501",
+        "ministral-3b",
+        "mistral-nemo",
+        "mistral-large-2411",
+        "mistral-large-2407",
+        "mistral-large",
         "mistral-medium-2505",
         "mistral-small-2503",
-        "Mistral-small",
+        "mistral-small",
     ]
-    return name in tool_supporting_models
+    return name.lower() in tool_supporting_models
 
 
 def extra_embedding_dimensions(name):
@@ -95,32 +98,65 @@ def extra_embedding_dimensions(name):
 with open("models.json", "r", encoding="utf-8") as f:
     models = json.load(f)
     for model in models:
-        if "chat-completion" in model["inferenceTasks"]:
+        id = model["id"].split("/")[-1]
+        # This alias logic is because some models used to have weird mixed-case names, e.g.
+        # "Llama-3.2-11B-Vision-Instruct"
+        alias = model["name"].replace(" ", "-")
+        if "text" in model["supported_output_modalities"]:
             chat_models.append(
                 (
+                    id,
+                    model["id"],
                     model["name"],
-                    supports_schemas(model["name"]),
-                    requires_usage_stream_option(model["name"]),
-                    supports_tools(model["name"]),
-                    model["modelLimits"]["supportedInputModalities"],
-                    model["modelLimits"]["supportedOutputModalities"],
+                    supports_schemas(id),
+                    requires_usage_stream_option(id),
+                    "tool-calling" in model["capabilities"] or supports_tools(id),
+                    model["supported_input_modalities"],
+                    model["supported_output_modalities"],
+                    [f"github/{alias}"],
                 )
             )
-        elif "embeddings" in model["inferenceTasks"]:
-            embedding_models.append((model["name"], extra_embedding_dimensions(model["name"])))
+        elif "embeddings" in model["supported_output_modalities"]:
+            embedding_models.append(
+                (id, model["id"], model["name"], extra_embedding_dimensions(id), None)
+            )
         else:
-            print("Not sure what to do with this model: ", model["name"])
+            print(
+                "Not sure what to do with this model: ",
+                model["name"],
+                model["supported_output_modalities"],
+            )
 
 print("Chat models:")
 # sort by name
-chat_models = sorted(chat_models, key=lambda x: x[0])
-pprint(chat_models, indent=4, width=999)
+chat_models = sorted(chat_models, key=lambda x: x[1])
+print("[")
+print(
+    ",\n".join(
+        [
+            f"ChatModelSpec(llm_id='{model[0]}', github_id='{model[1]}', name='{model[2]}', supports_schemas={model[3]}, supports_streaming={model[4]}, supports_tools={model[5]}, supported_input_modalities={model[6]}, supported_output_modalities={model[7]}, aliases={model[8]})"  # noqa: E501
+            for model in chat_models
+        ]
+    )
+)
+print("]\n\n")
 print("Embedding models:")
 # sort by name
 embedding_models = sorted(embedding_models)
-pprint(embedding_models, indent=4)
 
-# Make a Markdown series for the models
+print("[")
+
+for model in embedding_models:
+    if not model[3]:
+        print(
+            f"EmbeddingModelSpec(llm_id='{model[0]}', github_id='{model[1]}', name='{model[2]}', dimensions=None),"  # noqa: E501
+        )
+    else:
+        for dim in model[3]:
+            print(
+                f"EmbeddingModelSpec(llm_id='{model[0]}-{dim}', github_id='{model[1]}', name='{model[2]} ({dim})', dimensions={dim}),"  # noqa: E501
+            )
+print("]\n\n")
 
 with open("models.fragment.md", "w", encoding="utf-8") as f:
     f.write("## Supported Models\n\n")
@@ -131,24 +167,29 @@ with open("models.fragment.md", "w", encoding="utf-8") as f:
     f.write("|------------|---------|-------|------------------|-------------------|\n")
 
     for (
+        model_id,
+        _,
         model_name,
         schemas,
         usage_stream,
         tools,
         input_modalities,
         output_modalities,
+        _,
     ) in chat_models:
         schemas_str = "✅" if schemas else "❌"
         tools_str = "✅" if tools else "❌"
         input_str = ", ".join(input_modalities) if input_modalities else "text"
         output_str = ", ".join(output_modalities) if output_modalities else "text"
 
-        f.write(f"| {model_name} | {schemas_str} | {tools_str} | {input_str} | {output_str} |\n")
+        f.write(
+            f"| {model_name} (`{model_id}`) | {schemas_str} | {tools_str} | {input_str} | {output_str} |\n"  # noqa: E501
+        )
 
     f.write("\n")
 
     for model in models:
-        f.write(f"### {model['displayName']}\n\n")
-        f.write(f"Usage: `llm -m github/{model['name']}`\n\n")
+        f.write(f"### {model['name']}\n\n")
+        f.write(f"Usage: `llm -m github/{model['id'].split('/')[-1]}`\n\n")
         f.write(f"**Publisher:** {model['publisher']} \n\n")
         f.write(f"**Description:** {model['summary'].replace('\n## ', '\n#### ')} \n\n")
