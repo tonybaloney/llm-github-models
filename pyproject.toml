@@ -22,8 +22,10 @@ CI = "https://github.com/tonybaloney/llm-github-models/actions"
 
 [project.entry-points.llm]
 github = "llm_github_models"
+azure = "llm_azure"
 
 [project.optional-dependencies]
+azure = ["azure-ai-projects", "azure-identity"]
 test = ["pytest", "pytest-recording", "pytest-asyncio", "ruff", "pyright"]
 
 [tool.ruff]
@@ -31,3 +33,12 @@ line-length = 100
 
 [tool.ruff.lint]
 select = ["E", "F", "I"]
+
+# Explicitly include both top-level packages to fix flat-layout discovery
+[tool.setuptools]
+packages = ["llm_github_models", "llm_azure"]
+
+# Define the build system for PEP 517 builds
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
