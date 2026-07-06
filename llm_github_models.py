@@ -1,5 +1,6 @@
 import json
 import os
+import warnings
 from typing import AsyncGenerator, Dict, Iterable, Iterator, List, Optional, Union
 
 import llm
@@ -119,8 +120,16 @@ EMBEDDING_MODELS = [
 ]
 
 
+RETIREMENT_WARNING = (
+    "GitHub Models is being retired on July 30, 2026 and will no longer be available after"
+    " that date. See https://github.blog/changelog/2026-07-01-github-models-is-being-fully-retired-on-july-30-2026/"
+    " for details."
+)
+
+
 @llm.hookimpl
 def register_models(register):
+    warnings.warn(RETIREMENT_WARNING, DeprecationWarning, stacklevel=2)
     # Register both sync and async versions of each model
     # TODO: Dynamically fetch this list
     for (
@@ -153,6 +162,7 @@ def register_models(register):
 
 @llm.hookimpl
 def register_embedding_models(register):
+    warnings.warn(RETIREMENT_WARNING, DeprecationWarning, stacklevel=2)
     # Register embedding models
     for model_id, supported_dimensions in EMBEDDING_MODELS:
         register(GitHubEmbeddingModel(model_id))

@@ -1,4 +1,10 @@
 # GitHub Models Plugin for LLM
+
+> [!WARNING]
+> **GitHub Models is being retired on July 30, 2026.** After this date, the service will no longer be available.
+> See the [official announcement](https://github.blog/changelog/2026-07-01-github-models-is-being-fully-retired-on-july-30-2026/) for details.
+> This plugin will stop working after that date.
+
 [![PyPI](https://img.shields.io/pypi/v/llm-github-models.svg)](https://pypi.org/project/llm-github-models/)
 [![Changelog](https://img.shields.io/github/v/release/tonybaloney/llm-github-models?include_prereleases&label=changelog)](https://github.com/tonybaloney/llm-github-models/releases)
 

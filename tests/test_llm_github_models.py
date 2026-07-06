@@ -18,9 +18,23 @@ from llm import get_async_model, get_model
 from llm.models import Attachment, Conversation, Prompt, Response
 from pydantic import BaseModel
 
-from llm_github_models import GitHubModels, build_messages, set_usage
+from llm_github_models import RETIREMENT_WARNING, GitHubModels, build_messages, set_usage
 
 MODELS = ["github/gpt-4.1-mini", "github/gpt-4o-mini", "github/Llama-3.2-11B-Vision-Instruct"]
+
+
+def test_register_models_emits_deprecation_warning():
+    import warnings
+
+    from llm_github_models import register_models
+
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        register_models(lambda *args: None)
+
+    deprecation_warnings = [w for w in caught if issubclass(w.category, DeprecationWarning)]
+    assert len(deprecation_warnings) == 1
+    assert RETIREMENT_WARNING in str(deprecation_warnings[0].message)
 
 
 @pytest.mark.parametrize("model", MODELS)
