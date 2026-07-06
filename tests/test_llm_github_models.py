@@ -18,7 +18,7 @@ from llm import get_async_model, get_model
 from llm.models import Attachment, Conversation, Prompt, Response
 from pydantic import BaseModel
 
-from llm_github_models import GitHubModels, build_messages, set_usage, RETIREMENT_WARNING
+from llm_github_models import RETIREMENT_WARNING, GitHubModels, build_messages, set_usage
 
 MODELS = ["github/gpt-4.1-mini", "github/gpt-4o-mini", "github/Llama-3.2-11B-Vision-Instruct"]
 

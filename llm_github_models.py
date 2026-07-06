@@ -121,8 +121,9 @@ EMBEDDING_MODELS = [
 
 
 RETIREMENT_WARNING = (
-    "GitHub Models is being retired on July 30, 2026 and will no longer be available after that date. "
-    "See https://github.blog/changelog/2026-07-01-github-models-is-being-fully-retired-on-july-30-2026/ for details."
+    "GitHub Models is being retired on July 30, 2026 and will no longer be available after"
+    " that date. See https://github.blog/changelog/2026-07-01-github-models-is-being-fully-retired-on-july-30-2026/"
+    " for details."
 )
 
 
